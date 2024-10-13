@@ -16,5 +16,4 @@
 ![[iOS.png]]
 ### Контакты
 - [iOS Deep Tech в Telegram](https://t.me/+QmMbHUGcAE5lOWQ6)
-- [Eugene](https://t.me/kslff)
-- [Maxim](https://t.me/maxiMath)
+- [Eugene](https://t.me/kslff) & [Maxim](https://t.me/maxiMath)
