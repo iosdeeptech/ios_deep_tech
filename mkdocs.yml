@@ -24,7 +24,9 @@ theme:
         
     features:
     - header.autohide
-    - navigation.footer
+    
+    icon:
+      logo: material/material-apple
 
 # Extensions
 markdown_extensions:
