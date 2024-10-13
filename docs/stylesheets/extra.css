@@ -52,3 +52,14 @@
       margin-bottom: 10px;
   }
 }
+ 
+[data-md-color-scheme="slate"] .md-search__overlay {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+[data-md-color-scheme="slate"] .md-search__results {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #333333;
+    opacity: 1;
+}
