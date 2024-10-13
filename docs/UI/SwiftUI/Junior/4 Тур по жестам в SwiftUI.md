@@ -42,7 +42,7 @@ struct SimpleTapGestureExample: View {
 }
 ```
 
-![1.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/1.gif)
+![Gesture1.gif](Gesture1.gif)
 
 2. **Распознавание нескольких нажатий**
 
@@ -67,7 +67,7 @@ struct MultipleTapGestureExample: View {
 }
 ```
 
-![2.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/2.gif)
+![Gesture2.gif](Gesture2.gif)
 
 3. **Распознавание нажатия с координатами**
 
@@ -90,7 +90,7 @@ struct CoordinateTapGestureExample: View {
 }
 ```
 
-![3.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/3.gif)
+![Gesture3.gif](Gesture3.gif)
 
 ## **LongPressGesture**
 
@@ -123,7 +123,7 @@ struct SimpleLongPressGestureExample: View {
 }
 ```
 
-![4.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/4.gif)
+![Gesture4.gif](Gesture4.gif)
 
 2. **Долгое нажатие с изменением состояния**
 
@@ -149,7 +149,7 @@ struct StatefulLongPressGestureExample: View {
 }
 ```
 
-![5.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/5.gif)
+![Gesture5.gif](Gesture5.gif)
 
 ## **SpatialTapGesture**
 
@@ -190,7 +190,7 @@ struct SpatialTapGestureExample: View {
 }
 ```
 
-![6.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/6.gif)
+![Gesture6.gif](Gesture6.gif)
 
 2. **Взаимодействие с множеством объектов**
 
@@ -221,7 +221,7 @@ struct SpatialTapGestureTappedZoneExample: View {
 }
 ```
 
-![7.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/7.gif)
+![Gesture7.gif](Gesture7.gif)
 
 ## **DragGesture**
 
@@ -256,7 +256,7 @@ struct SimpleDragGestureExample: View {
 }
 ```
 
-![8.gif](8.gif)
+![Gesture8.gif](Gesture8.gif)
 
 2. **Перетаскивание с ограничением области**
 
@@ -286,7 +286,7 @@ struct ConstrainedDragGestureExample: View {
 }
 ```
 
-![9.gif](docs/UI/SwiftUI/Junior/4%20Тур%20по%20жестам%20в%20SwiftUI/9.gif)
+![Gesture9.gif](Gesture9.gif)
 
 ## **MagnifyGesture**
 
@@ -316,7 +316,7 @@ struct MagnifyGestureExample: View {
 }
 ```
 
-![10.gif](10.gif)
+![Gesture10.gif](Gesture10.gif)
 
 ## **RotateGesture**
 
@@ -347,7 +347,7 @@ struct RotateGestureExample: View {
 
 ```
 
-![11.gif](11.gif)
+![Gesture11.gif](Gesture11.gif)
 
 ## **Apple Pencil Жесты**
 
@@ -433,7 +433,7 @@ struct SimultaneousGestureExample: View {
 }
 ```
 
-![12.gif](12.gif)
+![Gesture12.gif](Gesture12.gif)
 
 2. **SequenceGesture**
 
@@ -489,7 +489,7 @@ struct SequenceGestureExample: View {
 
 ```
 
-![13.gif](13.gif)
+![Gesture13.gif](Gesture13.gif)
 
 3. **ExclusiveGesture**
 
@@ -535,7 +535,7 @@ struct ExclusiveGestureExampleView: View {
 }
 ```
 
-![14.gif](14.gif)
+![Gesture14.gif](Gesture14.gif)
 
 # **Управление приоритетами жестов**
 
