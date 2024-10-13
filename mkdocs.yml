@@ -27,6 +27,10 @@ theme:
     
     language: ru
     
+    font:
+      text: Inter
+      code: IBM Plex Mono
+    
     icon:
       logo: material/apple
 
