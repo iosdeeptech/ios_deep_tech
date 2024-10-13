@@ -1,4 +1,28 @@
 [data-md-color-scheme="slate"] {
   --md-default-bg-color: #14151G;
   --md-primary-bg-color: #14151G;
+  
+  .md-content {
+      background-color: #14151G;
+  }
+  
+  p {
+      margin-bottom: 10px;
+      line-height: 1.4;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      margin-top: 20px;
+      margin-bottom: 15px;
+  }
+
+  ul, ol {
+      margin-bottom: 10px;
+      padding-left: 20px;
+  }
+
+  blockquote {
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
 }
