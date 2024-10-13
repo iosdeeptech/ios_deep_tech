@@ -2,8 +2,8 @@
   "name": "iOS Deep Tech",
   "short_name": "Deep Tech",
   "description": "A tech blog about iOS development.",
-  "start_url": "/",
-  "display": "standalone",
+  "start_url": "/ios_deep_tech",
+  "display": "fullscreen",
   "background_color": "#ffffff",
   "theme_color": "#6200ea",
   "icons": [
