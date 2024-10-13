@@ -64,6 +64,8 @@ extra:
   social:
     - icon: fontawesome/brands/telegram
       link: https://t.me/+QmMbHUGcAE5lOWQ6
+  homepage: https://iosdeeptech.github.io/ios_deep_tech
+  generator: false
 
 extra_javascript:
   - javascripts/mathjax.js
