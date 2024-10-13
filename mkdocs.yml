@@ -3,15 +3,29 @@ site_name: iOS Deep Tech
 theme:
     name: 'material'
     palette:
+
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: black
       accent: deep purple
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Включить темную тему
+
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: deep purple
+      toggle:
+        icon: material/toggle-switch
+        name: Включить светлую тему
+      background: '#000000'
+      surface: '#000000'
+        
     
     language: ru
-    
-    font:
-      text: Inter
-      code: IBM Plex Mono
       
     features:
       - navigation.instant
