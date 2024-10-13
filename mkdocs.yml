@@ -78,6 +78,8 @@ extra:
   homepage: https://iosdeeptech.github.io/ios_deep_tech
   
   generator: false
+  
+  manifest: manifest.json
 
 extra_javascript:
   - javascripts/mathjax.js
