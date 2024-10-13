@@ -79,7 +79,7 @@ extra:
   
   generator: false
   
-  manifest: manifest.json
+  manifest: docs/manifest.json
 
 extra_javascript:
   - javascripts/mathjax.js
