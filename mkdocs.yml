@@ -11,7 +11,7 @@ theme:
       accent: deep purple
       toggle:
         icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
+        name: Включить темную тему
 
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
@@ -20,10 +20,12 @@ theme:
       accent: deep purple
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode
+        name: Включить светлую тему
         
     features:
     - header.autohide
+    
+    language: ru
     
     icon:
       logo: material/apple
