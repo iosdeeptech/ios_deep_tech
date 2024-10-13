@@ -60,7 +60,6 @@ markdown_extensions:
 plugins:
   - search
   - roamlinks
-  - optimize
   - rss:
       date_from_meta:
         as_creation: date
