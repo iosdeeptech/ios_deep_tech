@@ -21,6 +21,8 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Включить светлую тему
+      background: '#000000'
+      surface: '#000000'
         
     features:
     - header.autohide
