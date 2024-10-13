@@ -6,9 +6,6 @@ theme:
       scheme: default
       primary: black
       accent: deep purple
-
-    features:
-    - header.autohide
     
     language: ru
     
