@@ -15,6 +15,7 @@ theme:
       
     features:
       - navigation.instant
+      - navigation.sections
     
     icon:
       logo: material/apple
