@@ -71,8 +71,6 @@ hide:
   - footer
         
 extra:
-  manifest: manifest.json
-
   social:
     - icon: fontawesome/brands/telegram
       link: https://t.me/+QmMbHUGcAE5lOWQ6
@@ -86,8 +84,3 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/mermaid/dist/mermaid.min.js
-
-#PWA Config
-use_directory_urls: false
-scope: "./"
-version: 1.0.0
