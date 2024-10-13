@@ -12,6 +12,9 @@ theme:
     font:
       text: Inter
       code: IBM Plex Mono
+      
+    features:
+      - navigation.instant
     
     icon:
       logo: material/apple
