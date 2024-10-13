@@ -1,21 +1,28 @@
 {
-  "name": "iOS Deep Tech",
-  "short_name": "Deep Tech",
-  "description": "A tech blog about iOS development.",
-  "start_url": "/ios_deep_tech/",
-  "display": "fullscreen",
-  "background_color": "#ffffff",
-  "theme_color": "#6200ea",
-  "icons": [
-    {
-      "src": "icons/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
+    "name": "PWA Docs",
+    "short_name": "PWA Docs",
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "scope": ".",
+    "orientation":"portrait",
+    "icons": [
+      {
+        "src": "assets/icons/logo-36.png",
+        "sizes": "36x36",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/icons/logo-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/icons/logo-512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "background_color": "#3f51b5",
+    "theme_color": "#3f51b5"
+  }
+  
