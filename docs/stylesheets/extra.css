@@ -63,3 +63,34 @@
     border: 1px solid #333333;
     opacity: 1;
 }
+
+ [data-md-color-scheme="slate"] .md-sidebar--primary {
+     background-color: #1e1e1e;
+     color: #ffffff;
+ }
+
+ [data-md-color-scheme="slate"] .md-nav {
+     background-color: #1e1e1e;
+     color: #ffffff;
+ }
+
+ [data-md-color-scheme="slate"] .md-nav__link {
+     color: #ffffff;
+ }
+
+ [data-md-color-scheme="slate"] .md-nav__link--active {
+     color: #64b5f6;
+ }
+
+ [data-md-color-scheme="slate"] .md-nav__item {
+     background-color: transparent;
+     border-bottom: 1px solid #333333;
+ }
+
+ [data-md-color-scheme="slate"] .md-nav__link--sub {
+     color: #cccccc;
+ }
+
+ [data-md-color-scheme="slate"] .md-sidebar {
+     opacity: 1;
+ }
