@@ -1,3 +1,6 @@
+## Сайт
+https://iosdeeptech.github.io/ios_deep_tech/
+
 ## Локальный запуск сайта (Первичная настройка)
 
 1) `brew install pipx`
