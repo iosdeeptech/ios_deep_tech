@@ -6,3 +6,4 @@
 4) Необходимо перейти в директорию проекта в терминале
 5) `python3 -m venv venv source venv/bin/activate`
 6) `pipx runpip mkdocs install mkdocs-roamlinks-plugin mkdocs-rss-plugin pymdown-extensions`
+7) `mkdocs serve`
