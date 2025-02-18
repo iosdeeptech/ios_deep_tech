@@ -1,0 +1,2472 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../Tasks/5.%20Task%20Priority/">
+      
+      
+        <link rel="next" href="../../../Middle/Executors/1.%20Actor%20%D0%B8%20Executor/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS канал" href="../../../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS канал с новым контентом" href="../../../../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>1. Практический путь - iOS Deep Tech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="https://iosdeeptech.github.io/ios_deep_tech" title="iOS Deep Tech" class="md-header__button md-logo" aria-label="iOS Deep Tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iOS Deep Tech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Практический путь
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Включить темную тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Включить темную тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Включить светлую тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Включить светлую тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://iosdeeptech.github.io/ios_deep_tech" title="iOS Deep Tech" class="md-nav__button md-logo" aria-label="iOS Deep Tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+
+    </a>
+    iOS Deep Tech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Кто мы?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Swift
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Swift
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ARC
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            ARC
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ARC/Junior/1.%20%D0%A1%20%D1%87%D0%B5%D0%B3%D0%BE%20%D0%B2%D1%81%D0%B5%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3F%20%28MRC%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. С чего все началось? (MRC)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Подробнее про ARC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Коллекции
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Коллекции
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Массивы
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Массивы
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1_1" id="__nav_2_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/1.%20%D0%9F%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D0%BC%20%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0%D1%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Поговорим о массивах
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Оптимизации и устройство массивов
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Множества
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Множества
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_1" id="__nav_2_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0/Junior/1.%20Set%20%D0%B2%20Swift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Set в Swift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Словари
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Словари
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3_1" id="__nav_2_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Что такое словари в Swift?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Многопоточность
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Многопоточность
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Structured Concurrency
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Structured Concurrency
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1" id="__nav_2_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_1" id="__nav_2_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Actors
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Actors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Потокобезопасность. Введение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Actors/2.%20Actor%20Reentrancy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Actor Reentrancy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Actors/3.%20Actor%20Hopping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Actor Hopping
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Actors/4.%20Sendable/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Sendable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Actors/5.%20Global%20Actor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Global Actor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Actors/6.%20Actor%20isolation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Actor isolation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_2" id="__nav_2_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Sequence
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Sequence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Sequence/1.%20Continuation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Sequence/2.%20Task%20Group/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Task Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Sequence/3.%20AsyncSequence%20%26%20AsyncStream/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. AsyncSequence & AsyncStream
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_3" id="__nav_2_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tasks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tasks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tasks/1.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Введение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tasks/2.%20Task%28Detached%29%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Task(Detached)   техническое определение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Асинхронные функции и await
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Отмена задач
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tasks/5.%20Task%20Priority/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Task Priority
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1_1_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_4" id="__nav_2_3_1_1_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Практика
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_1_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Практика
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1. Практический путь
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1. Практический путь
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 9
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 10
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 11
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 12
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 13
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 14*
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2" id="__nav_2_3_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Middle
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Middle
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2_1" id="__nav_2_3_1_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Executors
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Executors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Middle/Executors/1.%20Actor%20%D0%B8%20Executor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Actor и Executor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    UI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SwiftUI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            SwiftUI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Основы
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../UI/SwiftUI/Junior/2.%20Property%20Wrappers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Property Wrappers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../UI/SwiftUI/Junior/3.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D0%B8%D0%B8%20%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D0%B9%20%D0%B2%20SwiftUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Основные концепции анимаций в SwiftUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../UI/SwiftUI/Junior/4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Тур по жестам в SwiftUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 9
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 10
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 11
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 12
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 13
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Задача 14*
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>1. Практический путь</h1>
+
+<p>Прежде чем переходить к практике,  необходимо прочитать теоретический материал. </p>
+<ol>
+<li>Tasks</li>
+<li>Actors</li>
+<li>Sequence</li>
+</ol>
+<p>Если у вас не получается решить задачу, например:</p>
+<ul>
+<li>Ваш ответ не совпадает с ответом автора</li>
+<li>Не проходят тесты</li>
+<li>Вы не знаете что делать и с чего начать</li>
+</ul>
+<p>Возвращайтесь к теории и внимательно изучайте теоретический материал. Не стесняйтесь гуглить или использовать chatGPT. <strong>Самое важное - понимание.</strong></p>
+<h2 id="1">Задача 1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>Что будет выведено на экран?</p>
+<div class="highlight"><pre><span></span><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SomeViewController</span><span class="p">:</span><span class="w"> </span><span class="bp">UIViewController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kr">override</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">viewDidLoad</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+<span class="w">        </span><span class="n">Task</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Is Main Thread - </span><span class="si">\(</span><span class="n">Thread</span><span class="p">.</span><span class="n">isMainThread</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">foo</span><span class="p">()</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Is Main Thread - </span><span class="si">\(</span><span class="n">Thread</span><span class="p">.</span><span class="n">isMainThread</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">Task</span><span class="p">.</span><span class="n">detached</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Is Main Thread - </span><span class="si">\(</span><span class="n">Thread</span><span class="p">.</span><span class="n">isMainThread</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">foo</span><span class="p">()</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Is Main Thread - </span><span class="si">\(</span><span class="n">Thread</span><span class="p">.</span><span class="n">isMainThread</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Is Main Thread - </span><span class="si">\(</span><span class="n">Thread</span><span class="p">.</span><span class="n">isMainThread</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="2">Задача 2<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>1) Что будет выведено на экран?
+2) Отменилась ли задача? - ответ обосновать. Если да - то почему? Если нет - то почему и как сделать чтобы отменилась?
+3) Что будет если вместо Task написать Task.detached?</p>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">task</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Task 1 has started&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">startLongTask</span><span class="p">()</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Task 1 has finished&quot;</span><span class="p">)</span>
+<span class="w">   </span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Task 2 has started&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="n">startLongTask</span><span class="p">()</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Task 2 has finished&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">startLongTask</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="p">?</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="n">task</span><span class="p">.</span><span class="n">cancel</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="3">Задача 3<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>Что происходит в момент вызова await? как система работает с потоком? что такое continuation?</p>
+<h2 id="4">Задача 4<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>Предположим вы разрабатываете чат и когда пользователь входит в чат, вам необходимо раз в  n секунд дёргать запрос, который оповещает, что пользователь  находится всё ещё в чате. Вам необходимо реализовать сервис, удовлетворяющий протоколу AnyLookingService, который бы отправлял события на сервер до тех пор пока не вызовется метод stop</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">protocol</span><span class="w"> </span><span class="nc">AnyLookingService</span><span class="p">:</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">stop</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">/// Метод отправки реализовывать не нужно достаточно использовать функцию ниже</span>
+<span class="c1">/// Если метод выкинул ошибку - необходимо прекратить дальнейшую отсылку событий</span>
+<span class="c1">/// В ином случае необходимо продолжать отправку спустя n секунд</span>
+<span class="kd">func</span><span class="w"> </span><span class="nf">sendLooking</span><span class="p">()</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="5">Задача 5<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>Чем отличается <em>withCheckedContinuation</em> и <em>withUnsafeContinuation</em> ?</p>
+<h2 id="6">Задача 6<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>К вам на ревью попала задача, которая имеет код ниже. Видите ли вы какие-нибудь проблемы?  Если да, то необходимо подсветить их и обосновать почему это явялется проблемой?</p>
+<div class="highlight"><pre><span></span><code><span class="kd">import</span><span class="w"> </span><span class="nc">Foundation</span>
+
+<span class="kd">actor</span><span class="w"> </span><span class="n">ActivitiesStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">cache</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">UUID</span><span class="p">:</span><span class="w"> </span><span class="n">Data</span><span class="p">?]()</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">retrieveHeavyData</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Data</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cache</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">data</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">requestDataFromDatabase</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="n">cache</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">data</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">requestDataFromDatabase</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Data</span><span class="p">?</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Performing heavy data loading!&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">try</span><span class="p">!</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">        </span><span class="c1">// ...</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="7">Задача 7<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>Расскажите как работает Actor? Какие нюансы есть при работе с Actor?</p>
+<h2 id="8">Задача 8<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p>Вы снова являетесь ревьюером задачи, в проекте вы используете MVVM и вам приносят на ревью код:</p>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="n">MainActor</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">OnboardingViewModel</span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">///</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Будут ли у вас какие-нибудь замечания?  хорошая ли идея помечать целый класс @MainActor - какие неприятные последствия могут быть в будущем при расширении проекта?</p>
+<h2 id="9">Задача 9<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<p>Напишите реализацию своей  AsyncSequence, например чтобы отдавались числа до определённого лимита с задержкой в 1 секунду. Учитывайте возможность отмены работы AsyncSequence.</p>
+<h2 id="10">Задача 10<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<p>У вас есть легаси функция, которая содержит completion, код который вы пишите - асинхронный. Как можно вызвать данную функцию?</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nf">fetchImageData</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">completion</span><span class="p">:</span><span class="w"> </span><span class="p">@</span><span class="n">escaping</span><span class="w"> </span><span class="p">(</span><span class="n">Result</span><span class="p">&lt;</span><span class="n">Data</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">&gt;))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">/// ...</span>
+<span class="p">}</span>
+
+
+<span class="kd">func</span><span class="w"> </span><span class="nf">loadImage</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Ваш код</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="11">Задача 11<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<p>Вы ревьюер. Что скажете про код ниже? можно ли его оптимизировать?</p>
+<div class="highlight"><pre><span></span><code><span class="kr">final</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">SomeInteractor</span><span class="p">:</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">/// ...</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">fetchUser</span><span class="p">(</span><span class="n">uid</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="n">fetchUserFromDatabase</span><span class="p">(</span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="n">uid</span><span class="p">)</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">presenter</span><span class="p">.</span><span class="n">displayUser</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nv">updatedUser</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">try</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="n">loadUserFromNetwork</span><span class="p">(</span><span class="n">by</span><span class="p">:</span><span class="w"> </span><span class="n">uid</span><span class="p">)</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="n">Task</span><span class="p">.</span><span class="n">checkCancellation</span><span class="p">()</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="n">presenter</span><span class="p">.</span><span class="n">displayUser</span><span class="p">(</span><span class="n">updatedUser</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Error fetching user: </span><span class="si">\(</span><span class="n">error</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="12">Задача 12<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<p>Напишите реализацию кеша, который бы мог хранить в себе информацию, определённое время и по истечении времени возвращать nil. На инициализацию данный кеш должен принимать TimeInterval, который означает время жизни кеша. В функционале должны быть реализованы следующие методы:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="nc">Cache</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="n">T</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">date</span><span class="p">:</span><span class="w"> </span><span class="n">Date</span>
+<span class="p">}</span>
+
+<span class="c1">/// Ваш класс/эктор {</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">cacheLifeTimeSeconds</span><span class="p">:</span><span class="w"> </span><span class="n">TimeInterval</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">cache</span><span class="p">:</span><span class="w"> </span><span class="n">Cache</span><span class="p">?</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">value</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">?,</span><span class="w"> </span><span class="n">shouldUpdate</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">newValue</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">?)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="13">Задача 13<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<p>Можно ли в задаче выше обойтись без actor? Если да - то как, если нет - то почему? Использовать другие механизмы синхронизации НЕЛЬЗЯ</p>
+<h2 id="14">Задача 14*<a class="headerlink" href="#14" title="Permanent link">&para;</a></h2>
+<p>Вам дали задачку,  в которой необходимо реализовать сервис получения аватарок пользователя. Сервис должен удовлетворять протоколу ниже</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">typealias</span><span class="w"> </span><span class="n">AvatarUpdatePublisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">AsyncPublisher</span><span class="p">&lt;</span><span class="n">AnyPublisher</span><span class="o">&lt;</span><span class="p">(</span><span class="n">UUID</span><span class="p">,</span><span class="w"> </span><span class="n">Avatar</span><span class="p">),</span><span class="w"> </span><span class="n">Never</span><span class="p">&gt;</span><span class="o">&gt;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">protocol</span><span class="w"> </span><span class="nc">AnyAvatarService</span><span class="p">:</span><span class="w"> </span><span class="n">Sendable</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">updatesPublisher</span><span class="p">:</span><span class="w"> </span><span class="n">AvatarPublisher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">get</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">/// Запрашивает на сервере (если нужно), готовит и возвращает аватар нужного размера</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">requestAvatar</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">user</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">)</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Avatar</span>
+<span class="w">    </span><span class="c1">/// Порядок в возвращаемом массиве НЕ соответствует порядку запросов</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">requestAvatars</span><span class="p">(</span><span class="k">for</span><span class="w"> </span><span class="n">userIds</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">UUID</span><span class="p">])</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kr">throws</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">Avatar</span><span class="p">]</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">setupCacheLimits</span><span class="p">(</span><span class="n">countLimit</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">totalCostLimit</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="k">async</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">clearAllAvatars</span><span class="p">()</span><span class="w"> </span><span class="k">async</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Данный сервис должен работать следующим образом. Когда UI функционал запрашивает аватарку, сервис должен проверить - находится ли она в рантайм кеше - если да, то отдать. Если нет - то необходимо проверить скачено ли изображение и хранится ли оно локально на телефоне, если да - тот необходимо обработать это изображение и вернуть пользователю в нужном размере. В остальном случае необходимо запросить изображение у сервера.</p>
+<p>Дополнительные условия:</p>
+<ul>
+<li>Если сервер отвечает ошибкой - то необходимо сгенерировать изображение, на котором нужно написать первую букву email</li>
+<li>Если выполняется запрос на сервер для какого-нибудь userId, то он должен быть единственным, дублирования запросов с одинаковыми айдишниками быть не должно</li>
+<li>У рантайм кеша должен быть лимит и он должен правильно подчищаться</li>
+<li>Пользователь может запросить один из трех размеров изображения (64, 32, 16). С сервера возвращается исходное изображение размера 128x128</li>
+<li>Также необходимо учитывать, что запрос аватарок можно происходить из нескольких мест приложения</li>
+<li>*** Если вы чувствуете в себе силы, можно написать ViewModifier,  чтобы было удобно работать с сервисом на UI. Подумайте, как это можно лучше сделать?</li>
+</ul>
+<p><em>Примечание</em>
+Начинайте реализовывать данный функционал последовательно - не пытайтесь написать сразу идеально. Начните с самого просто шага, когда запрос аватара происходит из 1 места на UI, подумайте что можно использовать для рантайм кеша? может есть что-то системное? или же вы захотите написать что-нибудь своё? Далее плавно повышайте сложность вашего сервиса, следите за потокобезопасностью, reetrancy.  Данная задача может многому вас научить, она сочетает в себе все пройденные темы. По итогу реализации старайтесь думать о крайних кейсах, когда нужно загрузить множество аватаров, плохая сеть и другие.</p>
+<p>Самым последним шагом приступайте к реализации updatesPublisher, он  необходим для того, чтобы оповещать уже имеющиеся вьюхи о произошедших изменениях.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/+QmMbHUGcAE5lOWQ6" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8m114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.45 10.45 0 0 1 3.53 6.716 43.8 43.8 0 0 1 .417 9.769"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand"], "search": "../../../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
