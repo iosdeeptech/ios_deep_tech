@@ -1,0 +1,4022 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/">
+      
+      
+        <link rel="next" href="../../../%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS канал" href="../../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS канал с новым контентом" href="../../../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>1. Set в Swift - iOS Deep Tech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="https://iosdeeptech.github.io/ios_deep_tech" title="iOS Deep Tech" class="md-header__button md-logo" aria-label="iOS Deep Tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iOS Deep Tech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Set в Swift
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Включить темную тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Включить темную тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Включить светлую тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Включить светлую тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://iosdeeptech.github.io/ios_deep_tech" title="iOS Deep Tech" class="md-nav__button md-logo" aria-label="iOS Deep Tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+
+    </a>
+    iOS Deep Tech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Кто мы?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Swift
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Swift
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ARC
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            ARC
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ARC/Junior/1.%20%D0%A1%20%D1%87%D0%B5%D0%B3%D0%BE%20%D0%B2%D1%81%D0%B5%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3F%20%28MRC%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. С чего все началось? (MRC)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Подробнее про ARC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Коллекции
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Коллекции
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Массивы
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Массивы
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1_1" id="__nav_2_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/1.%20%D0%9F%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D0%BC%20%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0%D1%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Поговорим о массивах
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Оптимизации и устройство массивов
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Множества
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Множества
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_1" id="__nav_2_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1. Set в Swift
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1. Set в Swift
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Синтаксис
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Синтаксис">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание Set
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Создание Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание пустого Set с явным указанием типа
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание пустого Set с использованием литерала массива
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Основные операции
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Основные операции">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Добавление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Добавление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert_" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Удаление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Удаление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove_" class="md-nav__link">
+    <span class="md-ellipsis">
+      remove(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removeall" class="md-nav__link">
+    <span class="md-ellipsis">
+      removeAll()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на наличие элемента/элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на наличие элемента/элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contains_" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count" class="md-nav__link">
+    <span class="md-ellipsis">
+      count
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isempty" class="md-nav__link">
+    <span class="md-ellipsis">
+      isEmpty
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Итерация по элементам Set
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сортировка элементов
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Операции над множествами
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Операции над множествами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union" class="md-nav__link">
+    <span class="md-ellipsis">
+      Объединение (Union)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Объединение (Union)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union_" class="md-nav__link">
+    <span class="md-ellipsis">
+      union(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formunion_" class="md-nav__link">
+    <span class="md-ellipsis">
+      formUnion(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пересечение (Intersection)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пересечение (Intersection)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intersection_" class="md-nav__link">
+    <span class="md-ellipsis">
+      intersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formintersection_" class="md-nav__link">
+    <span class="md-ellipsis">
+      formIntersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtracting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Разность (Subtracting)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Разность (Subtracting)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subtracting_" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtracting(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtract_" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtract(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetric-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Симметрическая разность (Symmetric Difference)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Симметрическая разность (Symmetric Difference)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symmetricdifference_" class="md-nav__link">
+    <span class="md-ellipsis">
+      symmetricDifference(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formsymmetricdifference_" class="md-nav__link">
+    <span class="md-ellipsis">
+      formSymmetricDifference(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сравнение множеств
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сравнение множеств">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на подмножество и надмножество
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на подмножество и надмножество">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issubsetof" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSubset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issupersetof" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isstrictsubsetof-isstrictsupersetof" class="md-nav__link">
+    <span class="md-ellipsis">
+      isStrictSubset(of:) и isStrictSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на пересечение и равенство
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на пересечение и равенство">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isdisjointwith" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDisjoint(with:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      Преобразование между Set и Array
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Алгоритмическая сложность основных операций
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Алгоритмическая сложность основных операций">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Добавление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Добавление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Удаление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Удаление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      remove(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на наличие элемента/элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на наличие элемента/элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contains__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      count
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isempty_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isEmpty
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      Итерация по элементам
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Итерация по элементам">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      Перебор элементов с помощью цикла for-in
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сортировка элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сортировка элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sorted" class="md-nav__link">
+    <span class="md-ellipsis">
+      sorted()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      Операции над множествами
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Операции над множествами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      union(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formunion__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      formUnion(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пересечение (Intersection)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пересечение (Intersection)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intersection__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      intersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formintersection__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      formIntersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtracting_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Разность (Subtracting)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Разность (Subtracting)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subtracting__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtracting(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtract__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtract(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetric-difference_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Симметрическая разность (Symmetric Difference)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Симметрическая разность (Symmetric Difference)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symmetricdifference__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      symmetricDifference(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сравнение множеств
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сравнение множеств">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на подмножество и надмножество
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на подмножество и надмножество">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issubsetof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSubset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issupersetof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isstrictsubsetof-isstrictsupersetof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isStrictSubset(of:), isStrictSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на пересечение и равенство
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на пересечение и равенство">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isdisjointwith_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDisjoint(with:) или ==
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      Итоговая таблица
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Словари
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Словари
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3_1" id="__nav_2_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Что такое словари в Swift?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Многопоточность
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Многопоточность
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Structured Concurrency
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Structured Concurrency
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1" id="__nav_2_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_1" id="__nav_2_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Actors
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Actors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Потокобезопасность. Введение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/2.%20Actor%20Reentrancy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Actor Reentrancy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/3.%20Actor%20Hopping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Actor Hopping
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/4.%20Sendable/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Sendable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/5.%20Global%20Actor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Global Actor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/6.%20Actor%20isolation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Actor isolation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_2" id="__nav_2_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Sequence
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Sequence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/1.%20Continuation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/2.%20Task%20Group/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Task Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/3.%20AsyncSequence%20%26%20AsyncStream/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. AsyncSequence & AsyncStream
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_3" id="__nav_2_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tasks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tasks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/1.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Введение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/2.%20Task%28Detached%29%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Task(Detached)   техническое определение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Асинхронные функции и await
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Отмена задач
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/5.%20Task%20Priority/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Task Priority
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_4" id="__nav_2_3_1_1_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Практика
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Практика
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Практический путь
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2" id="__nav_2_3_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Middle
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Middle
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2_1" id="__nav_2_3_1_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Executors
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Executors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Executors/1.%20Actor%20%D0%B8%20Executor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Actor и Executor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2_2" id="__nav_2_3_1_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tasks (deep)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tasks (deep)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20%28deep%29/1.%20Task%20Local/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Task Local
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    UI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SwiftUI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            SwiftUI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Основы
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../UI/SwiftUI/Junior/2.%20Property%20Wrappers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Property Wrappers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../UI/SwiftUI/Junior/3.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D0%B8%D0%B8%20%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D0%B9%20%D0%B2%20SwiftUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Основные концепции анимаций в SwiftUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../UI/SwiftUI/Junior/4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Тур по жестам в SwiftUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Синтаксис
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Синтаксис">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание Set
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Создание Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание пустого Set с явным указанием типа
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание пустого Set с использованием литерала массива
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Основные операции
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Основные операции">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Добавление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Добавление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert_" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Удаление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Удаление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove_" class="md-nav__link">
+    <span class="md-ellipsis">
+      remove(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removeall" class="md-nav__link">
+    <span class="md-ellipsis">
+      removeAll()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на наличие элемента/элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на наличие элемента/элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contains_" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count" class="md-nav__link">
+    <span class="md-ellipsis">
+      count
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isempty" class="md-nav__link">
+    <span class="md-ellipsis">
+      isEmpty
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Итерация по элементам Set
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сортировка элементов
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Операции над множествами
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Операции над множествами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union" class="md-nav__link">
+    <span class="md-ellipsis">
+      Объединение (Union)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Объединение (Union)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union_" class="md-nav__link">
+    <span class="md-ellipsis">
+      union(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formunion_" class="md-nav__link">
+    <span class="md-ellipsis">
+      formUnion(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пересечение (Intersection)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пересечение (Intersection)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intersection_" class="md-nav__link">
+    <span class="md-ellipsis">
+      intersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formintersection_" class="md-nav__link">
+    <span class="md-ellipsis">
+      formIntersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtracting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Разность (Subtracting)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Разность (Subtracting)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subtracting_" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtracting(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtract_" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtract(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetric-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Симметрическая разность (Symmetric Difference)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Симметрическая разность (Symmetric Difference)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symmetricdifference_" class="md-nav__link">
+    <span class="md-ellipsis">
+      symmetricDifference(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formsymmetricdifference_" class="md-nav__link">
+    <span class="md-ellipsis">
+      formSymmetricDifference(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сравнение множеств
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сравнение множеств">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на подмножество и надмножество
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на подмножество и надмножество">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issubsetof" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSubset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issupersetof" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isstrictsubsetof-isstrictsupersetof" class="md-nav__link">
+    <span class="md-ellipsis">
+      isStrictSubset(of:) и isStrictSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на пересечение и равенство
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на пересечение и равенство">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isdisjointwith" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDisjoint(with:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      Преобразование между Set и Array
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Алгоритмическая сложность основных операций
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Алгоритмическая сложность основных операций">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Добавление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Добавление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      insert(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Удаление элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Удаление элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      remove(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на наличие элемента/элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на наличие элемента/элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contains__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      contains(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      count
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isempty_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isEmpty
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      Итерация по элементам
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Итерация по элементам">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      Перебор элементов с помощью цикла for-in
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сортировка элементов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сортировка элементов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sorted" class="md-nav__link">
+    <span class="md-ellipsis">
+      sorted()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      Операции над множествами
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Операции над множествами">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      union(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formunion__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      formUnion(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пересечение (Intersection)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пересечение (Intersection)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intersection__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      intersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formintersection__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      formIntersection(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtracting_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Разность (Subtracting)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Разность (Subtracting)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subtracting__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtracting(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subtract__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      subtract(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetric-difference_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Симметрическая разность (Symmetric Difference)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Симметрическая разность (Symmetric Difference)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#symmetricdifference__1" class="md-nav__link">
+    <span class="md-ellipsis">
+      symmetricDifference(_:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сравнение множеств
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Сравнение множеств">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на подмножество и надмножество
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на подмножество и надмножество">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issubsetof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSubset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issupersetof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isstrictsubsetof-isstrictsupersetof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isStrictSubset(of:), isStrictSuperset(of:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка на пересечение и равенство
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Проверка на пересечение и равенство">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#isdisjointwith_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      isDisjoint(with:) или ==
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      Итоговая таблица
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>1. Set в Swift</h1>
+
+<hr />
+<blockquote>
+<p><strong>Изучение данного блока предполагает предварительное знание синтаксиса языка Swift.</strong>
+<em>Для успешного освоения этого материала, необходимо иметь базовое понимание синтаксиса языка Swift. Это включает в себя знание основных структур данных, операторов, циклов, функций, абстракций и других ключевых элементов языка. Без этих фундаментальных знаний будет сложно понять более сложные концепции и примеры, которые будут рассматриваться в данном блоке.</em>
+</p>
+</blockquote>
+<hr />
+<p>В Swift <strong>Set</strong> (множество) — это неупорядоченная коллекция уникальных значений одного типа. В отличие от массивов, где элементы могут повторяться и имеют определенный порядок, <strong>Set гарантирует, что каждый элемент присутствует только один раз</strong>, <strong>и не обеспечивает определенного порядка хранения</strong>. </p>
+<p>Сеты используются, когда важно обеспечить уникальность элементов, быстро проверять наличие определенного значения и выполнять операции теории множеств, такие как объединение, пересечение и разность.</p>
+<h2 id="_1">Синтаксис<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="set">Создание Set<a class="headerlink" href="#set" title="Permanent link">&para;</a></h3>
+<h4 id="set_1"><strong>Создание пустого Set с явным указанием типа</strong><a class="headerlink" href="#set_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">emptySet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Set</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;()</span>
+</code></pre></div>
+<h4 id="set_2"><strong>Создание пустого Set с использованием литерала массива</strong><a class="headerlink" href="#set_2" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">anotherEmptySet</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="p">&lt;</span><span class="nb">String</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+</code></pre></div>
+<strong>Важно:</strong> Если вы используете литерал массива для создания Set и не указываете тип явно, <strong>Swift</strong> будет считать эту коллекцию массивом. Поэтому для создания Set необходимо либо явно указать тип <strong>Set</strong>, либо использовать тип <strong>Set</strong> в объявлении переменной.</p>
+<h3 id="_2"><strong>Основные операции</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="_3"><strong>Добавление элементов</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<h5 id="insert_"><strong>insert(_:)</strong><a class="headerlink" href="#insert_" title="Permanent link">&para;</a></h5>
+<p>Добавляет новый элемент в множество. Если элемент уже существует, он не будет добавлен повторно.
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">colors</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Green&quot;</span><span class="p">]</span>
+<span class="n">colors</span><span class="p">.</span><span class="bp">insert</span><span class="p">(</span><span class="s">&quot;Blue&quot;</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="w"> </span><span class="c1">// [&quot;Red&quot;, &quot;Green&quot;, &quot;Blue&quot;]</span>
+</code></pre></div></p>
+<h4 id="_4"><strong>Удаление элементов</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h5 id="remove_"><strong>remove(_:)</strong><a class="headerlink" href="#remove_" title="Permanent link">&para;</a></h5>
+<p>Удаляет указанный элемент из множества. Возвращает удаленный элемент, если он существовал, или <strong>nil</strong> в противном случае.
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">removedColor</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">colors</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;Green&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">\(</span><span class="n">removedColor</span><span class="si">)</span><span class="s"> был удален&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="w"> </span><span class="c1">// [&quot;Red&quot;, &quot;Blue&quot;]</span>
+</code></pre></div></p>
+<h5 id="removeall"><strong>removeAll()</strong><a class="headerlink" href="#removeall" title="Permanent link">&para;</a></h5>
+<p>Удаляет все элементы из множества.
+<div class="highlight"><pre><span></span><code><span class="n">colors</span><span class="p">.</span><span class="bp">removeAll</span><span class="p">()</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="w"> </span><span class="c1">// Пустое множество</span>
+</code></pre></div></p>
+<h4 id="_5"><strong>Проверка на наличие элемента/элементов</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<h5 id="contains_"><strong>contains(_:)</strong><a class="headerlink" href="#contains_" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">cities</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Moscow&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;London&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;New York&quot;</span><span class="p">]</span>
+<span class="k">if</span><span class="w"> </span><span class="n">cities</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="s">&quot;London&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;London есть в множестве городов&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h5 id="count"><strong>count</strong><a class="headerlink" href="#count" title="Permanent link">&para;</a></h5>
+<p>Свойство, возвращающее количество элементов в множестве.
+<div class="highlight"><pre><span></span><code><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Количество городов: </span><span class="si">\(</span><span class="n">cities</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Количество городов: 3</span>
+</code></pre></div></p>
+<h5 id="isempty"><strong>isEmpty</strong><a class="headerlink" href="#isempty" title="Permanent link">&para;</a></h5>
+<p>Свойство, возвращающее <strong>true</strong>, если множество пусто.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">emptySet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Set</span><span class="p">&lt;</span><span class="nb">Int</span><span class="p">&gt;()</span>
+<span class="k">if</span><span class="w"> </span><span class="n">emptySet</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Множество пусто&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="set_3"><strong>Итерация по элементам Set</strong><a class="headerlink" href="#set_3" title="Permanent link">&para;</a></h4>
+<p>Поскольку <strong>Set</strong> соответствует протоколу <strong>Sequence</strong>, вы можете использовать цикл <strong>for-in</strong> для перебора элементов.
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">cities</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="bp">print</span><span class="p">(</span><span class="n">city</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+Порядок элементов при итерации по множеству не гарантируется.</p>
+<h4 id="_6"><strong>Сортировка элементов</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>Чтобы получить отсортированный список элементов из множества, используйте метод <strong>sorted()</strong>, который возвращает массив отсортированных элементов.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">numbers</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">sortedNumbers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="bp">sorted</span><span class="p">()</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">sortedNumbers</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2, 3]</span>
+</code></pre></div></p>
+<h3 id="_7"><strong>Операции над множествами</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="union"><strong>Объединение (Union)</strong><a class="headerlink" href="#union" title="Permanent link">&para;</a></h4>
+<h5 id="union_"><strong>union(_:)</strong><a class="headerlink" href="#union_" title="Permanent link">&para;</a></h5>
+<p>Возвращает новое множество, содержащее все уникальные элементы обоих множеств.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">setA</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">setB</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">unionSet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">setA</span><span class="p">.</span><span class="n">union</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">unionSet</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2, 3, 4, 5]</span>
+</code></pre></div></p>
+<h5 id="formunion_"><strong>formUnion(_:)</strong><a class="headerlink" href="#formunion_" title="Permanent link">&para;</a></h5>
+<p>Модифицирует текущее множество, добавляя в него элементы из другого множества.
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">setC</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="n">setC</span><span class="p">.</span><span class="n">formUnion</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">])</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">setC</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2, 3, 4]</span>
+</code></pre></div></p>
+<h4 id="intersection"><strong>Пересечение (Intersection)</strong><a class="headerlink" href="#intersection" title="Permanent link">&para;</a></h4>
+<h5 id="intersection_"><strong>intersection(_:)</strong><a class="headerlink" href="#intersection_" title="Permanent link">&para;</a></h5>
+<p>Возвращает новое множество, содержащее общие элементы обоих множеств.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">intersectionSet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">setA</span><span class="p">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">intersectionSet</span><span class="p">)</span><span class="w"> </span><span class="c1">// [3]</span>
+</code></pre></div></p>
+<h5 id="formintersection_"><strong>formIntersection(_:)</strong><a class="headerlink" href="#formintersection_" title="Permanent link">&para;</a></h5>
+<p>Модифицирует текущее множество, оставляя в нем только общие элементы с другим множеством.
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">setD</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="n">setD</span><span class="p">.</span><span class="n">formIntersection</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">])</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">setD</span><span class="p">)</span><span class="w"> </span><span class="c1">// [2, 3]</span>
+</code></pre></div></p>
+<h4 id="subtracting"><strong>Разность (Subtracting)</strong><a class="headerlink" href="#subtracting" title="Permanent link">&para;</a></h4>
+<h5 id="subtracting_"><strong>subtracting(_:)</strong><a class="headerlink" href="#subtracting_" title="Permanent link">&para;</a></h5>
+<p>Возвращает новое множество, содержащее элементы текущего множества, которые не содержатся в указанном множестве.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">subtractingSet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">setA</span><span class="p">.</span><span class="n">subtracting</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">subtractingSet</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2]</span>
+</code></pre></div></p>
+<h5 id="subtract_"><strong>subtract(_:)</strong><a class="headerlink" href="#subtract_" title="Permanent link">&para;</a></h5>
+<p>Модифицирует текущее множество, удаляя из него элементы другого множества.
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">setE</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<span class="n">setE</span><span class="p">.</span><span class="n">subtract</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">])</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">setE</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2]</span>
+</code></pre></div></p>
+<h4 id="symmetric-difference"><strong>Симметрическая разность (Symmetric Difference)</strong><a class="headerlink" href="#symmetric-difference" title="Permanent link">&para;</a></h4>
+<h5 id="symmetricdifference_"><strong>symmetricDifference(_:)</strong><a class="headerlink" href="#symmetricdifference_" title="Permanent link">&para;</a></h5>
+<p>Возвращает новое множество, содержащее элементы, которые есть в одном из множеств, но не в обоих.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">symmetricSet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">setA</span><span class="p">.</span><span class="n">symmetricDifference</span><span class="p">(</span><span class="n">setB</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">symmetricSet</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2, 4, 5]</span>
+</code></pre></div></p>
+<h5 id="formsymmetricdifference_"><strong>formSymmetricDifference(_:)</strong><a class="headerlink" href="#formsymmetricdifference_" title="Permanent link">&para;</a></h5>
+<p>Модифицирует текущее множество, заменяя его симметрической разностью с другим множеством.
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">setF</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="n">setF</span><span class="p">.</span><span class="n">formSymmetricDifference</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">setF</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2, 4, 5]</span>
+</code></pre></div></p>
+<h4 id="_8"><strong>Сравнение множеств</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<h5 id="_9"><strong>Проверка на подмножество и надмножество</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<h6 id="issubsetof"><strong>isSubset(of:)</strong><a class="headerlink" href="#issubsetof" title="Permanent link">&para;</a></h6>
+<p>Проверяет, является ли текущее множество подмножеством другого множества.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">smallSet</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">largeSet</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">smallSet</span><span class="p">.</span><span class="n">isSubset</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">largeSet</span><span class="p">))</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div></p>
+<h6 id="issupersetof"><strong>isSuperset(of:)</strong><a class="headerlink" href="#issupersetof" title="Permanent link">&para;</a></h6>
+<p>Проверяет, является ли текущее множество надмножеством другого множества.
+<div class="highlight"><pre><span></span><code><span class="bp">print</span><span class="p">(</span><span class="n">largeSet</span><span class="p">.</span><span class="n">isSuperset</span><span class="p">(</span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">smallSet</span><span class="p">))</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div></p>
+<h6 id="isstrictsubsetof-isstrictsupersetof"><strong>isStrictSubset(of:)</strong> и <strong>isStrictSuperset(of:)</strong><a class="headerlink" href="#isstrictsubsetof-isstrictsupersetof" title="Permanent link">&para;</a></h6>
+<p>Проверяют строгие отношения подмножества и надмножества (исключая равенство множеств).</p>
+<h5 id="_10"><strong>Проверка на пересечение и равенство</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h5>
+<h6 id="isdisjointwith"><strong>isDisjoint(with:)</strong><a class="headerlink" href="#isdisjointwith" title="Permanent link">&para;</a></h6>
+<p>Проверяет, не имеют ли множества общих элементов.
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">setG</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">setH</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">setG</span><span class="p">.</span><span class="n">isDisjoint</span><span class="p">(</span><span class="n">with</span><span class="p">:</span><span class="w"> </span><span class="n">setH</span><span class="p">))</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div>
+Либо, можно использовать классическое: <code>==</code></p>
+<h3 id="set-array"><strong>Преобразование между Set и Array</strong><a class="headerlink" href="#set-array" title="Permanent link">&para;</a></h3>
+<p><strong>Из Set в Array</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">numberSet</span><span class="p">:</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">numberArray</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="n">numberSet</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">numberArray</span><span class="p">)</span><span class="w"> </span><span class="c1">// Может быть [2, 3, 1] — порядок не гарантируется</span>
+</code></pre></div>
+<strong>Из Array в Set</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nv">numberArray</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="kd">let</span><span class="w"> </span><span class="nv">numberSet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Set</span><span class="p">(</span><span class="n">numberArray</span><span class="p">)</span>
+<span class="bp">print</span><span class="p">(</span><span class="n">numberSet</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1, 2, 3]</span>
+</code></pre></div></p>
+<h2 id="_11">Алгоритмическая сложность основных операций<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12"><strong>Добавление элементов</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<h4 id="insert__1">insert(_:)<a class="headerlink" href="#insert__1" title="Permanent link">&para;</a></h4>
+<p><strong>Амортизированная O(1)</strong></p>
+<p>Операция вставки элемента в Set реализована с использованием хеш-таблицы. В среднем, добавление элемента выполняется за константное время. Однако в редких случаях, когда происходит рехеширование (<strong>перераспределение хеш-таблицы при превышении определенного коэффициента загрузки</strong>), операция может занять больше времени, но это компенсируется в амортизированном анализе.</p>
+<h3 id="_13"><strong>Удаление элементов</strong><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h4 id="remove__1">remove(_:)<a class="headerlink" href="#remove__1" title="Permanent link">&para;</a></h4>
+<p><strong>Амортизированная O(1)</strong></p>
+<p>Удаление всех элементов требует обхода всей структуры данных и освобождения памяти, поэтому сложность линейна по количеству элементов <strong>n</strong>.</p>
+<h3 id="_14"><strong>Проверка на наличие элемента/элементов</strong><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<h4 id="contains__1">contains(_:)<a class="headerlink" href="#contains__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(1)</strong></p>
+<p>Проверка наличия элемента в <strong>Set</strong> выполняется за константное время благодаря <strong>хеш-таблице</strong>. По <strong>хеш-значению</strong> сразу определяется, есть ли элемент в множестве.</p>
+<h4 id="count_1">count<a class="headerlink" href="#count_1" title="Permanent link">&para;</a></h4>
+<p><strong>O(1)</strong></p>
+<p>Свойство <strong>count</strong> хранится и обновляется при каждой операции добавления или удаления элемента, поэтому доступ к нему выполняется за константное время.</p>
+<h4 id="isempty_1">isEmpty<a class="headerlink" href="#isempty_1" title="Permanent link">&para;</a></h4>
+<p><strong>O(1)</strong></p>
+<p>Проверка на пустоту — это простая проверка значения свойства <strong>count</strong>, что выполняется за константное время.</p>
+<h3 id="_15"><strong>Итерация по элементам</strong><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<h4 id="for-in">Перебор элементов с помощью цикла for-in<a class="headerlink" href="#for-in" title="Permanent link">&para;</a></h4>
+<p><strong>O(n)</strong></p>
+<p>Для перебора всех элементов множества необходимо пройти по каждому из n элементов, что требует линейного времени.</p>
+<h3 id="_16"><strong>Сортировка элементов</strong><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<h4 id="sorted">sorted()<a class="headerlink" href="#sorted" title="Permanent link">&para;</a></h4>
+<p><strong>O(n log n)</strong></p>
+<p>Метод <code>sorted()</code> возвращает отсортированный массив элементов множества. Сортировка требует времени <strong>O(n log n</strong>), где <strong>n</strong> — количество элементов в множестве.</p>
+<h3 id="_17"><strong>Операции над множествами</strong><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<h4 id="union__1">union(_:)<a class="headerlink" href="#union__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(n + m)</strong></p>
+<p>Возвращает новое множество, содержащее все уникальные элементы из двух множеств. Необходимо пройти по каждому элементу обоих множеств (размеры n и m) и добавить их в новое множество, что требует <strong>O(n + m)</strong> времени.</p>
+<h4 id="formunion__1">formUnion(_:)<a class="headerlink" href="#formunion__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(m)</strong></p>
+<p>Модифицирует текущее множество, добавляя в него элементы из другого множества размером <strong>m</strong>. Каждая вставка выполняется за амортизированное <strong>O(1)</strong>, итого <strong>O(m)</strong>.</p>
+<h3 id="intersection_1"><strong>Пересечение (Intersection)</strong><a class="headerlink" href="#intersection_1" title="Permanent link">&para;</a></h3>
+<h4 id="intersection__1">intersection(_:)<a class="headerlink" href="#intersection__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(n)</strong></p>
+<p>Возвращает новое множество с общими элементами. Необходимо пройти по каждому элементу текущего множества (размер <strong>n</strong>) и проверить, содержится ли он в другом множестве (проверка за <strong>O(1)</strong>). Итого <strong>O(n)</strong>.</p>
+<h4 id="formintersection__1">formIntersection(_:)<a class="headerlink" href="#formintersection__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(n)</strong></p>
+<p>Модифицирует текущее множество, оставляя только общие элементы. Аналогично предыдущему, требуется пройти по всем элементам текущего множества.</p>
+<h3 id="subtracting_1"><strong>Разность (Subtracting)</strong><a class="headerlink" href="#subtracting_1" title="Permanent link">&para;</a></h3>
+<h4 id="subtracting__1">subtracting(_:)<a class="headerlink" href="#subtracting__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(n)</strong></p>
+<p>Возвращает новое множество с элементами, которые есть в текущем множестве, но отсутствуют в другом. Проход по каждому элементу текущего множества с проверкой наличия в другом множестве за <strong>O(1)</strong>. Итого <strong>O(n)</strong>.</p>
+<h4 id="subtract__1">subtract(_:)<a class="headerlink" href="#subtract__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(m)</strong></p>
+<p>Модифицирует текущее множество, удаляя из него элементы другого множества размера <strong>m</strong>. Для каждого элемента из другого множества выполняется удаление за <strong>O(1)</strong>, итого <strong>O(m)</strong>.</p>
+<h3 id="symmetric-difference_1"><strong>Симметрическая разность (Symmetric Difference)</strong><a class="headerlink" href="#symmetric-difference_1" title="Permanent link">&para;</a></h3>
+<h4 id="symmetricdifference__1">symmetricDifference(_:)<a class="headerlink" href="#symmetricdifference__1" title="Permanent link">&para;</a></h4>
+<p><strong>O(n + m)</strong></p>
+<p>Возвращает новое множество с элементами, которые присутствуют в одном из множеств, но не в обоих. Требуется пройти по элементам обоих множеств и выполнить операции вставки и удаления, итого <strong>O(n + m)</strong>.</p>
+<h3 id="_18"><strong>Сравнение множеств</strong><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<h4 id="_19"><strong>Проверка на подмножество и надмножество</strong><a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
+<h5 id="issubsetof_1">isSubset(of:)<a class="headerlink" href="#issubsetof_1" title="Permanent link">&para;</a></h5>
+<p><strong>O(n)</strong></p>
+<p>Проверяет, являются ли все элементы текущего множества (размер <strong>n</strong>) элементами другого множества. Проходит по каждому элементу текущего множества и проверяет наличие в другом множестве за <strong>O(1)</strong>, итого <strong>O(n)</strong>.</p>
+<h5 id="issupersetof_1">isSuperset(of:)<a class="headerlink" href="#issupersetof_1" title="Permanent link">&para;</a></h5>
+<p><strong>O(m)</strong></p>
+<p>Проверяет, содержит ли текущее множество все элементы другого множества размера m. Проходит по каждому элементу другого множества и проверяет наличие в текущем множестве за <strong>O(1)</strong>, итого <strong>O(m)</strong>.</p>
+<h5 id="isstrictsubsetof-isstrictsupersetof_1">isStrictSubset(of:), isStrictSuperset(of:)<a class="headerlink" href="#isstrictsubsetof-isstrictsupersetof_1" title="Permanent link">&para;</a></h5>
+<p><strong>O(n) или O(m)</strong></p>
+<p>Аналогично предыдущим методам с дополнительной проверкой на неравенство размеров множеств.</p>
+<h4 id="_20"><strong>Проверка на пересечение и равенство</strong><a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
+<h5 id="isdisjointwith_1">isDisjoint(with:) или ==<a class="headerlink" href="#isdisjointwith_1" title="Permanent link">&para;</a></h5>
+<p><strong>O(n)</strong></p>
+<p>Проверяет, не имеют ли множества общих элементов. Проходит по каждому элементу текущего множества и проверяет наличие в другом множестве за <strong>O(1)</strong>, останавливается при нахождении общего элемента. В худшем случае — <strong>O(n)</strong>.</p>
+<h3 id="_21">Итоговая таблица<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Операция</strong></th>
+<th><strong>Метод</strong></th>
+<th><strong>Сложность</strong></th>
+<th><strong>Объяснение</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Добавление элемента</strong></td>
+<td><code>insert(_:)</code></td>
+<td>Амортизированная O(1)</td>
+<td>Добавление элемента в <code>Set</code> реализовано через хеш-таблицу. В среднем операция выполняется за O(1), хотя в редких случаях может потребоваться больше времени из-за рехеширования.</td>
+</tr>
+<tr>
+<td><strong>Удаление элемента</strong></td>
+<td><code>remove(_:)</code></td>
+<td>Амортизированная O(1)</td>
+<td>Удаление элемента также использует хеш-таблицу для быстрого доступа. Амортизированная сложность составляет O(1), с учетом возможного рехеширования.</td>
+</tr>
+<tr>
+<td><strong>Удаление всех элементов</strong></td>
+<td><code>removeAll()</code></td>
+<td>O(n)</td>
+<td>Требуется пройти по всей структуре данных для освобождения памяти и удаления элементов, поэтому сложность линейна от количества элементов n.</td>
+</tr>
+<tr>
+<td><strong>Проверка наличия элемента</strong></td>
+<td><code>contains(_:)</code></td>
+<td>O(1)</td>
+<td>Используя хеш-таблицу, проверка наличия элемента выполняется за константное время, обращаясь напрямую по хешу.</td>
+</tr>
+<tr>
+<td><strong>Получение количества элементов</strong></td>
+<td><code>count</code></td>
+<td>O(1)</td>
+<td>Свойство <code>count</code> хранится и обновляется при каждой модификации множества, поэтому доступ к нему занимает константное время.</td>
+</tr>
+<tr>
+<td><strong>Проверка на пустоту</strong></td>
+<td><code>isEmpty</code></td>
+<td>O(1)</td>
+<td>Проверка выполняется через сравнение свойства <code>count</code> с нулем, что занимает константное время.</td>
+</tr>
+<tr>
+<td><strong>Итерация по элементам</strong></td>
+<td>Цикл <code>for-in</code></td>
+<td>O(n)</td>
+<td>Необходимо пройти по каждому из n элементов множества, что требует линейного времени. Порядок элементов не гарантируется.</td>
+</tr>
+<tr>
+<td><strong>Сортировка элементов</strong></td>
+<td><code>sorted()</code></td>
+<td>O(n log n)</td>
+<td>Сортировка требует сравнения элементов и организации их в порядке, что занимает O(n log n) времени. Возвращает отсортированный массив.</td>
+</tr>
+<tr>
+<td><strong>Объединение множеств</strong></td>
+<td><code>union(_:)</code></td>
+<td>O(n + m)</td>
+<td>Создает новое множество, проходя по элементам обоих множеств размером n и m соответственно. Каждая вставка в новое множество занимает O(1).</td>
+</tr>
+<tr>
+<td><strong>Модификация при объединении</strong></td>
+<td><code>formUnion(_:)</code></td>
+<td>O(m)</td>
+<td>Добавляет элементы из другого множества размера m в текущее множество. Каждая операция вставки выполняется за O(1).</td>
+</tr>
+<tr>
+<td><strong>Пересечение множеств</strong></td>
+<td><code>intersection(_:)</code></td>
+<td>O(n)</td>
+<td>Проходит по элементам текущего множества размера n и проверяет наличие каждого в другом множестве за O(1).</td>
+</tr>
+<tr>
+<td><strong>Модификация при пересечении</strong></td>
+<td><code>formIntersection(_:)</code></td>
+<td>O(n)</td>
+<td>Удаляет из текущего множества элементы, отсутствующие в другом. Проход по n элементам с проверкой за O(1).</td>
+</tr>
+<tr>
+<td><strong>Разность множеств</strong></td>
+<td><code>subtracting(_:)</code></td>
+<td>O(n)</td>
+<td>Проходит по элементам текущего множества и исключает те, что присутствуют в другом множестве. Проверка присутствия за O(1).</td>
+</tr>
+<tr>
+<td><strong>Модификация при разности</strong></td>
+<td><code>subtract(_:)</code></td>
+<td>O(m)</td>
+<td>Удаляет из текущего множества элементы другого множества размера m. Каждое удаление выполняется за O(1).</td>
+</tr>
+<tr>
+<td><strong>Симметрическая разность</strong></td>
+<td><code>symmetricDifference(_:)</code></td>
+<td>O(n + m)</td>
+<td>Создает новое множество, включая элементы, присутствующие только в одном из множеств. Требуется пройти по обоим множествам.</td>
+</tr>
+<tr>
+<td><strong>Модификация при симметрической разности</strong></td>
+<td><code>formSymmetricDifference(_:)</code></td>
+<td>O(m)</td>
+<td>Для каждого элемента из другого множества размера m проверяется присутствие и выполняется добавление или удаление за O(1).</td>
+</tr>
+<tr>
+<td><strong>Проверка на подмножество</strong></td>
+<td><code>isSubset(of:)</code></td>
+<td>O(n)</td>
+<td>Проходит по каждому элементу текущего множества размера n и проверяет его наличие в другом множестве за O(1).</td>
+</tr>
+<tr>
+<td><strong>Проверка на надмножество</strong></td>
+<td><code>isSuperset(of:)</code></td>
+<td>O(m)</td>
+<td>Проверяет, содержатся ли все элементы другого множества размера m в текущем. Проход по m элементам с проверкой за O(1).</td>
+</tr>
+<tr>
+<td><strong>Проверка на пересечение</strong></td>
+<td><code>isDisjoint(with:)</code></td>
+<td>O(n)</td>
+<td>Проходит по элементам текущего множества и проверяет отсутствие каждого в другом множестве. Останавливается при первом совпадении.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Примечания:</strong></p>
+<ul>
+<li><strong>n</strong> — размер текущего множества.</li>
+<li><strong>m</strong> — размер другого множества или коллекции.</li>
+<li><strong>Амортизированная сложность</strong> учитывает среднее время выполнения операций, сглаживая редкие случаи увеличения времени выполнения (например, при рехешировании).</li>
+<li><strong>Операции с пользовательскими типами</strong>: Элементы должны соответствовать протоколу <code>Hashable</code>. Операции хеширования и сравнения должны выполняться за <strong>O(1)</strong> для сохранения общей сложности операций с множеством.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/+QmMbHUGcAE5lOWQ6" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8m114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.45 10.45 0 0 1 3.53 6.716 43.8 43.8 0 0 1 .417 9.769"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand"], "search": "../../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

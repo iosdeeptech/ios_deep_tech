@@ -1,0 +1,2701 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../2.%20Property%20Wrappers/">
+      
+      
+        <link rel="next" href="../4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS канал" href="../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS канал с новым контентом" href="../../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>3. Основные концепции анимаций в SwiftUI - iOS Deep Tech</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="https://iosdeeptech.github.io/ios_deep_tech" title="iOS Deep Tech" class="md-header__button md-logo" aria-label="iOS Deep Tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iOS Deep Tech
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Основные концепции анимаций в SwiftUI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Включить темную тему"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Включить темную тему" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Включить светлую тему"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Включить светлую тему" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://iosdeeptech.github.io/ios_deep_tech" title="iOS Deep Tech" class="md-nav__button md-logo" aria-label="iOS Deep Tech" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+
+    </a>
+    iOS Deep Tech
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Кто мы?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Swift
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Swift
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ARC
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            ARC
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/ARC/Junior/1.%20%D0%A1%20%D1%87%D0%B5%D0%B3%D0%BE%20%D0%B2%D1%81%D0%B5%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3F%20%28MRC%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. С чего все началось? (MRC)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Подробнее про ARC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Коллекции
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Коллекции
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Массивы
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Массивы
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1_1" id="__nav_2_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/1.%20%D0%9F%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D0%BC%20%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0%D1%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Поговорим о массивах
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Оптимизации и устройство массивов
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Множества
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Множества
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2_1" id="__nav_2_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0/Junior/1.%20Set%20%D0%B2%20Swift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Set в Swift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Словари
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Словари
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3_1" id="__nav_2_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Что такое словари в Swift?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Многопоточность
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Многопоточность
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Structured Concurrency
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Structured Concurrency
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1" id="__nav_2_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_1" id="__nav_2_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Actors
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Actors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Потокобезопасность. Введение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/2.%20Actor%20Reentrancy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Actor Reentrancy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/3.%20Actor%20Hopping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Actor Hopping
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/4.%20Sendable/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Sendable
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/5.%20Global%20Actor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Global Actor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/6.%20Actor%20isolation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Actor isolation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_2" id="__nav_2_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Sequence
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Sequence
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/1.%20Continuation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/2.%20Task%20Group/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Task Group
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/3.%20AsyncSequence%20%26%20AsyncStream/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. AsyncSequence & AsyncStream
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_3" id="__nav_2_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tasks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tasks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/1.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Введение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/2.%20Task%28Detached%29%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Task(Detached)   техническое определение
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Асинхронные функции и await
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Отмена задач
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/5.%20Task%20Priority/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Task Priority
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_1_4" id="__nav_2_3_1_1_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Практика
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Практика
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Практический путь
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2" id="__nav_2_3_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Middle
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_3_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Middle
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2_1" id="__nav_2_3_1_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Executors
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Executors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Executors/1.%20Actor%20%D0%B8%20Executor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Actor и Executor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_1_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1_2_2" id="__nav_2_3_1_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tasks (deep)
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_2_3_1_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tasks (deep)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20%28deep%29/1.%20Task%20Local/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Task Local
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    UI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SwiftUI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            SwiftUI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Junior
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Junior
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Основы
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20Property%20Wrappers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Property Wrappers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3. Основные концепции анимаций в SwiftUI
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    3. Основные концепции анимаций в SwiftUI
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Основные концепции
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animation_-animation-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Простые анимации: Модификаторы .animation(_:) и .animation(, value:)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Простые анимации: Модификаторы .animation(_:) и .animation(, value:)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#animation_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Модификатор .animation(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animation-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Модификатор .animation(, value:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#withanimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Контекстная анимация: withAnimation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anytransition-transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Переходы между состояниями: AnyTransition и .transition()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animatablemodifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Гибкие анимации: AnimatableModifier и работа с векторными данными
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Гибкие анимации: AnimatableModifier и работа с векторными данными">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#animatablemodifier_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Модификаторы анимаций с использованием AnimatableModifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorarithmetic-animatabledata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Работа с векторными данными (VectorArithmetic, AnimatableData)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matchedgeometryeffect" class="md-nav__link">
+    <span class="md-ellipsis">
+      Анимации между состояниями: .matchedGeometryEffect()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transformeffect" class="md-nav__link">
+    <span class="md-ellipsis">
+      Трансформации с использованием .transformEffect()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Оптимизация и проблемы с анимацией
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Тур по жестам в SwiftUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Основные концепции
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animation_-animation-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Простые анимации: Модификаторы .animation(_:) и .animation(, value:)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Простые анимации: Модификаторы .animation(_:) и .animation(, value:)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#animation_" class="md-nav__link">
+    <span class="md-ellipsis">
+      Модификатор .animation(_:)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animation-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      Модификатор .animation(, value:)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#withanimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Контекстная анимация: withAnimation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anytransition-transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Переходы между состояниями: AnyTransition и .transition()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#animatablemodifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Гибкие анимации: AnimatableModifier и работа с векторными данными
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Гибкие анимации: AnimatableModifier и работа с векторными данными">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#animatablemodifier_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Модификаторы анимаций с использованием AnimatableModifier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorarithmetic-animatabledata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Работа с векторными данными (VectorArithmetic, AnimatableData)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matchedgeometryeffect" class="md-nav__link">
+    <span class="md-ellipsis">
+      Анимации между состояниями: .matchedGeometryEffect()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transformeffect" class="md-nav__link">
+    <span class="md-ellipsis">
+      Трансформации с использованием .transformEffect()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Оптимизация и проблемы с анимацией
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>3. Основные концепции анимаций в SwiftUI</h1>
+
+<hr />
+<blockquote>
+<p><strong>Изучение данного блока предполагает предварительное знание синтаксиса языка Swift.</strong>
+<em>Для успешного освоения этого материала, необходимо иметь базовое понимание синтаксиса языка Swift. Это включает в себя знание основных структур данных, операторов, циклов, функций, абстракций и других ключевых элементов языка. Без этих фундаментальных знаний будет сложно понять более сложные концепции и примеры, которые будут рассматриваться в данном блоке.</em>
+</p>
+</blockquote>
+<hr />
+<p>Анимация является ключевым элементом современного интерфейса пользователя, создавая ощущение живости и отзывчивости приложения. SwiftUI предоставляет мощные инструменты для создания анимаций, и в этом руководстве мы рассмотрим различные методы их реализации, их преимущества и недостатки. </p>
+<h3 id="_1">Основные концепции<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>В SwiftUI существует несколько основных методов и модификаторов для создания анимаций:</p>
+<ol>
+<li><strong>.animation(_:)</strong></li>
+<li><strong>.animation(, value:)</strong></li>
+<li><strong>withAnimation</strong></li>
+<li><strong>AnyTransition</strong></li>
+<li><strong>AnimatableModifier</strong></li>
+<li><strong>Работа с векторными данными (VectorArithmetic, AnimatableData)</strong></li>
+<li><strong>.matchedGeometryEffect()</strong></li>
+<li><strong>.transformEffect()</strong></li>
+</ol>
+<p>Мы рассмотрим каждый из этих методов в логическом порядке, начиная с простых и переходя к более сложным и мощным подходам.</p>
+<h2 id="animation_-animation-value">Простые анимации: <strong>Модификаторы .animation(_:) и .animation(, value:)</strong><a class="headerlink" href="#animation_-animation-value" title="Permanent link">&para;</a></h2>
+<h3 id="animation_"><strong>Модификатор .animation(_:)</strong><a class="headerlink" href="#animation_" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Модификатор находится в статусе <strong>Deprecated,</strong> но его до сих пор можно встретить в проектах
+</p>
+</blockquote>
+<p><strong>.animation(_:)</strong> — это базовый модификатор, который применяется ко всей вьюхе и анимирует все изменения её состояния.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">SimpleAnimationView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isScaled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Circle</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="n">scaleEffect</span><span class="p">(</span><span class="n">isScaled</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">animation</span><span class="p">(.</span><span class="n">easeInOut</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">))</span>
+<span class="w">            </span><span class="p">.</span><span class="n">onTapGesture</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isScaled</span><span class="p">.</span><span class="n">toggle</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation1.gif" src="../Attachments/Animation1.gif" /></p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Простота применения. Весь код анимации сосредоточен в одном месте.</li>
+<li>Подходит для случаев, когда изменения состояния должны быть анимированы одновременно.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Анимация применяется ко всем изменениям, что может привести к неожиданным эффектам.</li>
+<li>Ограниченный контроль над анимацией отдельных изменений.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ SwiftUI обрабатывает изменения состояния и автоматически применяет анимацию к связанным вьюхам. Внутри фреймворка создаются временные слоты, в которых изменения визуально трансформируются с использованием тайминга анимации. Это достигается благодаря внутреннему API, которое интерполирует значения между текущим и целевым состоянием.</strong></p>
+<h3 id="animation-value"><strong>Модификатор .animation(, value:)</strong><a class="headerlink" href="#animation-value" title="Permanent link">&para;</a></h3>
+<p><strong>.animation(, value:)</strong> — более избирательный способ управления анимациями. Анимация выполняется только при изменении конкретного значения.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ValueBasedAnimationView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">scale</span><span class="p">:</span><span class="w"> </span><span class="n">CGFloat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">colorToggle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Circle</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="n">colorToggle</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Color</span><span class="p">.</span><span class="n">blue</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">frame</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">scaleEffect</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">animation</span><span class="p">(.</span><span class="n">easeInOut</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">scale</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">animation</span><span class="p">(.</span><span class="n">spring</span><span class="p">(</span><span class="n">response</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">dampingFraction</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">blendDuration</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">),</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">colorToggle</span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Change Scale&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">scale</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Toggle Color&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">colorToggle</span><span class="p">.</span><span class="n">toggle</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation2.gif" src="../Attachments/Animation2.gif" /></p>
+<p>Здесь анимация запускается только при изменении значений <strong>scale</strong> или <strong>colorToggle</strong>.</p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Точный контроль над тем, какие изменения должны быть анимированы.</li>
+<li>Улучшенная производительность, так как анимация применяется только к конкретным изменениям.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Может потребоваться больше кода для управления различными состояниями.</li>
+<li>При множественных изменениях одновременно возможно несоответствие анимаций.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ Этот модификатор использует принцип дифференциации состояний. SwiftUI отслеживает изменения указанных значений, и если одно из них изменяется, анимация автоматически применяется к связанным визуальным элементам. Внутри фреймворка используется механизм KVO (Key-Value Observing) для отслеживания этих изменений.</strong></p>
+<h2 id="withanimation"><strong>Контекстная анимация: withAnimation</strong><a class="headerlink" href="#withanimation" title="Permanent link">&para;</a></h2>
+<p><strong>withAnimation</strong> позволяет оборачивать изменения состояния в блок анимации. В отличие от <strong>.animation(_:)</strong>, <strong>withAnimation</strong> позволяет анимировать конкретные действия, а не все изменения вьюхи.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ContextualAnimationView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isVisible</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Hi world!&quot;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isVisible</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">frame</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">infinity</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="n">onTapGesture</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">withAnimation</span><span class="p">(.</span><span class="n">easeInOut</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">.</span><span class="n">toggle</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation3.gif" src="../Attachments/Animation3.gif" /></p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Анимация применяется только к конкретным действиям, что повышает предсказуемость поведения.</li>
+<li>Легче управлять и синхронизировать анимации.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Требует явного указания, какие действия должны быть анимированы.</li>
+<li>Может усложнить код при множественных состояниях и действиях.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ withAnimation работает, оборачивая изменения состояния в транзакцию, которая передает анимационные параметры внутрь фреймворка. Эти параметры затем используются для создания анимации перехода от одного состояния к другому. SwiftUI управляет этими транзакциями, обеспечивая синхронное выполнение анимаций.</strong></p>
+<h2 id="anytransition-transition"><strong>Переходы между состояниями: AnyTransition и .transition()</strong><a class="headerlink" href="#anytransition-transition" title="Permanent link">&para;</a></h2>
+<p><strong>AnyTransition</strong> используется для анимации появления и исчезновения вьюх. Это мощный инструмент для создания плавных переходов между состояниями интерфейса.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">TransitionExampleView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isVisible</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Hi World!&quot;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isVisible</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Rectangle</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">blue</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">frame</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">transition</span><span class="p">(.</span><span class="n">scale</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="n">onTapGesture</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">withAnimation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isVisible</span><span class="p">.</span><span class="n">toggle</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation4.gif" src="../Attachments/Animation4.gif" /></p>
+<p><strong>Виды предустановленных переходов:</strong></p>
+<ul>
+<li><strong>.slide</strong>: Сдвиг вьюхи в сторону.</li>
+<li><strong>.scale</strong>: Масштабирование вьюхи.</li>
+<li><strong>.opacity</strong>: Плавное появление/исчезновение.</li>
+</ul>
+<p><strong>Кастомные переходы:</strong></p>
+<p>Вы можете создавать свои собственные переходы, комбинируя существующие или создавая полностью уникальные эффекты.
+<div class="highlight"><pre><span></span><code><span class="kd">extension</span><span class="w"> </span><span class="nc">AnyTransition</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">customScaleAndOpacity</span><span class="p">:</span><span class="w"> </span><span class="n">AnyTransition</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">AnyTransition</span><span class="p">.</span><span class="n">scale</span><span class="p">.</span><span class="n">combined</span><span class="p">(</span><span class="n">with</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">opacity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Простота использования для создания анимаций перехода между состояниями.</li>
+<li>Поддержка множества предустановленных переходов, таких как .<strong>slide</strong>, .<strong>scale</strong>, .<strong>opacity</strong>.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Ограниченные возможности для кастомизации переходов по сравнению с другими методами.</li>
+<li>Переходы ограничены конкретными действиями, такими как добавление и удаление вьюх.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ SwiftUI создает временные слепки вьюх для выполнения переходов и управляет визуальной согласованностью между состояниями. Когда вы задаете AnyTransition, SwiftUI создает замороженные копии вьюх до и после анимации и затем интерполирует эти состояния, чтобы создать плавный переход.</strong></p>
+<h2 id="animatablemodifier"><strong>Гибкие анимации: AnimatableModifier и работа с векторными данными</strong><a class="headerlink" href="#animatablemodifier" title="Permanent link">&para;</a></h2>
+<h3 id="animatablemodifier_1"><strong>Модификаторы анимаций с использованием AnimatableModifier</strong><a class="headerlink" href="#animatablemodifier_1" title="Permanent link">&para;</a></h3>
+<p><strong>AnimatableModifier</strong> позволяет анимировать сложные свойства, такие как текст или градиенты, которые не поддерживаются стандартными методами анимации.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">AnimatableFontModifier</span><span class="p">:</span><span class="w"> </span><span class="n">AnimatableModifier</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">size</span><span class="p">:</span><span class="w"> </span><span class="n">CGFloat</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">animatableData</span><span class="p">:</span><span class="w"> </span><span class="n">CGFloat</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kr">get</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kr">set</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">newValue</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">body</span><span class="p">(</span><span class="n">content</span><span class="p">:</span><span class="w"> </span><span class="n">Content</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">content</span>
+<span class="w">            </span><span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">system</span><span class="p">(</span><span class="n">size</span><span class="p">:</span><span class="w"> </span><span class="n">size</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">AnimatableFontView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">fontSize</span><span class="p">:</span><span class="w"> </span><span class="n">CGFloat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Animating Font Size&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">modifier</span><span class="p">(</span><span class="n">AnimatableFontModifier</span><span class="p">(</span><span class="n">size</span><span class="p">:</span><span class="w"> </span><span class="n">fontSize</span><span class="p">))</span>
+<span class="w">            </span><span class="p">.</span><span class="n">onTapGesture</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">withAnimation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">fontSize</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fontSize</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation5.gif" src="../Attachments/Animation5.gif" /></p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Возможность анимации сложных и нестандартных свойств.</li>
+<li>Высокая гибкость и возможность создания уникальных анимаций.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Более сложный синтаксис.</li>
+<li>Может потребовать дополнительных усилий по оптимизации.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ AnimatableModifier использует протокол AnimatableData, который позволяет SwiftUI интерполировать данные анимации. SwiftUI отслеживает изменения в animatableData, вычисляет промежуточные значения для плавного перехода между состояниями и обновляет визуальные свойства вьюхи соответственно.</strong></p>
+<h3 id="vectorarithmetic-animatabledata">Работа с векторными данными (VectorArithmetic, AnimatableData)<a class="headerlink" href="#vectorarithmetic-animatabledata" title="Permanent link">&para;</a></h3>
+<p>Эти протоколы позволяют создавать сложные анимации, работающие с векторными данными, например, анимацию нескольких параметров одновременно.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">CustomShape</span><span class="p">:</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">animatableData</span><span class="p">:</span><span class="w"> </span><span class="n">CGFloat</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">path</span><span class="p">(</span><span class="k">in</span><span class="w"> </span><span class="n">rect</span><span class="p">:</span><span class="w"> </span><span class="n">CGRect</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Path</span><span class="p">()</span>
+<span class="w">        </span><span class="n">path</span><span class="p">.</span><span class="n">addEllipse</span><span class="p">(</span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="n">CGRect</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">rect</span><span class="p">.</span><span class="n">midX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">animatableData</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                                   </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="n">rect</span><span class="p">.</span><span class="n">midY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">animatableData</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                                   </span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="n">animatableData</span><span class="p">,</span>
+<span class="w">                                   </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="n">animatableData</span><span class="p">))</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">path</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">VectorAnimationView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">size</span><span class="p">:</span><span class="w"> </span><span class="n">CGFloat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">50</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">CustomShape</span><span class="p">(</span><span class="n">animatableData</span><span class="p">:</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">onTapGesture</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">withAnimation</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">size</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation6.gif" src="../Attachments/Animation6.gif" /></p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Возможность анимации сложных форм и множественных параметров.</li>
+<li>Высокая гибкость в создании кастомных анимаций.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Требует более глубоких знаний для использования.</li>
+<li>Сложность в управлении и отладке анимаций.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ SwiftUI использует протоколы VectorArithmetic и AnimatableData, чтобы разбить данные на составляющие и интерполировать их. Эти протоколы позволяют SwiftUI преобразовывать векторные данные в анимации, которые затем плавно изменяют свойства вьюхи.</strong></p>
+<h2 id="matchedgeometryeffect"><strong>Анимации между состояниями: .matchedGeometryEffect()</strong><a class="headerlink" href="#matchedgeometryeffect" title="Permanent link">&para;</a></h2>
+<p><strong>.matchedGeometryEffect()</strong> используется для создания согласованных анимаций между двумя разными состояниями вьюх. Это позволяет создать иллюзию непрерывного движения или трансформации объектов между двумя представлениями.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">MatchedGeometryEffectExample</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Namespace</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">animationNamespace</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isExpanded</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isExpanded</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">RoundedRectangle</span><span class="p">(</span><span class="n">cornerRadius</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">matchedGeometryEffect</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rectangle&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="n">animationNamespace</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">frame</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">onTapGesture</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">withAnimation</span><span class="p">(.</span><span class="n">spring</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">isExpanded</span><span class="p">.</span><span class="n">toggle</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">RoundedRectangle</span><span class="p">(</span><span class="n">cornerRadius</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">matchedGeometryEffect</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;rectangle&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="n">animationNamespace</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">frame</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">onTapGesture</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">withAnimation</span><span class="p">(.</span><span class="n">spring</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">isExpanded</span><span class="p">.</span><span class="n">toggle</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation7.gif" src="../Attachments/Animation7.gif" /></p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Позволяет создавать плавные и естественные анимации перехода между разными состояниями интерфейса.</li>
+<li>Поддержка сложных анимаций между несколькими вьюхами.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Требует использования <strong>@Namespace</strong>, что может усложнить код в более сложных приложениях.</li>
+<li>Анимации могут быть сложными для отладки при неправильном использовании.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ .matchedGeometryEffect() работает, сопоставляя геометрию двух вьюх с использованием уникального идентификатора. SwiftUI затем интерполирует изменения в позиции, размере и форме этих вьюх, создавая плавный переход. Внутри фреймворка используется механизм привязки к анимации, который отслеживает изменения этих вьюх и обновляет представление в реальном времени.</strong></p>
+<h2 id="transformeffect"><strong>Трансформации с использованием .transformEffect()</strong><a class="headerlink" href="#transformeffect" title="Permanent link">&para;</a></h2>
+<p><strong>.transformEffect()</strong> применяется для выполнения матричных трансформаций к вьюхам, таких как перемещение, масштабирование и вращение.
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">TransformEffectExample</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">angle</span><span class="p">:</span><span class="w"> </span><span class="n">Angle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">.</span><span class="n">degrees</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Rectangle</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="n">red</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">frame</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">transformEffect</span><span class="p">(</span><span class="bp">CGAffineTransform</span><span class="p">(</span><span class="n">rotationAngle</span><span class="p">:</span><span class="w"> </span><span class="n">CGFloat</span><span class="p">(</span><span class="n">angle</span><span class="p">.</span><span class="n">radians</span><span class="p">)))</span>
+
+<span class="w">            </span><span class="n">Slider</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">angle</span><span class="p">.</span><span class="n">degrees</span><span class="p">,</span><span class="w"> </span><span class="k">in</span><span class="p">:</span><span class="w"> </span><span class="mf">0.</span><span class="p">..</span><span class="mi">360</span><span class="p">,</span><span class="w"> </span><span class="n">step</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="n">padding</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="n">animation</span><span class="p">(.</span><span class="n">easeInOut</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">angle</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<img alt="Animation9.gif" src="../Attachments/Animation9.gif" /></p>
+<p><strong>Преимущества</strong></p>
+<ul>
+<li>Позволяет выполнять сложные трансформации с использованием матричных операций.</li>
+<li>Поддержка комбинаций нескольких трансформаций для создания уникальных эффектов.</li>
+</ul>
+<p><strong>Недостатки</strong></p>
+<ul>
+<li>Матричные операции могут быть сложными для понимания и использования.</li>
+<li>Требует внимания к деталям при работе с трансформациями.</li>
+</ul>
+<p><strong>Реализация</strong>*</p>
+<p><strong>*️⃣ .transformEffect() использует матричные преобразования для изменения параметров вьюхи, таких как положение, размер и угол поворота, интерполируя эти значения при анимации. SwiftUI берет матрицы преобразований, применяет их к вьюхе и плавно интерполирует эти матрицы, создавая плавные и согласованные эффекты.</strong></p>
+<h2 id="_2"><strong>Оптимизация и проблемы с анимацией</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>Несмотря на простоту и мощь SwiftUI, анимации могут привести к некоторым проблемам, таким как:</p>
+<ol>
+<li>
+<p><strong>Фризы и задержки:</strong> Если анимация затрагивает много объектов или выполняет сложные вычисления, это может привести к снижению производительности.</p>
+<p><strong>Решение:</strong> Разделите сложные анимации на несколько простых или используйте более быстрые виды анимаций.</p>
+</li>
+<li>
+<p><strong>Неожиданные эффекты:</strong> Стандартные анимации могут иногда вести себя неожиданно, особенно если изменения состояния не синхронизированы.</p>
+<p><strong>Решение:</strong> Тщательно управляйте состояниями и используйте <strong>withAnimation</strong>/<strong>animation(, value:)</strong> для контроля над анимациями.</p>
+</li>
+<li>
+<p><strong>Конфликты анимаций:</strong> Если несколько анимаций запускаются одновременно, они могут конфликтовать друг с другом.</p>
+<p><strong>Решение:</strong> Избегайте одновременных изменений нескольких зависимых состояний.</p>
+</li>
+<li>
+<p><strong>Проблемы с обновлением состояния:</strong> Асинхронные изменения состояния могут приводить к непредсказуемым результатам в анимациях.</p>
+<p><strong>Решение:</strong> Минимизируйте количество одновременно изменяемых состояний и используйте транзакции для синхронизации изменений.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/+QmMbHUGcAE5lOWQ6" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8m114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.45 10.45 0 0 1 3.53 6.716 43.8 43.8 0 0 1 .417 9.769"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.sections", "navigation.expand"], "search": "../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
