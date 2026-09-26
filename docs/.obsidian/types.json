@@ -1,0 +1,13 @@
+{
+  "types": {
+    "title": "text",
+    "nav_title": "text",
+    "description": "text",
+    "level": "text",
+    "tags": "tags",
+    "aliases": "aliases",
+    "date": "date",
+    "updated": "date",
+    "draft": "checkbox"
+  }
+}

@@ -1,0 +1,9 @@
+# Shared vault settings only (link format, attachment folder, templates, property types).
+# Everything else Obsidian writes here — workspace, graph, hotkeys, themes, plugins — is
+# per-author state and stays local.
+*
+!.gitignore
+!app.json
+!core-plugins.json
+!templates.json
+!types.json
