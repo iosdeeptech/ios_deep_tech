@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-09-26T20:14:09+03:00",
+  "source": {
+    "ref": "HEAD",
+    "commit": "0898352"
+  },
+  "date": "2026-09-26",
+  "highlighted": [
+    {
+      "path": "_templates/article",
+      "label": "article",
+      "title": "article",
+      "addedIn": {
+        "commit": "0898352",
+        "date": "2026-09-26T20:14:09+03:00"
+      }
+    }
+  ],
+  "counts": {
+    "articles": 28,
+    "nodes": 53,
+    "sections": {
+      "Swift": 23,
+      "UI": 4,
+      "_templates": 1
+    },
+    "grades": {
+      "Junior": 25,
+      "Middle": 2,
+      "Senior": 0
+    }
+  },
+  "images": {
+    "dark": {
+      "png": "roadmap-dark.png",
+      "svg": "roadmap-dark.svg",
+      "theme": "brand",
+      "layout": "tree",
+      "width": 1981.33,
+      "height": 982.41,
+      "pngWidth": 3963,
+      "pngHeight": 1965
+    },
+    "light": {
+      "png": "roadmap-light.png",
+      "svg": "roadmap-light.svg",
+      "theme": "brand-light",
+      "layout": "tree",
+      "width": 1981.33,
+      "height": 982.41,
+      "pngWidth": 3963,
+      "pngHeight": 1965
+    },
+    "telegram": {
+      "png": "roadmap-4x5-dark.png",
+      "theme": "brand",
+      "layout": "stacked",
+      "aspect": "4:5",
+      "width": 1111.93,
+      "height": 1389.91,
+      "pngWidth": 2224,
+      "pngHeight": 2780
+    }
+  },
+  "warnings": []
+}
