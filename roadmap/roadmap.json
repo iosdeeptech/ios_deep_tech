@@ -1,28 +1,27 @@
 {
-  "generatedAt": "2026-09-26T20:14:09+03:00",
+  "generatedAt": "2026-09-26T23:09:28+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "0898352"
+    "commit": "a90e42a"
   },
   "date": "2026-09-26",
   "highlighted": [
     {
-      "path": "_templates/article",
-      "label": "article",
-      "title": "article",
+      "path": "Swift/Многопоточность/Structured Concurrency/Middle/Tasks (deep)/1. Task Local",
+      "label": "1. Task Local",
+      "title": "Task Local",
       "addedIn": {
-        "commit": "0898352",
-        "date": "2026-09-26T20:14:09+03:00"
+        "commit": "ba7ffe8",
+        "date": "2025-03-09T19:14:55+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 28,
-    "nodes": 53,
+    "articles": 27,
+    "nodes": 51,
     "sections": {
       "Swift": 23,
-      "UI": 4,
-      "_templates": 1
+      "UI": 4
     },
     "grades": {
       "Junior": 25,
@@ -36,9 +35,9 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 1981.33,
+      "width": 1890.71,
       "height": 982.41,
-      "pngWidth": 3963,
+      "pngWidth": 3781,
       "pngHeight": 1965
     },
     "light": {
@@ -46,9 +45,9 @@
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 1981.33,
+      "width": 1890.71,
       "height": 982.41,
-      "pngWidth": 3963,
+      "pngWidth": 3781,
       "pngHeight": 1965
     },
     "telegram": {
@@ -56,10 +55,10 @@
       "theme": "brand",
       "layout": "stacked",
       "aspect": "4:5",
-      "width": 1111.93,
-      "height": 1389.91,
-      "pngWidth": 2224,
-      "pngHeight": 2780
+      "width": 1099.47,
+      "height": 1374.34,
+      "pngWidth": 2199,
+      "pngHeight": 2749
     }
   },
   "warnings": []
