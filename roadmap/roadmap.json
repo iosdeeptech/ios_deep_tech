@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-26T23:09:28+03:00",
+  "generatedAt": "2026-09-27T13:24:27+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "a90e42a"
+    "commit": "b882549"
   },
-  "date": "2026-09-26",
+  "date": "2026-09-27",
   "highlighted": [
     {
       "path": "Swift/Многопоточность/Structured Concurrency/Middle/Tasks (deep)/1. Task Local",
