@@ -9,6 +9,20 @@
   "language": "ru",
   "items": [
     {
+      "id": "https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/",
+      "url": "https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/",
+      "title": "Как изучать iOS вместе с ассистентом и не терять понимание",
+      "summary": "Как учиться с ассистентом и оставлять решения за собой. Порядок работы в пять шагов, выводы эксперимента о навыках и ИИ и разбор задач 4, 10 и 12 из «Практического пути».",
+      "content_text": "Как учиться с ассистентом и оставлять решения за собой. Порядок работы в пять шагов, выводы эксперимента о навыках и ИИ и разбор задач 4, 10 и 12 из «Практического пути».",
+      "date_published": "2026-09-28T14:20:26.000Z",
+      "date_modified": "2026-09-28T14:20:26.000Z",
+      "tags": [
+        "Разработка с ИИ",
+        "Изучение",
+        "Junior"
+      ]
+    },
+    {
       "id": "https://iosdeeptech.github.io/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/",
       "url": "https://iosdeeptech.github.io/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/",
       "title": "Task Local",

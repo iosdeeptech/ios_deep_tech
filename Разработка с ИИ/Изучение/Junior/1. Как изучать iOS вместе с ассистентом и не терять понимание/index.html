@@ -1,0 +1,747 @@
+<!DOCTYPE html><html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Как изучать iOS вместе с ассистентом и не терять понимание — iOS Deep Tech</title><meta name="description" content="Как учиться с ассистентом и оставлять решения за собой. Порядок работы в пять шагов, выводы эксперимента о навыках и ИИ и разбор задач 4, 10 и 12 из «Практического пути»."><link rel="canonical" href="https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/"><meta name="theme-color" content="#08090a"><meta name="color-scheme" content="dark light"><meta name="generator" content="Astro v7.3.5"><meta property="og:site_name" content="iOS Deep Tech"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="og:title" content="Как изучать iOS вместе с ассистентом и не терять понимание"><meta property="og:description" content="Как учиться с ассистентом и оставлять решения за собой. Порядок работы в пять шагов, выводы эксперимента о навыках и ИИ и разбор задач 4, 10 и 12 из «Практического пути»."><meta property="og:url" content="https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/"><meta property="og:image" content="https://iosdeeptech.github.io/ios_deep_tech/brand/og-512.jpg"><meta name="twitter:card" content="summary"><link rel="icon" href="/ios_deep_tech/favicon.ico" sizes="48x48"><link rel="icon" href="/ios_deep_tech/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/ios_deep_tech/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/ios_deep_tech/apple-touch-icon.png"><link rel="alternate" type="application/rss+xml" title="iOS Deep Tech — новые статьи" href="/ios_deep_tech/feed_rss_created.xml"><link rel="alternate" type="application/rss+xml" title="iOS Deep Tech — обновления" href="/ios_deep_tech/feed_rss_updated.xml"><link rel="alternate" type="application/feed+json" title="iOS Deep Tech — новые статьи" href="/ios_deep_tech/feed_json_created.json"><link rel="preload" href="/ios_deep_tech/_astro/geist-latin.BGnTDqni.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/ios_deep_tech/_astro/geist-cyrillic.D_Kiv5N3.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/ios_deep_tech/_astro/geist-mono-latin.pyAoGB9p.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/ios_deep_tech/_astro/geist-mono-cyrillic.C58l5Ba4.woff2" as="font" type="font/woff2" crossorigin><script>
+      // Pre-paint: enables the reveal CSS and applies the stored theme, else the OS one (the rest
+      // of the theme behaviour is src/scripts/theme.ts). The browser-chrome colour is --bg of
+      // tokens.css / light.css.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var t = null;
+        try { t = localStorage.getItem('idt-theme'); } catch (e) {}
+        d.dataset.themeSource = t === 'light' || t === 'dark' ? 'manual' : 'system';
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        d.dataset.theme = t;
+        d.style.colorScheme = t;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', t === 'light' ? '#fafaf9' : '#08090a');
+        // Fail-open watchdog. The reveal CSS keeps the article hidden until src/scripts/fx.ts
+        // runs (it sets window.__idtFx). Scripts that did not load or did not run by the time the
+        // document is complete: the no-script layout. Scripts that are only slow (2s after the
+        // document is parsed): the content shows without its entrance.
+        document.addEventListener('readystatechange', function () {
+          if (document.readyState !== 'interactive') return;
+          setTimeout(function () {
+            if (!window.__idtFx) d.classList.add('fx-off');
+          }, 2000);
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+          if (!window.__idtFx) d.classList.remove('js');
+        });
+      })();
+    </script><link rel="stylesheet" href="/ios_deep_tech/_astro/Base.C147cM2F.css"></head><body><a class="skip-link" href="#main">К содержанию</a><div class="root" data-root><header class="site-header"><a class="site-header__brand" href="/ios_deep_tech/"><!-- 1x/2x/3x captures of Chrome drawing the concept's 1254px logo at 28px (pixel-identical to
+         it), 1–8 KB each and fetched first, so the mark paints with the bar. --><img class="site-header__logo" src="/ios_deep_tech/brand/logo-84.webp" srcset="/ios_deep_tech/brand/logo-28.webp 1x, /ios_deep_tech/brand/logo-56.webp 2x, /ios_deep_tech/brand/logo-84.webp 3x" alt="" width="28" height="28" fetchpriority="high"><span class="site-header__name">iOS Deep Tech</span></a><nav class="site-header__crumbs" aria-label="Раздел"><span aria-hidden="true">/</span><a class="site-header__crumb" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/">Разработка с ИИ</a><span aria-hidden="true">/</span><span class="site-header__crumb-current">Изучение</span></nav><div class="site-header__spacer"></div><!-- Left of the search, the toggle takes its width from the spacer: search, GitHub and the pill
+       stay exactly where the concept draws them. --><button type="button" class="theme-toggle" data-theme-toggle aria-label="Сменить тему" title="Сменить тему"><span class="theme-toggle__icon" aria-hidden="true"></span></button><button type="button" class="site-header__search" data-open-palette aria-haspopup="dialog" aria-keyshortcuts="Meta+K Control+K /"><span class="site-header__search-label">Поиск по базе знаний</span><span class="site-header__keys" aria-hidden="true"><kbd data-kbd-mod>⌘</kbd><kbd>K</kbd></span></button><a class="site-header__link" href="https://github.com/iosdeeptech/ios_deep_tech" rel="noopener">GitHub</a><a class="site-header__support" href="https://t.me/tribute/app?startapp=dcYS-5hL96tXcw3d" rel="noopener">Поддержать</a><!-- Mobile hook (owner: mobile): below 900px the sidebar becomes a drawer opened by this
+       button; hidden on desktop. Behaviour: src/scripts/mobile.ts, styles: src/styles/mobile.css. --><button type="button" class="site-header__menu" data-nav-toggle aria-expanded="false" aria-label="Открыть навигацию"><span class="site-header__menu-icon" aria-hidden="true"></span></button><div class="site-header__progress" data-progress aria-hidden="true"></div></header><div class="shell" data-layout="docs"><aside class="sidebar" data-sidebar><nav class="sb-nav" aria-label="Навигация по базе знаний"><div class="sb-label">IOS DEEP TECH</div><a class="sb-link" href="/ios_deep_tech/">Кто мы?</a><a class="sb-link sb-link--map" href="/ios_deep_tech/#актуальная-схема" data-sb-map>Актуальная схема<span class="sb-badge">MAP</span></a><div class="sb-label">SWIFT</div><button class="sb-toggle" type="button" data-toggle="Swift/ARC" aria-expanded="false" aria-controls="sb-group-0-0"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">ARC</span><span class="sb-count">2</span></button><div class="sb-group" id="sb-group-0-0" data-group="Swift/ARC" data-closed="1" style="display:none"><a class="sb-child" href="/ios_deep_tech/Swift/ARC/Junior/1.%20%D0%A1%20%D1%87%D0%B5%D0%B3%D0%BE%20%D0%B2%D1%81%D0%B5%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3F%20(MRC)/">С чего все началось? (MRC)</a><a class="sb-child" href="/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/">Подробнее про ARC</a></div><button class="sb-toggle" type="button" data-toggle="Swift/Коллекции" aria-expanded="false" aria-controls="sb-group-0-1"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">Коллекции</span><span class="sb-count">4</span></button><div class="sb-group" id="sb-group-0-1" data-group="Swift/Коллекции" data-closed="1" style="display:none"><div class="sb-sublabel">МАССИВЫ</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/1.%20%D0%9F%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D0%BC%20%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0%D1%85/">Поговорим о массивах</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/">Оптимизации и устройство массивов</a><div class="sb-sublabel">МНОЖЕСТВА</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0/Junior/1.%20Set%20%D0%B2%20Swift/">Set в Swift</a><div class="sb-sublabel">СЛОВАРИ</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/">Что такое словари в Swift?</a></div><button class="sb-toggle" type="button" data-toggle="Swift/Многопоточность" aria-expanded="false" aria-controls="sb-group-0-2"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">Многопоточность</span><span class="sb-count">17</span></button><div class="sb-group" id="sb-group-0-2" data-group="Swift/Многопоточность" data-closed="1" style="display:none"><div class="sb-sublabel">ACTORS</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/">Потокобезопасность. Введение</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/2.%20Actor%20Reentrancy/">Actor Reentrancy</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/3.%20Actor%20Hopping/">Actor Hopping</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/4.%20Sendable/">Sendable</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/5.%20Global%20Actor/">Global Actor</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/6.%20Actor%20isolation/">Actor isolation</a><div class="sb-sublabel">SEQUENCE</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/1.%20Continuation/">Continuation</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/2.%20Task%20Group/">Task Group</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/3.%20AsyncSequence%20%26%20AsyncStream/">AsyncSequence &amp; AsyncStream</a><div class="sb-sublabel">TASKS</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/1.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/">Введение</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/2.%20Task(Detached)%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/">Task(Detached) - техническое определение</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/">Асинхронные функции и await</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/">Отмена задач</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/5.%20Task%20Priority/">Task Priority</a><div class="sb-sublabel">ПРАКТИКА</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/">Практический путь</a><div class="sb-sublabel">EXECUTORS</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Executors/1.%20Actor%20%D0%B8%20Executor/">Actor и Executor</a><div class="sb-sublabel">TASKS (DEEP)</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/">Task Local</a></div><div class="sb-label">UI</div><button class="sb-toggle" type="button" data-toggle="UI/SwiftUI" aria-expanded="false" aria-controls="sb-group-1-0"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">SwiftUI</span><span class="sb-count">4</span></button><div class="sb-group" id="sb-group-1-0" data-group="UI/SwiftUI" data-closed="1" style="display:none"><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/">Основы</a><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/2.%20Property%20Wrappers/">Property Wrappers</a><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/3.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D0%B8%D0%B8%20%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D0%B9%20%D0%B2%20SwiftUI/">Основные концепции анимаций в SwiftUI</a><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/">Тур по жестам в SwiftUI</a></div><div class="sb-label">РАЗРАБОТКА С ИИ</div><button class="sb-toggle" type="button" data-toggle="Разработка с ИИ/Изучение" data-current aria-expanded="true" aria-controls="sb-group-2-0"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">Изучение</span><span class="sb-count">1</span></button><div class="sb-group" id="sb-group-2-0" data-group="Разработка с ИИ/Изучение"><a class="sb-child" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/" aria-current="page">Как изучать iOS вместе с ассистентом и не терять понимание<span class="sb-dot" aria-hidden="true"></span></a></div></nav><script>
+    // Pre-paint, runs as soon as the nav is parsed: applies the reader's saved open/closed groups
+    // (the current page's group always stays open), restores the sidebar scroll position from the
+    // previous page and keeps the active item in view. Storage keys are shared with sidebar.ts.
+    (function () {
+      var aside = document.currentScript && document.currentScript.parentElement;
+      if (!aside) return;
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem('idt-nav-groups') || '{}') || {}; } catch (e) {}
+      aside.querySelectorAll('[data-toggle]').forEach(function (t) {
+        var key = t.getAttribute('data-toggle');
+        if (t.hasAttribute('data-current') || !Object.prototype.hasOwnProperty.call(saved, key)) return;
+        var g = document.getElementById(t.getAttribute('aria-controls'));
+        if (!g) return;
+        var open = saved[key] === 1;
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        g.style.display = open ? '' : 'none';
+        if (open) g.removeAttribute('data-closed'); else g.setAttribute('data-closed', '1');
+      });
+      var top = null;
+      try { top = sessionStorage.getItem('idt-nav-scroll'); } catch (e) {}
+      function place() {
+        if (top !== null) aside.scrollTop = Number(top) || 0;
+        var a = aside.querySelector('[aria-current="page"]');
+        if (!a) return;
+        var r = a.getBoundingClientRect(), s = aside.getBoundingClientRect(), pad = 24;
+        if (r.top < s.top + pad || r.bottom > s.bottom - pad) aside.scrollTop += r.top - s.top - (s.height - r.height) / 2;
+      }
+      place();
+      // Row heights change when Geist replaces the fallback font; place again unless the reader scrolled.
+      if (document.fonts && document.fonts.status !== 'loaded') {
+        var placed = aside.scrollTop;
+        document.fonts.ready.then(function () { if (aside.scrollTop === placed) place(); });
+      }
+    })();
+  </script></aside><main class="main" id="main"><article class="page article" data-pagefind-body data-article-id="Разработка с ИИ/Изучение/Junior/1. Как изучать iOS вместе с ассистентом и не терять понимание"><div hidden data-pagefind-ignore><span data-pagefind-meta="title">Как изучать iOS вместе с ассистентом и не терять понимание</span><span data-pagefind-meta="group">Изучение</span><span data-pagefind-filter="section">Разработка с ИИ</span><span data-pagefind-filter="level">Junior</span></div><header class="article-header"><div class="article-meta" data-reveal data-pagefind-ignore><span class="article-chip"><span class="article-chip__dot" aria-hidden="true"></span>Разработка с ИИ · Изучение</span><span class="article-level" data-level="junior">JUNIOR</span><span class="article-time">38 мин чтения</span></div><h1 class="article-title" data-reveal><span class="article-title__text">Как изучать iOS вместе с ассистентом и не терять понимание</span></h1><p class="article-lead" data-reveal>Как учиться с ассистентом и оставлять решения за собой. Порядок работы в пять шагов, выводы эксперимента о навыках и ИИ и разбор задач 4, 10 и 12 из «Практического пути».</p><p class="article-tags" data-reveal><span class="tag" data-tag="swift" data-pagefind-filter="tag:swift">#swift</span><span class="tag" data-tag="ai" data-pagefind-filter="tag:ai">#ai</span><span class="tag" data-tag="learning" data-pagefind-filter="tag:learning">#learning</span><span class="tag" data-tag="concurrency" data-pagefind-filter="tag:concurrency">#concurrency</span><span class="tag" data-tag="xcode" data-pagefind-filter="tag:xcode">#xcode</span></p></header><script type="module">var e=document.querySelector(`[data-prose]`),t=1500,n=90;e?.querySelectorAll(`:scope > :is(h2, h3, h4, h5, h6)[id]`).forEach(e=>{let r=document.createElement(`a`);r.className=`heading-anchor`,r.href=`#${encodeURIComponent(e.id)}`,r.textContent=`#`,r.setAttribute(`aria-hidden`,`true`),r.tabIndex=-1;let i=0;r.addEventListener(`click`,a=>{a.preventDefault();let o=new URL(location.href);o.hash=e.id,history.replaceState(history.state,``,o),navigator.clipboard?.writeText(o.href).catch(()=>{}),r.setAttribute(`data-copied`,``),clearTimeout(i),i=window.setTimeout(()=>r.removeAttribute(`data-copied`),t);let s=e.getBoundingClientRect().top+window.scrollY-n;window.__idtJumpTo?window.__idtJumpTo(s):window.scrollTo({top:s,behavior:`smooth`})}),e.append(r)});var r=/^O\(([^()]+)\)\*?$/;e?.querySelectorAll(`td`).forEach(e=>{let t=r.exec(e.textContent?.trim()??``);if(!t)return;let n=t[1].replace(/\s+/g,` `).trim();e.dataset.complexity=n===`1`?`const`:n===`log n`?`log`:`other`});</script><div class="prose" data-prose><p>В <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/" class="wikilink">практическом пути</a> по Structured Concurrency 14 задач без ответов. Там мы советовали при затруднениях гуглить или спрашивать ChatGPT, а главным называли понимание. Сейчас ассистент встроен прямо в Xcode, и с версии 26.3 агент сам собирает проект и запускает тесты. Задачу 10 можно отдать ему целиком. Вопрос в том, что после этого останется у вас в голове, когда ассистента рядом не будет, например на собеседовании.</p>
+<p>После статьи вы сможете:</p>
+<ul>
+<li>работать с ассистентом в пять шагов, в которых решения остаются за вами;</li>
+<li>пересказать, что измерил эксперимент Shen и Tamkin о навыках и ИИ и чего он не измерял;</li>
+<li>обернуть функцию с completion в <code>async</code> и объяснить, что будет при двойном и при пропущенном <code>resume</code>;</li>
+<li>написать периодическую отправку, которая останавливается по <code>stop()</code>, и тест, который это проверяет;</li>
+<li>собрать кеш со временем жизни на акторе и проверить его без реального ожидания.</li>
+</ul>
+<div class="callout" data-callout="warning" data-callout-type="warning" data-tone="amber" role="note"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">!</span><div class="callout__body"><p><strong class="callout__title">Нужно знать основы async/await, задач и акторов.</strong> Перед чтением полезно освежить <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/" class="wikilink">3. Асинхронные функции и await</a>, <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/" class="wikilink">4. Отмена задач</a>, <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/1.%20Continuation/" class="wikilink">1. Continuation</a>, <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/" class="wikilink">1. Потокобезопасность. Введение</a> и <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/4.%20Sendable/" class="wikilink">4. Sendable</a>. В коде встретятся <code>Mutex</code> из модуля Synchronization (замок: <code>withLock</code> пускает к значению один поток за раз) и тесты на Swift Testing (<code>@Test</code> помечает тест, <code>#expect</code> проверяет условие).</p></div></div>
+<h3 id="что-показал-эксперимент"><span id="_1" class="legacy-anchor" aria-hidden="true"></span>Что показал эксперимент</h3>
+<p>28 января 2026 года на arXiv вышел препринт Judy Hanwen Shen и Alex Tamkin «How AI Impacts Skill Formation», а 29 января Anthropic, в которой сделана эта работа, рассказала о нём в блоге. В рандомизированном эксперименте 52 разработчика, которые больше года пишут на Python, осваивали незнакомую им библиотеку Trio. Trio нужна для асинхронного кода и построена на structured concurrency, то есть на тех же идеях, что задачи и группы задач в Swift. На две задачи давали не больше 35 минут, потом шёл тест без ИИ: 14 вопросов на 27 баллов про отладку, чтение кода и понятия. Вопросов на написание кода авторы в тест специально не включили, чтобы на оценку не влияли синтаксические ошибки.</p>
+<p>Половине участников дали чат-ассистента в боковой панели. Он работал на GPT-4o, видел код участника и по запросу мог выдать готовое решение обеих задач. Описание задачи, документация и поиск были у обеих групп, а различались группы только ассистентом.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>С ассистентом</th><th>Без ассистента</th></tr></thead><tbody><tr><td>Балл за тест сразу после задач</td><td>50%</td><td>67%</td></tr><tr><td>Ошибок в своём коде за время задач, медиана</td><td>1</td><td>3</td></tr></tbody></table>
+<p>Разница в баллах статистически значима (p = 0,01): если бы ассистент на результат не влиял, такой или ещё больший разрыв случайно получался бы примерно в одном эксперименте из ста. Размер эффекта d = 0,74 значит, что средние групп разошлись почти на три четверти стандартного отклонения. Во времени ассистент почти ничего не дал. По блогу группа с ним справилась «примерно на две минуты быстрее», и эта разница статистически не значима (p = 0,391). В разведочном анализе, который авторы заранее не заявляли, сильнее всего группы разошлись на вопросах про отладку, меньше всего на чтении кода.</p>
+<p>Дальше авторы пересмотрели записи экрана и разбили группу с ассистентом по тому, как люди с ним работали<sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Как работали с ассистентом</th><th>Человек</th><th>Время</th><th>Балл</th></tr></thead><tbody><tr><td>Просили код и вставляли его (AI Delegation)</td><td>4</td><td>19,5 мин</td><td>39%</td></tr><tr><td>Спрашивали в первой задаче, во второй перешли на готовый код (Progressive AI Reliance)</td><td>4</td><td>22 мин</td><td>35%</td></tr><tr><td>Раз за разом просили ассистента найти и исправить ошибку (Iterative AI Debugging)</td><td>4</td><td>31 мин</td><td>24%</td></tr><tr><td>Генерировали код, потом задавали вопросы, чтобы его понять (Generation-Then-Comprehension)</td><td>2</td><td>24 мин</td><td>86%</td></tr><tr><td>Просили код сразу с объяснением (Hybrid Code-Explanation)</td><td>3</td><td>24 мин</td><td>68%</td></tr><tr><td>Задавали только вопросы о понятиях, ошибки чинили сами (Conceptual Inquiry)</td><td>7</td><td>22 мин</td><td>65%</td></tr></tbody></table>
+<p>Прежде чем делать выводы, посмотрите на ограничения, которые называют сами авторы. Паттерны выделены уже после эксперимента, в каждом от 2 до 7 человек, и блог пишет, что этот анализ не устанавливает причинной связи. Тест шёл сразу после задач, и авторы отдельно оговаривают, что исследование не отвечает на вопрос, предсказывает ли такой результат навык в долгой перспективе. Ассистентом в эксперименте был чат. Авторы ожидают, что агенты, при работе с которыми участие человека ещё меньше, повлияют на навыки сильнее, но в эксперименте это не проверяли.</p>
+<p>В пересказах эксперимент часто искажают. Пишут, что «ИИ снижает навыки на 17%», хотя это разница между 50% и 67% на одном тесте сразу после задач<sup><a href="#user-content-fn-2" id="user-content-fnref-2" data-footnote-ref="" aria-describedby="footnote-label">2</a></sup>. Пишут, что проверяли джунов. Блог действительно называет выборку «mostly junior», но по таблице 1 препринта у 29 участников из 52 семь и больше лет опыта программирования и только у 4 от года до трёх.</p>
+<h3 id="почему-помогают-ошибки-и-попытка-до-ответа"><span id="_2" class="legacy-anchor" aria-hidden="true"></span>Почему помогают ошибки и попытка до ответа</h3>
+<p>Авторы объясняют разницу в баллах ошибками, которые пришлось чинить самим. Группа без ассистента чаще видела <code>RuntimeWarning</code>, когда асинхронную функцию вызывали без <code>await</code> (в Swift это ошибка компиляции, в Python только предупреждение при запуске), и <code>TypeError</code>, когда в Trio передавали результат такого вызова вместо самой функции. Чтобы починить такую ошибку, приходится разобраться, как Trio работает с <code>await</code>, а как раз об этом потом спрашивали в тесте.</p>
+<p>В психологии обучения такие эффекты описаны давно. На три из них опираются шаги ниже:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Эффект</th><th>Как проверяли</th><th>Что получили</th></tr></thead><tbody><tr><td>Генерация</td><td>Slamecka и Graf, 1978: сравнивали слово, которое человек достраивает сам по подсказке, с тем же словом, которое он просто прочитал</td><td>Сгенерированное запоминалось лучше во всех пяти экспериментах; метаанализ 86 исследований (Bertsch и соавторы, 2007) даёт средний эффект d = 0,40</td></tr><tr><td>Вспоминание вместо перечитывания</td><td>Roediger и Karpicke, 2006: текст перечитывали или пересказывали по памяти без подсказок</td><td>Через 5 минут перечитывание выигрывает (81% против 75%), через неделю проигрывает (42% против 56%). Те, кто перечитывал, при этом были увереннее в себе</td></tr><tr><td>Попытка до ответа</td><td>Kornell, Hays и Bjork, 2009; Richland, Kornell и Kao, 2009: сначала ответить (почти всегда неверно), потом увидеть правильный ответ</td><td>Материал после неудачной попытки запоминается лучше, чем если потратить то же время на чтение: 75% против 56% в первом опыте Richland и соавторов</td></tr></tbody></table>
+<p>Ближе всего к нашей теме эксперимент Bastani и соавторов (PNAS, 2025). Около тысячи школьников в Турции решали задачи по математике, а классы случайно распределили на три группы: обычный чат на GPT-4, GPT-4 с подсказками вместо ответов и учебник без ИИ. С обычным чатом результат на тренировке вырос на 48%, а на контрольной без ИИ оказался на 17% ниже, чем у группы с учебником, и сами школьники этого не заметили. Вариант с подсказками падение убрал, но и прироста на контрольной не дал.</p>
+<p>Все эти опыты ставили на словах, текстах и школьной математике. На код их переносим мы сами, и пять шагов ниже построены на этом переносе, поэтому проверенным методом их считать нельзя. Есть у этих эффектов и граница. Bjork и Bjork (2011) пишут, что трудность помогает, только если знаний хватает, чтобы с ней справиться. Если вы не понимаете в условии ни слова, ждать озарения бесполезно, и тут объяснение ассистента к месту.</p>
+<h3 id="пять-шагов-работы-с-ассистентом"><span id="_3" class="legacy-anchor" aria-hidden="true"></span>Пять шагов работы с ассистентом</h3>
+<p>Из эксперимента и эффектов выше мы собрали порядок работы. Всё, на чём учатся (прогноз, форма кода, разбор ошибки), вы делаете сами, а набор кода можно отдать ассистенту.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Шаг</th><th>Что делаете вы</th><th>На что опирается</th></tr></thead><tbody><tr><td>1. Предсказать</td><td>До запроса записываете, чего ожидаете: вывод, ошибку компилятора, поток, порядок строк</td><td>Попытка до ответа</td></tr><tr><td>2. Описать форму кода</td><td>Типы, сигнатуры, где живёт состояние, кто владеет задачей и что её останавливает. В Xcode 27 для этого есть режим <code>/plan</code></td><td>Генерация</td></tr><tr><td>3. Отдать реализацию</td><td>Просите ассистента написать тела функций под вашу форму, а место, где нужно ваше решение, оставить вам комментарием <code>TODO(human)</code></td><td>В эксперименте те, кто перепечатывал код ассистента вручную, набрали не больше тех, кто вставлял его целиком</td></tr><tr><td>4. Попросить объяснение со ссылкой</td><td>«Почему так и где это написано?» Ссылка на proposal, документацию или строку исходников на теге. Открываете и читаете сами</td><td>Наблюдение из эксперимента: объяснения просили в группах с высокими баллами</td></tr><tr><td>5. Сверить прогноз с компилятором и тестом</td><td>Собираете, запускаете тест и сравниваете результат со своим прогнозом из шага 1. Расхождение разбираете до конца</td><td>Ошибки, разобранные самостоятельно</td></tr></tbody></table>
+<p>Паттерн с самым низким баллом и самым долгим временем легко узнать по себе: вы по кругу отправляете ассистенту ошибку со словом «почини». Если узнали себя, остановитесь и запишите, что, по-вашему, происходит. Эта запись и будет шагом 1 новой попытки.</p>
+<p>С сентября 2025 по сентябрь 2026 года вышли Swift 6.2, 6.3 и 6.4, а модель, облачная или локальная, знает язык только до даты среза своих знаний. Поэтому в шаге 4 открывайте документ своей версии, а в шаге 5 проверяйте свой прогноз компилятором вашего Xcode. Версию покажет <code>xcrun swiftc --version</code>: для <code>Apple Swift version 6.3.1</code> тег исходников <code>swift-6.3.1-RELEASE</code>. Все примеры ниже собраны компилятором Swift 6.3.1 из Xcode 26.4.1 в режиме Swift 6. С другой версией подставляйте в запросы свой тег.</p>
+<p>Шаги в задачах ниже подписаны, но порядок в них бывает другим. Когда прогноз сразу проверяют компилятор или тест, шаг 5 идёт раньше шага 4, и объяснение со ссылкой вы просите уже про расхождение.</p>
+<details class="callout callout--fold" data-callout="tip" data-callout-type="tip" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">*</span><span class="callout__title">Как запустить примеры</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Тесты задач 4 и 12 проще всего запустить в пакете. Создайте его командой <code>swift package init --type library --name Practice</code>, код положите в <code>Sources/Practice</code>, тесты в <code>Tests/PracticeTests</code> и запускайте <code>swift test</code>. В <code>Package.swift</code> добавьте <code>platforms: [.macOS(.v15), .iOS(.v18)]</code>, иначе компилятор ответит <code>'Mutex' is only available in macOS 15.0 or newer</code>. Программы с <code>@main</code> запускаются из терминала: <code>xcrun swiftc -swift-version 6 -parse-as-library DoubleResume.swift -o demo</code>, затем <code>./demo</code>.</p></div></details>
+<h3 id="где-выполнять-эти-шаги"><span id="_4" class="legacy-anchor" aria-hidden="true"></span>Где выполнять эти шаги</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Версия</th><th>Что появилось</th></tr></thead><tbody><tr><td>Xcode 26 (2025)</td><td>Ассистент-чат в боковой панели: ChatGPT (можно без аккаунта, с дневным лимитом), Claude по платному аккаунту, любой провайдер с Chat Completions API, локальные модели на Mac с Apple silicon. Кнопка Explain объясняет выделенный код</td></tr><tr><td>Xcode 26.3 (26 февраля 2026)</td><td>Агенты Claude Agent и Codex. Агент сам собирает проект, запускает тесты и ищет в документации Apple, а ошибки сборки получает от Xcode и исправляет</td></tr><tr><td>Xcode 26.6 (25 июня 2026)</td><td>Gemini в ассистенте и поддержка Agent Client Protocol, через который подключается сторонний агент</td></tr><tr><td>Xcode 27 (14 сентября 2026)</td><td>Режим планирования <code>/plan</code>: план появляется отдельным Markdown-документом, его можно править и одобрить до изменений в коде. Ассистент переехал в область редактора. Xcode 27 ставится только на Mac с Apple silicon и требует macOS Tahoe 26.6 или новее</td></tr></tbody></table>
+<p>Для учёбы здесь важнее всего план. В сессии WWDC26 «Xcode, agents, and you» (259) Apple говорит, что план позволяет вам быть архитектором и описать подход до того, как написана первая строка кода, то есть сделать шаг 2.</p>
+<h4 id="учебные-режимы-и-todohuman"><span id="todohuman" class="legacy-anchor" aria-hidden="true"></span>Учебные режимы и TODO(human)</h4>
+<p>В Claude Code, агенте для терминала, учебный режим сделан как стиль ответа Learning. По документации ассистент в этом стиле сам пишет рутинный код, а там, где решение можно принять по-разному, оставляет в файле комментарий <code>TODO(human)</code> и ждёт, пока вы допишете. Включается стиль командой <code>/output-style learning</code> в Claude Code 2.1.269 и новее или через меню <code>/config</code>. У ChatGPT похожий режим называется Study mode, у Gemini Guided Learning.</p>
+<p>В Xcode 27 отдельного учебного режима нет. На групповой лабе WWDC26 для начинающих (8007) инженерам Apple задали как раз этот вопрос: разработчики попросили объяснение после каждой задачи, чтобы на этом учиться. На странице лабы Apple отвечает, что объяснение можно попросить у агента или описать такое поведение в <code>AGENTS.md</code> проекта, чтобы агент объяснял свою работу по умолчанию. Codex читает инструкции из <code>AGENTS.md</code> в папке проекта, Claude Code из <code>CLAUDE.md</code>. Правило для учёбы туда можно записать обычным текстом:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="markdown" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">MARKDOWN</span><span class="code-block__title">AGENTS.md</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-markdown"><span class="line"><span>## Режим обучения</span></span>
+<span class="line"><span>- Не пиши реализацию целиком. Там, где есть выбор решения (обработка ошибок, отмена, где хранится состояние), оставь комментарий TODO(human) и объясни, что нужно решить.</span></span>
+<span class="line"><span>- К каждому объяснению давай ссылку: Swift Evolution proposal, страницу документации Apple или файл исходников Swift на теге версии компилятора.</span></span>
+<span class="line"><span>- Когда я присылаю ошибку компилятора, сначала спроси, как я её объясняю, и только потом предлагай исправление.</span></span></code></pre></div>
+<p>Правило не гарантирует, что ассистент каждый раз оставит место вам, и документация Claude Code про стили предупреждает о том же. Поэтому место, где нужно ваше решение, вы называете сами ещё в шаге 2.</p>
+<h4 id="если-облачные-ассистенты-недоступны"><span id="_5" class="legacy-anchor" aria-hidden="true"></span>Если облачные ассистенты недоступны</h4>
+<p>Claude, Codex и Gemini в Xcode требуют аккаунта или ключа у Anthropic, OpenAI или Google. ChatGPT в Xcode работает и без аккаунта, но это тот же сервис OpenAI, и Apple включает его только там, где он доступен. России нет ни в одном из списков поддерживаемых стран этих компаний (мы проверяли 28 сентября 2026 года). Кроме них Xcode принимает любой сервер с Chat Completions API, и самый доступный вариант это локальная модель на вашем Mac. В настройках Intelligence её добавляют как провайдера чата с типом Locally Hosted: вы указываете порт, а сервер на нём должен отвечать на <code>/v1/models</code> и <code>/v1/chat/completions</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Сервер</th><th>Порт по умолчанию</th><th>Откуда</th></tr></thead><tbody><tr><td>Ollama</td><td>11434</td><td>FAQ Ollama; у Ollama есть отдельная инструкция для Xcode</td></tr><tr><td>LM Studio</td><td>1234</td><td>Документация LM Studio</td></tr><tr><td><code>mlx_lm.server</code></td><td>8080 в демонстрации Apple</td><td>WWDC26, сессия 232</td></tr></tbody></table>
+<p>Окно контекста это объём текста, который модель видит за раз: ваш вопрос, код, который Xcode добавляет из проекта, и ответ. Ollama по умолчанию даёт 4 тысячи токенов, если видеопамяти меньше 24 ГиБ, а для инструментов программирования сама советует не меньше 64 тысяч. На Mac с Apple silicon отдельной видеопамяти нет, поэтому окно лучше задать явно: ползунком длины контекста в настройках приложения Ollama или, если сервер запускаете из терминала, командой <code>OLLAMA_CONTEXT_LENGTH=64000 ollama serve</code>. Сколько выделено на самом деле, покажет колонка <code>CONTEXT</code> в выводе <code>ollama ps</code>. Чем больше окно, тем больше памяти нужно модели. У открытой модели gpt-oss-20b, которую можно запустить в Ollama, срез знаний 1 июня 2024 года, раньше выхода Swift 6.0 (17 сентября 2024-го) с режимом языка Swift 6 и <code>Mutex</code> из задачи 4.</p>
+<p>С локальной моделью шаги те же, отличаются две вещи. Xcode подключает локальный сервер как чат, а режим <code>/plan</code> и подсказки из <code>AGENTS.md</code> Apple описывает для агентов, поэтому правило для учёбы отправьте первым сообщением разговора и в том же сообщении опишите форму кода из шага 2. Проект в этом случае собираете и тесты запускаете вы сами. Начиная с Xcode 26.6 сторонний агент подключается через Agent Client Protocol, и в сессии WWDC26 «Inside Apple Intelligence and Xcode» (382) Apple говорит, что так можно подключить и агента с моделью на вашем Mac. Такую связку мы сами не собирали.</p>
+<h3 id="задача-10-completion-в-async"><span id="10-completion-async" class="legacy-anchor" aria-hidden="true"></span>Задача 10. Completion в async</h3>
+<p>Условие: есть легаси-функция с completion, и её нужно вызвать из асинхронного кода.</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">Из условия задачи 10</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">fetchImageData</span>(id: <span class="tk-ty">UUID</span>, completion: <span class="tk-kw">@escaping</span> (<span class="tk-ty">Result</span>&#x3C;<span class="tk-ty">Data</span>, <span class="tk-ty">Error</span>>)) {</span></span>
+<span class="line"><span>    <span class="tk-com">/// ...</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">loadImage</span>(from id: <span class="tk-ty">UUID</span>) <span class="tk-kw">async throws</span> -> <span class="tk-ty">Data</span> {</span></span>
+<span class="line"><span>    <span class="tk-com">// Ваш код</span></span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p><strong>Шаг 1.</strong> Ответьте до того, как читать дальше:</p>
+<ol>
+<li>Скомпилируется ли сигнатура из условия?</li>
+<li>Что произойдёт, если легаси-функция вызовет completion дважды?</li>
+<li>А если не вызовет ни разу? Поможет ли <code>cancel()</code> у задачи, которая ждёт ответа?</li>
+</ol>
+<p><strong>Шаги 2 и 3.</strong> Форму задаёт условие: одна функция <code>loadImage(from:)</code> и continuation внутри. Реализацию можно написать самим или попросить у ассистента.</p>
+<p><strong>Шаг 5.</strong> Первый вопрос компилятор закрывает за секунду:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>error: '@escaping' only applies to function types</span></span>
+<span class="line"><span>func fetchImageData(id: UUID, completion: @escaping (Result&#x3C;Data, Error>)) {</span></span>
+<span class="line"><span>                                          `- error: '@escaping' only applies to function types</span></span></code></pre></div>
+<p>В условии опечатка: без <code>-> Void</code> запись <code>(Result&#x3C;Data, Error>)</code> означает просто <code>Result</code> в скобках, и <code>@escaping</code> к ней неприменим. С исправленной сигнатурой ответ помещается в несколько строк:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">LoadImage.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Foundation</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">fetchImageData</span>(id: <span class="tk-ty">UUID</span>, completion: <span class="tk-kw">@escaping @Sendable</span> (<span class="tk-ty">Result</span>&#x3C;<span class="tk-ty">Data</span>, <span class="tk-ty">Error</span>>) -> <span class="tk-ty">Void</span>) {</span></span>
+<span class="line"><span>    <span class="tk-com">// легаси-код: ответ приходит на чужой очереди</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">loadImage</span>(from id: <span class="tk-ty">UUID</span>) <span class="tk-kw">async throws</span> -> <span class="tk-ty">Data</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-fn">withCheckedThrowingContinuation</span> { continuation <span class="tk-kw">in</span></span></span>
+<span class="line"><span>        <span class="tk-fn">fetchImageData</span>(id: id) { result <span class="tk-kw">in</span></span></span>
+<span class="line"><span>            continuation.<span class="tk-fn">resume</span>(with: result)</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p><code>resume(with:)</code> принимает <code>Result</code> целиком, поэтому <code>switch</code> не нужен. Код выше компилируется и с легаси-функцией, у которой completion без <code>@Sendable</code>. Эта пометка нужна самой легаси-функции: если она зовёт completion из <code>DispatchQueue.global()</code>, без неё Swift 6.3.1 предупреждает <code>capture of 'completion' with non-Sendable type ... in a '@Sendable' closure</code>.</p>
+<p>Второй вопрос проверим экспериментом. Легаси-функция с ошибкой отвечает из кеша, а через 100 мс ещё и из сети.</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">DoubleResume.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Foundation</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">fetchImageData</span>(id: <span class="tk-ty">UUID</span>, completion: <span class="tk-kw">@escaping @Sendable</span> (<span class="tk-ty">Result</span>&#x3C;<span class="tk-ty">Data</span>, <span class="tk-ty">Error</span>>) -> <span class="tk-ty">Void</span>) {</span></span>
+<span class="line"><span>    <span class="tk-fn">completion</span>(.<span class="tk-fn">success</span>(<span class="tk-ty">Data</span>([<span class="tk-num">1</span>])))       <span class="tk-com">// ответ из кеша</span></span></span>
+<span class="line"><span>    <span class="tk-ty">DispatchQueue</span>.<span class="tk-fn">global</span>().<span class="tk-fn">asyncAfter</span>(deadline: .<span class="tk-fn">now</span>() + .<span class="tk-fn">milliseconds</span>(<span class="tk-num">100</span>)) {</span></span>
+<span class="line"><span>        <span class="tk-fn">completion</span>(.<span class="tk-fn">success</span>(<span class="tk-ty">Data</span>([<span class="tk-num">1</span>, <span class="tk-num">2</span>]))) <span class="tk-com">// ответ сети</span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-com">// loadImage(from:) из ответа выше</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@main</span></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">Main</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">static func </span><span class="tk-fn">main</span>() <span class="tk-kw">async throws</span> {</span></span>
+<span class="line"><span>        <span class="tk-fn">setvbuf</span>(stdout, <span class="tk-kw">nil</span>, _IONBF, <span class="tk-num">0</span>) <span class="tk-com">// без буфера: при выводе в файл строка иначе пропадёт вместе с процессом</span></span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> data = <span class="tk-kw">try await </span><span class="tk-fn">loadImage</span>(from: <span class="tk-ty">UUID</span>())</span></span>
+<span class="line"><span>        <span class="tk-fn">print</span>(<span class="tk-str">"Получено байт: \(</span>data.count<span class="tk-str">)"</span>)</span></span>
+<span class="line"><span>        <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">300</span>))</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>Получено байт: 1</span></span>
+<span class="line"><span>_Concurrency/CheckedContinuation.swift:172: Fatal error: SWIFT TASK CONTINUATION MISUSE: loadImage(from:) tried to resume its continuation more than once, returning 2 bytes!</span></span></code></pre></div>
+<p>Процесс падает с <code>SIGTRAP</code> (код выхода 133), причём через 100 мс после того, как <code>loadImage</code> уже вернула данные. Ошибка в легаси-функции, а падение случается в другом месте и в другое время. Если легаси-функцию исправить нельзя, переходник защищают сами: флаг «уже ответили» хранят в <code>Mutex</code>, а второй вызов completion пропускают и пишут в лог. Вместо падения тогда теряется второй ответ, а в логе остаётся запись о нём.</p>
+<p>Теперь третий вопрос. Легаси-функция при пустом <code>id</code> молча выходит и completion не вызывает (та же <code>loadImage</code>, только <code>id</code> опциональный):</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">LeakedContinuation.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Foundation</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">fetchImageData</span>(id: <span class="tk-ty">UUID</span>?, completion: <span class="tk-kw">@escaping @Sendable</span> (<span class="tk-ty">Result</span>&#x3C;<span class="tk-ty">Data</span>, <span class="tk-ty">Error</span>>) -> <span class="tk-ty">Void</span>) {</span></span>
+<span class="line"><span>    <span class="tk-kw">guard</span> id != <span class="tk-kw">nil else</span> { <span class="tk-kw">return</span> }</span></span>
+<span class="line"><span>    <span class="tk-fn">completion</span>(.<span class="tk-fn">success</span>(<span class="tk-ty">Data</span>([<span class="tk-num">1</span>])))</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@main</span></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">Main</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">static func </span><span class="tk-fn">main</span>() <span class="tk-kw">async throws</span> {</span></span>
+<span class="line"><span>        <span class="tk-fn">setvbuf</span>(stdout, <span class="tk-kw">nil</span>, _IONBF, <span class="tk-num">0</span>)</span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> task = <span class="tk-ty">Task</span> {</span></span>
+<span class="line"><span>            <span class="tk-kw">defer</span> { <span class="tk-fn">print</span>(<span class="tk-str">"Задача завершилась"</span>) } <span class="tk-com">// не напечатается, пока задача ждёт</span></span></span>
+<span class="line"><span>            <span class="tk-fn">print</span>(<span class="tk-str">"Загрузка началась"</span>)</span></span>
+<span class="line"><span>            <span class="tk-kw">let</span> data = <span class="tk-kw">try await </span><span class="tk-fn">loadImage</span>(from: <span class="tk-kw">nil</span>)</span></span>
+<span class="line"><span>            <span class="tk-fn">print</span>(<span class="tk-str">"Получено байт: \(</span>data.count<span class="tk-str">)"</span>)</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">500</span>))</span></span>
+<span class="line"><span>        task.<span class="tk-fn">cancel</span>()</span></span>
+<span class="line"><span>        <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">500</span>))</span></span>
+<span class="line"><span>        <span class="tk-fn">print</span>(<span class="tk-str">"Прошла секунда, строки «Задача завершилась» нет"</span>)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>Загрузка началась</span></span>
+<span class="line"><span>SWIFT TASK CONTINUATION MISUSE: loadImage(from:) leaked its continuation without resuming it. This may cause tasks waiting on it to remain suspended forever.</span></span>
+<span class="line"><span>Прошла секунда, строки «Задача завершилась» нет</span></span></code></pre></div>
+<p>Программа завершилась с кодом 0, а строки «Задача завершилась» нет: после <code>cancel()</code> задача так и не вышла из <code>loadImage</code>. <code>withCheckedThrowingContinuation</code> не ставит обработчик отмены, поэтому <code>cancel()</code> лишь поднимает флаг, который здесь никто не проверяет. Чтобы отмена прерывала такое ожидание, нужен <code>withTaskCancellationHandler</code> (раздел «Cancellation handlers» в SE-0304). В <code>onCancel</code> отменяют саму легаси-операцию, и она вызывает completion с ошибкой. Если у операции нет своей отмены, <code>onCancel</code> может сам вызвать <code>resume(throwing: CancellationError())</code>. Тогда под одним замком хранят continuation и флаг «отменено» и отдают continuation тому, кто успел первым, иначе поздний completion даст двойной <code>resume</code>. Флаг нужен для задачи, которую отменили ещё до вызова: <code>onCancel</code> в ней срабатывает раньше, чем появился continuation, и операция, положив его под замок и увидев флаг, сразу будит задачу с <code>CancellationError</code>. Без флага такая задача зависнет, и сообщения о потере в консоли не будет.</p>
+<p><strong>Шаг 4.</strong> Почему одна ошибка роняет процесс, а другая нет? Спросите ассистента: «Почему второй <code>resume</code> у <code>CheckedContinuation</code> приводит к падению, а пропущенный только пишет в консоль? Дай ссылку на раздел proposal и на строку <code>CheckedContinuation.swift</code> на теге swift-6.3.1-RELEASE». Вот что лежит по этим ссылкам (без веток для Embedded Swift)<sup><a href="#user-content-fn-3" id="user-content-fnref-3" data-footnote-ref="" aria-describedby="footnote-label">3</a></sup>:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">stdlib/public/Concurrency/CheckedContinuation.swift, swift-6.3.1-RELEASE</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">internal final class </span><span class="tk-ty">CheckedContinuationCanary</span>: <span class="tk-kw">@unchecked </span><span class="tk-ty">Sendable </span>{</span></span>
+<span class="line"><span>  <span class="tk-com">// ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">internal func </span><span class="tk-fn">takeContinuation</span>&#x3C;<span class="tk-ty">T</span>, <span class="tk-ty">E</span>>() -> <span class="tk-ty">UnsafeContinuation</span>&#x3C;<span class="tk-ty">T</span>, <span class="tk-ty">E</span>>? {</span></span>
+<span class="line"><span>    <span class="tk-com">// Atomically exchange the current continuation value with a null pointer.</span></span></span>
+<span class="line"><span>    <span class="tk-com">// ...</span></span></span>
+<span class="line"><span>  }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-kw">deinit</span> {</span></span>
+<span class="line"><span>    unsafe _functionPtr.<span class="tk-fn">deinitialize</span>(count: <span class="tk-num">1</span>)</span></span>
+<span class="line"><span>    <span class="tk-com">// Log if the continuation was never consumed before the instance was</span></span></span>
+<span class="line"><span>    <span class="tk-com">// destructed.</span></span></span>
+<span class="line"><span>    <span class="tk-kw">if</span> unsafe _continuationPtr.pointee != <span class="tk-kw">nil</span> {</span></span>
+<span class="line"><span>      unsafe <span class="tk-fn">logFailedCheck</span>(<span class="tk-str">"SWIFT TASK CONTINUATION MISUSE: \(</span>function<span class="tk-str">) leaked its continuation without resuming it. This may cause tasks waiting on it to remain suspended forever.\n"</span>)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">public struct </span><span class="tk-ty">CheckedContinuation</span>&#x3C;<span class="tk-ty">T</span>, <span class="tk-ty">E</span>: <span class="tk-ty">Error</span>>: <span class="tk-ty">Sendable </span>{</span></span>
+<span class="line"><span>  <span class="tk-kw">private let</span> canary: <span class="tk-ty">CheckedContinuationCanary</span></span></span>
+<span class="line"><span>  <span class="tk-com">// ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">public func </span><span class="tk-fn">resume</span>(returning value: <span class="tk-kw">sending </span><span class="tk-ty">T</span>) {</span></span>
+<span class="line"><span>    <span class="tk-kw">if let</span> c: <span class="tk-ty">UnsafeContinuation</span>&#x3C;<span class="tk-ty">T</span>, <span class="tk-ty">E</span>> = unsafe canary.<span class="tk-fn">takeContinuation</span>() {</span></span>
+<span class="line"><span>      unsafe c.<span class="tk-fn">resume</span>(returning: value)</span></span>
+<span class="line"><span>    } <span class="tk-kw">else</span> {</span></span>
+<span class="line"><span>      <span class="tk-fn">fatalError</span>(<span class="tk-str">"SWIFT TASK CONTINUATION MISUSE: \(</span>canary.function<span class="tk-str">) tried to resume its continuation more than once, returning \(</span>value<span class="tk-str">)!\n"</span>)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Checked-версия держит настоящий continuation в отдельном объекте <code>CheckedContinuationCanary</code>. Название от канарейки в шахте: объект сообщает о беде, когда умирает. Слово <code>unsafe</code> перед выражениями отмечает использование небезопасных API, здесь указателей и <code>UnsafeContinuation</code> (SE-0458), и на логику не влияет. Первый <code>resume</code> атомарно забирает continuation у канарейки и оставляет там <code>nil</code>, второй получает <code>nil</code> и доходит до <code>fatalError</code>. Потерю continuation видно только в <code>deinit</code> канарейки, когда отпускают последнюю ссылку на неё, поэтому continuation, который сохранили в словарь и забыли, вообще ничего не напишет. В разделе «Alternatives considered» SE-0300 объяснено, почему в <code>deinit</code> нет падения: его момент зависит от оптимизаций подсчёта ссылок, и падение происходило бы или нет в зависимости от уровня оптимизации.</p>
+<p>SE-0300 обещает, что обе проверки работают при любом уровне оптимизации, так что в релизной сборке они тоже есть. <code>withUnsafeThrowingContinuation</code> этих проверок не делает, и двойной <code>resume</code> у него приводит к неопределённому поведению.</p>
+<h3 id="задача-4-сервис-онлайн-в-чате"><span id="4" class="legacy-anchor" aria-hidden="true"></span>Задача 4. Сервис «онлайн» в чате</h3>
+<p>Условие: пока пользователь в чате, раз в n секунд вызываем <code>sendLooking()</code>. Отправка прекращается по <code>stop()</code> или после первой ошибки. Сервис реализует протокол:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">public protocol </span><span class="tk-ty">AnyLookingService</span>: <span class="tk-ty">Sendable </span>{</span></span>
+<span class="line"><span>    <span class="tk-kw">func </span><span class="tk-fn">start</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">func </span><span class="tk-fn">stop</span>()</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p><strong>Шаг 1.</strong> Предскажите: сколько отправок пройдёт после <code>stop()</code>, если перед <code>Task.sleep</code> написать <code>try?</code> вместо <code>try</code>, а других проверок отмены в цикле нет? Изменится ли ответ, если проверку добавить? Ответ даст тест из шага 5.</p>
+<p><strong>Шаг 2.</strong> Форму кода решаем сами, до запроса. Первым в голову приходит актор:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">actor </span><span class="tk-ty">LookingActor</span>: <span class="tk-ty">AnyLookingService </span>{</span></span>
+<span class="line"><span>    <span class="tk-kw">private var</span> loop: <span class="tk-ty">Task</span>&#x3C;<span class="tk-ty">Void</span>, <span class="tk-ty">Never</span>>?</span></span>
+<span class="line"><span>    <span class="tk-kw">func </span><span class="tk-fn">start</span>() { <span class="tk-com">/* ... */</span> }</span></span>
+<span class="line"><span>    <span class="tk-kw">func </span><span class="tk-fn">stop</span>() { <span class="tk-com">/* ... */</span> }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>error: conformance of 'LookingActor' to protocol 'AnyLookingService' crosses into actor-isolated code and can cause data races [#ConformanceIsolation]</span></span>
+<span class="line"><span>note: mark all declarations used in the conformance 'nonisolated'</span></span>
+<span class="line"><span>note: actor-isolated instance method 'start()' cannot satisfy nonisolated requirement</span></span></code></pre></div>
+<p>Методы протокола синхронные и не изолированы, а методы актора изолированы. Компилятор предлагает пометить <code>start()</code> и <code>stop()</code> как <code>nonisolated</code>, но такие методы не могут синхронно менять состояние актора. Пришлось бы писать <code>Task { await self.startLoop() }</code>, и тогда <code>stop()</code> возвращался бы раньше, чем отменён цикл, а порядок, в котором задачи из <code>start()</code> и <code>stop()</code> доберутся до актора, SE-0306 не гарантирует. Поэтому берём класс и замок:</p>
+<ul>
+<li><code>final class</code> только с <code>let</code>-свойствами <code>Sendable</code>-типов, иначе он не станет <code>Sendable</code>;</li>
+<li>единственное изменяемое состояние, ссылка на запущенную задачу, лежит в <code>Mutex</code> (iOS 18 и новее; для iOS 16 и 17 есть <code>OSAllocatedUnfairLock</code>);</li>
+<li>цикл живёт в <code>Task</code> и захватывает только интервал и функцию отправки, но не <code>self</code>, поэтому сервис может освободиться, а его <code>deinit</code> отменит цикл;</li>
+<li>цикл останавливают ошибка <code>send()</code> и отмена. Отмену проверяем в начале каждого прохода цикла, а во время паузы о ней сообщает <code>Task.sleep</code>, который в отменённой задаче бросает <code>CancellationError</code>;</li>
+<li>повторный <code>start()</code> отменяет старый цикл, а не запускает второй;</li>
+<li>функцию отправки передаём в инициализатор, чтобы в тесте подставить свою.</li>
+</ul>
+<p><strong>Шаг 3.</strong> Этот список и есть запрос ассистенту, плюс одна строка: «Реализуй <code>LookingService</code> по этой форме, без изменения протокола». Реализация получается такой:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">LookingService.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Synchronization</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">public final class </span><span class="tk-ty">LookingService</span>: <span class="tk-ty">AnyLookingService </span>{</span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> interval: <span class="tk-ty">Duration</span></span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> send: <span class="tk-kw">@Sendable</span> () <span class="tk-kw">async throws</span> -> <span class="tk-ty">Void</span></span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> loop = <span class="tk-ty">Mutex</span>&#x3C;<span class="tk-ty">Task</span>&#x3C;<span class="tk-ty">Void</span>, <span class="tk-ty">Never</span>>?>(<span class="tk-kw">nil</span>)</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public init</span>(interval: <span class="tk-ty">Duration</span>, send: <span class="tk-kw">@escaping @Sendable</span> () <span class="tk-kw">async throws</span> -> <span class="tk-ty">Void</span>) {</span></span>
+<span class="line"><span>        <span class="tk-kw">self</span>.interval = interval</span></span>
+<span class="line"><span>        <span class="tk-kw">self</span>.send = send</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public func </span><span class="tk-fn">start</span>() {</span></span>
+<span class="line"><span>        loop.<span class="tk-fn">withLock</span> { current <span class="tk-kw">in</span></span></span>
+<span class="line"><span>            current?.<span class="tk-fn">cancel</span>() <span class="tk-com">// повторный start перезапускает цикл, а не добавляет второй</span></span></span>
+<span class="line"><span>            current = <span class="tk-ty">Task</span> { [interval, send] <span class="tk-kw">in</span></span></span>
+<span class="line"><span>                <span class="tk-kw">do</span> {</span></span>
+<span class="line"><span>                    <span class="tk-kw">while true</span> {</span></span>
+<span class="line"><span>                        <span class="tk-kw">try </span><span class="tk-ty">Task</span>.<span class="tk-fn">checkCancellation</span>()        <span class="tk-com">// stop() сразу после start(): ни одной отправки</span></span></span>
+<span class="line"><span>                        <span class="tk-kw">try await </span><span class="tk-fn">send</span>()</span></span>
+<span class="line"><span>                        <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: interval) <span class="tk-com">// после stop() бросит CancellationError</span></span></span>
+<span class="line"><span>                    }</span></span>
+<span class="line"><span>                } <span class="tk-kw">catch</span> {</span></span>
+<span class="line"><span>                    <span class="tk-com">// ошибка сервера или отмена: больше не отправляем</span></span></span>
+<span class="line"><span>                }</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public func </span><span class="tk-fn">stop</span>() {</span></span>
+<span class="line"><span>        loop.<span class="tk-fn">withLock</span> { current <span class="tk-kw">in</span></span></span>
+<span class="line"><span>            current?.<span class="tk-fn">cancel</span>()</span></span>
+<span class="line"><span>            current = <span class="tk-kw">nil</span></span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">deinit</span> {</span></span>
+<span class="line"><span>        loop.<span class="tk-fn">withLock</span> { <span class="tk-kw">$0</span>?.<span class="tk-fn">cancel</span>() }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Без проверки в начале прохода задача, которую <code>stop()</code> отменил до первого прохода, всё равно один раз вызывает <code>send()</code>. У нас так было в 199 прогонах из 200, а с проверкой отправок не было ни в одном из 200.</p>
+<p>Что держит функция отправки, тоже часть формы. Если <code>sendLooking</code> это свободная функция, сервис создаётся просто: <code>LookingService(interval: .seconds(n), send: sendLooking)</code>. Если это метод модели экрана, которая сама хранит сервис, <code>send: sendLooking</code> захватывает модель сильно. Задача держит <code>send</code>, <code>send</code> держит модель, модель держит сервис. В нашей проверке с интервалом 20 мс после того, как отпустили ссылку на такую модель, за следующие 200 мс ушло ещё от 6 до 9 отправок, и ни один <code>deinit</code> не вызвался. С <code>{ [weak self] in try await self?.sendLooking() }</code> оба <code>deinit</code> сработали, и цикл остановился. Цепочку разрывает и вызов <code>stop()</code> при уходе с экрана.</p>
+<details class="callout callout--fold" data-callout="warning" data-callout-type="warning" data-tone="amber"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">!</span><span class="callout__title">Если в проекте Default Actor Isolation стоит MainActor</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Код компилируется, но работает иначе (SE-0466). Всё без явной изоляции в модуле попадает на главный актор, включая сам протокол <code>AnyLookingService</code>, поэтому <code>start()</code> и <code>stop()</code> синхронно вызываются только с главного актора, а тело цикла выполняется на нём же. Если сервис должен работать вне главного актора, объявите протокол как <code>nonisolated public protocol AnyLookingService</code>, а класс как <code>nonisolated public final class LookingService</code>.</p></div></details>
+<p><strong>Шаг 5.</strong> Тест проверяет только поведение сервиса, поэтому неважно, кто писал реализацию:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">LookingServiceTests.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Testing</span></span></span>
+<span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Synchronization</span></span></span>
+<span class="line"><span><span class="tk-kw">@testable import </span><span class="tk-ty">Practice </span><span class="tk-com">// модуль с LookingService</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">final class </span><span class="tk-ty">SendLog</span>: <span class="tk-ty">Sendable </span>{</span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> count = <span class="tk-ty">Mutex</span>(<span class="tk-num">0</span>)</span></span>
+<span class="line"><span>    <span class="tk-kw">func </span><span class="tk-fn">record</span>() { count.<span class="tk-fn">withLock</span> { <span class="tk-kw">$0</span> += <span class="tk-num">1</span> } }</span></span>
+<span class="line"><span>    <span class="tk-kw">var</span> value: <span class="tk-ty">Int</span> { count.<span class="tk-fn">withLock</span> { <span class="tk-kw">$0</span> } }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">ServerError</span>: <span class="tk-ty">Error </span>{}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@Test func </span><span class="tk-fn">послеStopОтправокНет</span>() <span class="tk-kw">async throws</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> log = <span class="tk-ty">SendLog</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> service = <span class="tk-ty">LookingService</span>(interval: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">20</span>)) { log.<span class="tk-fn">record</span>() }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    service.start()</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">110</span>))</span></span>
+<span class="line"><span>    service.<span class="tk-fn">stop</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">50</span>)) <span class="tk-com">// даём закончиться отправке, начатой до stop()</span></span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> afterStop = log.value</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">200</span>))</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(afterStop > <span class="tk-num">0</span>)</span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(log.value == afterStop)</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@Test func </span><span class="tk-fn">ошибкаОстанавливаетОтправку</span>() <span class="tk-kw">async throws</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> log = <span class="tk-ty">SendLog</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> service = <span class="tk-ty">LookingService</span>(interval: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">20</span>)) {</span></span>
+<span class="line"><span>        log.<span class="tk-fn">record</span>()</span></span>
+<span class="line"><span>        <span class="tk-kw">if</span> log.value == <span class="tk-num">3</span> { <span class="tk-kw">throw </span><span class="tk-ty">ServerError</span>() }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    service.start()</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">300</span>))</span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(log.value == <span class="tk-num">3</span>)</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Оба теста проходят. Они завязаны на реальное время, поэтому под сильной нагрузкой могут вести себя нестабильно; в CI такие тесты лучше перевести на подменяемый источник времени, как в задаче 12.</p>
+<p>Чтобы убедиться, что первый тест вообще что-то ловит, мы прогнали его на реализации без <code>checkCancellation()</code> и с <code>try? await Task.sleep</code> вместо <code>try await Task.sleep</code>. Такая замена соблазнительна, потому что с ней не нужно решать, что делать с ошибкой из <code>Task.sleep</code>.</p>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>✘ Test послеStopОтправокНет() recorded an issue at LookingServiceTests.swift:25:5: Expectation failed: (log.value → 351368) == (afterStop → 58587)</span></span></code></pre></div>
+<p>После <code>stop()</code> <code>Task.sleep</code> бросает <code>CancellationError</code> сразу, <code>try?</code> её глотает, и <code>while true</code> крутится без пауз. В восьми прогонах на Mac mini с Apple M4 за 200 мс между двумя замерами теста набиралось от 270 до 296 тысяч вызовов нашей заглушки <code>send</code>, и все они шли уже после <code>stop()</code>. С настоящим <code>URLSession</code> цикл остановится, но только благодаря самой функции отправки: в отменённой задаче <code>URLSession.shared.data(from:)</code> у нас бросил ошибку <code>-999 cancelled</code> через 16 мс, и цикл завершился на ней. Проверка в начале прохода закрывает и этот случай: с <code>checkCancellation()</code> вариант с <code>try?</code> тест проходит.</p>
+<p><strong>Шаг 4.</strong> Почему отменённый <code>Task.sleep</code> бросает ошибку, спросите у ассистента со ссылкой на исходники. Это задача 4 из практики в конце статьи.</p>
+<h3 id="задача-12-кеш-со-временем-жизни"><span id="12" class="legacy-anchor" aria-hidden="true"></span>Задача 12. Кеш со временем жизни</h3>
+<p>Условие: кеш хранит одно значение, при инициализации получает время жизни в секундах, <code>value</code> возвращает пару из значения и флага <code>shouldUpdate</code>, а после истечения времени значение становится <code>nil</code>. Заготовка из условия:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">Из условия задачи 12</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">private struct </span><span class="tk-ty">Cache</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> value: <span class="tk-ty">T</span></span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> date: <span class="tk-ty">Date</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-com">/// Ваш класс/эктор {</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> cacheLifeTimeSeconds: <span class="tk-ty">TimeInterval</span></span></span>
+<span class="line"><span>    <span class="tk-kw">private var</span> cache: <span class="tk-ty">Cache</span>?</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public var</span> value: (value: <span class="tk-ty">T</span>?, shouldUpdate: <span class="tk-ty">Bool</span>) { ... }</span></span>
+<span class="line"><span>    <span class="tk-kw">public func </span><span class="tk-fn">set</span>(_ newValue: <span class="tk-ty">T</span>?) { ... }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p><strong>Шаг 1.</strong> Предскажите:</p>
+<ol>
+<li>Скомпилируется ли <code>struct Cache</code> из заготовки?</li>
+<li>Можно ли прочитать <code>cache.value</code> из обычной синхронной функции?</li>
+<li>Нужно ли что-то требовать от типа <code>T</code>?</li>
+<li>Что вернёт кеш со временем жизни 60 секунд ровно через 60 секунд?</li>
+<li>Что будет, если пользователь переведёт часы на телефоне?</li>
+</ol>
+<p><strong>Шаг 5.</strong> На первые три вопроса отвечает компилятор. Ниже три ошибки из трёх отдельных попыток: заготовка как есть, чтение <code>cache.value</code> из синхронной функции и кеш без <code>T: Sendable</code>, в котором хранится <code>Avatar</code>, обычный класс без <code>Sendable</code>.</p>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>error: cannot find type 'T' in scope</span></span>
+<span class="line"><span>error: actor-isolated property 'value' can not be referenced from a nonisolated context</span></span>
+<span class="line"><span>error: non-Sendable type '(value: Avatar?, shouldUpdate: Bool)' of property 'value' cannot exit actor-isolated context</span></span></code></pre></div>
+<p><strong>Шаг 4.</strong> В заготовке <code>struct Cache</code> объявлена вне обобщённого типа, и <code>T</code> там неоткуда взяться, поэтому переносим её внутрь актора. Правила за второй и третьей ошибками записаны в SE-0306. Изменяемое или вычисляемое свойство актора снаружи читается только асинхронно, через <code>await</code>. Без <code>await</code> можно прочитать только <code>let</code> с <code>Sendable</code>-типом из того же модуля и члены, помеченные <code>nonisolated</code>. Результат обращения к актору извне должен быть <code>Sendable</code>.</p>
+<p><strong>Шаг 3.</strong> Актор, хранение и <code>set</code> это рутина. Выбирать здесь приходится только в условии просрочки: сравнивать строго (<code>&#x3C;</code>) или нестрого (<code>&#x3C;=</code>) и какие часы брать. Со стилем Learning или с правилом из <code>AGENTS.md</code> выше попросите ассистента оставить это место вам. В файле оно может выглядеть так:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">public var</span> value: (value: <span class="tk-ty">T</span>?, shouldUpdate: <span class="tk-ty">Bool</span>) {</span></span>
+<span class="line"><span>    <span class="tk-kw">guard let</span> cache <span class="tk-kw">else</span> { <span class="tk-kw">return</span> (<span class="tk-kw">nil</span>, <span class="tk-kw">true</span>) }</span></span>
+<span class="line"><span>    <span class="tk-com">// TODO(human): когда запись считается просроченной?</span></span></span>
+<span class="line"><span>    <span class="tk-com">// Сравните возраст записи с cacheLifeTimeSeconds и решите, какие часы брать.</span></span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> isFresh = <span class="tk-kw">true</span></span></span>
+<span class="line"><span>    <span class="tk-kw">return</span> isFresh ? (cache.value, <span class="tk-kw">false</span>) : (<span class="tk-kw">nil</span>, <span class="tk-kw">true</span>)</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Готовый ответ с источником времени, который передаётся в инициализатор:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">ExpiringCache.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Foundation</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">public actor </span><span class="tk-ty">ExpiringCache</span>&#x3C;<span class="tk-ty">T</span>: <span class="tk-ty">Sendable</span>> {</span></span>
+<span class="line"><span>    <span class="tk-kw">private struct </span><span class="tk-ty">Cache</span> {</span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> value: <span class="tk-ty">T</span></span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> date: <span class="tk-ty">Date</span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> cacheLifeTimeSeconds: <span class="tk-ty">TimeInterval</span></span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> now: <span class="tk-kw">@Sendable</span> () -> <span class="tk-ty">Date</span></span></span>
+<span class="line"><span>    <span class="tk-kw">private var</span> cache: <span class="tk-ty">Cache</span>?</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public init</span>(cacheLifeTimeSeconds: <span class="tk-ty">TimeInterval</span>, now: <span class="tk-kw">@escaping @Sendable</span> () -> <span class="tk-ty">Date</span> = { <span class="tk-ty">Date</span>() }) {</span></span>
+<span class="line"><span>        <span class="tk-kw">self</span>.cacheLifeTimeSeconds = cacheLifeTimeSeconds</span></span>
+<span class="line"><span>        <span class="tk-kw">self</span>.now = now</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public var</span> value: (value: <span class="tk-ty">T</span>?, shouldUpdate: <span class="tk-ty">Bool</span>) {</span></span>
+<span class="line"><span>        <span class="tk-kw">guard let</span> cache, <span class="tk-fn">now</span>().<span class="tk-fn">timeIntervalSince</span>(cache.date) &#x3C; cacheLifeTimeSeconds <span class="tk-kw">else</span> {</span></span>
+<span class="line"><span>            <span class="tk-kw">return</span> (<span class="tk-kw">nil</span>, <span class="tk-kw">true</span>)</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        <span class="tk-kw">return</span> (cache.value, <span class="tk-kw">false</span>)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public func </span><span class="tk-fn">set</span>(_ newValue: <span class="tk-ty">T</span>?) {</span></span>
+<span class="line"><span>        cache = newValue.<span class="tk-fn">map</span> { <span class="tk-ty">Cache</span>(value: <span class="tk-kw">$0</span>, date: <span class="tk-fn">now</span>()) }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Из-за подменяемого источника времени тест не ждёт минуту:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">ExpiringCacheTests.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Testing</span></span></span>
+<span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Foundation</span></span></span>
+<span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Synchronization</span></span></span>
+<span class="line"><span><span class="tk-kw">@testable import </span><span class="tk-ty">Practice</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">final class </span><span class="tk-ty">FakeTime</span>: <span class="tk-ty">Sendable </span>{</span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> date = <span class="tk-ty">Mutex</span>(<span class="tk-ty">Date</span>(timeIntervalSince1970: <span class="tk-num">0</span>))</span></span>
+<span class="line"><span>    <span class="tk-kw">var</span> now: <span class="tk-ty">Date</span> { date.<span class="tk-fn">withLock</span> { <span class="tk-kw">$0</span> } }</span></span>
+<span class="line"><span>    <span class="tk-kw">func </span><span class="tk-fn">advance</span>(by seconds: <span class="tk-ty">TimeInterval</span>) { date.<span class="tk-fn">withLock</span> { <span class="tk-kw">$0</span> += seconds } }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@Test func </span><span class="tk-fn">кешЖивётЗаданноеВремя</span>() <span class="tk-kw">async</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> time = <span class="tk-ty">FakeTime</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> cache = <span class="tk-ty">ExpiringCache</span>&#x3C;<span class="tk-ty">String</span>>(cacheLifeTimeSeconds: <span class="tk-num">60</span>, now: { time.now })</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(<span class="tk-kw">await</span> cache.value == (<span class="tk-kw">nil</span>, <span class="tk-kw">true</span>))   <span class="tk-com">// пусто: нужно обновить</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">await</span> cache.set(<span class="tk-str">"avatar.png"</span>)</span></span>
+<span class="line"><span>    time.<span class="tk-fn">advance</span>(by: <span class="tk-num">59</span>)</span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(<span class="tk-kw">await</span> cache.value == (<span class="tk-str">"avatar.png"</span>, <span class="tk-kw">false</span>))</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    time.<span class="tk-fn">advance</span>(by: <span class="tk-num">1</span>)</span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(<span class="tk-kw">await</span> cache.value == (<span class="tk-kw">nil</span>, <span class="tk-kw">true</span>))   <span class="tk-com">// ровно 60 секунд: уже просрочен</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">await</span> cache.set(<span class="tk-kw">nil</span>)</span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(<span class="tk-kw">await</span> cache.value == (<span class="tk-kw">nil</span>, <span class="tk-kw">true</span>))</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Ответ на четвёртый вопрос задаёт знак <code>&#x3C;</code>: ровно через 60 секунд значение уже просрочено, и тест это закрепляет.</p>
+<p>С пятым вопросом компилятор не поможет. <code>Date()</code> берёт время с системных часов, а их, как предупреждает SE-0329, сдвигают вперёд и назад сетевая синхронизация и ручная правка. Переведёте часы на день вперёд, и все записи разом протухнут; назад, и они проживут лишний день. Для времени жизни внутри процесса подходит <code>ContinuousClock</code>: он монотонный и продолжает считать, пока устройство спит. <code>SuspendingClock</code> во сне останавливается, и запись переживёт свой срок. Сохранять <code>ContinuousClock.Instant</code> на диск бессмысленно, потому что такие моменты сравнимы только внутри одного запуска программы. Переделать кеш на <code>ContinuousClock</code> предстоит в первой задаче практики.</p>
+<h3 id="вопросы-на-собеседовании"><span id="_6" class="legacy-anchor" aria-hidden="true"></span>Вопросы на собеседовании</h3>
+<p>Прежде чем раскрыть ответ, сформулируйте свой вслух или письменно, не возвращаясь к задачам выше. Это вспоминание из таблицы эффектов.</p>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Чем withCheckedContinuation отличается от withUnsafeContinuation?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>API одинаковый, различаются проверки. Checked-версия падает на втором <code>resume</code> и пишет в консоль, если continuation отпустили без <code>resume</code>, причём при любом уровне оптимизации (SE-0300). Unsafe-версия ничего не проверяет: двойной <code>resume</code> приводит к неопределённому поведению, потерянный continuation молча оставляет задачу висеть. Unsafe берут там, где стоимость проверок заметна, а переходник уже проверен checked-версией.</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Задача ждёт continuation, а completion так и не вызвали. Поможет ли task.cancel()?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Сам по себе нет. У <code>withCheckedContinuation</code> нет обработчика отмены, поэтому <code>cancel()</code> только поднимает флаг, и задача остаётся приостановленной. Отмену подключают через <code>withTaskCancellationHandler</code>. В <code>onCancel</code> отменяют легаси-операцию, а если своей отмены у неё нет, сами вызывают <code>resume(throwing: CancellationError())</code> и держат continuation под замком, чтобы поздний completion не вызвал второй <code>resume</code>. Если задачу отменили ещё до вызова, <code>onCancel</code> срабатывает сразу, когда continuation ещё нет, поэтому рядом с ним под тем же замком хранят флаг «отменено».</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Что будет выведено и сколько времени это займёт?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><div class="code-block" data-code="" data-glow="" data-lang="swift"><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">let</span> task = <span class="tk-ty">Task</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">for</span> step <span class="tk-kw">in </span><span class="tk-num">1</span>...<span class="tk-num">3</span> {</span></span>
+<span class="line"><span>        <span class="tk-kw">try</span>? <span class="tk-kw">await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">seconds</span>(<span class="tk-num">1</span>))</span></span>
+<span class="line"><span>        <span class="tk-fn">print</span>(<span class="tk-str">"Шаг \(</span>step<span class="tk-str">), отменена: \(</span><span class="tk-ty">Task</span>.isCancelled<span class="tk-str">)"</span>)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>task.<span class="tk-fn">cancel</span>()</span></span>
+<span class="line"><span><span class="tk-kw">await</span> task.value</span></span></code></pre></div><div class="code-block" data-code="" data-glow="" data-lang="text"><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>Шаг 1, отменена: true</span></span>
+<span class="line"><span>Шаг 2, отменена: true</span></span>
+<span class="line"><span>Шаг 3, отменена: true</span></span></code></pre></div><p>Все три строки выводятся почти сразу: в 23 запусках на Mac mini вся задача занимала от 0,09 до 0,85 мс, а не 3 секунды. Отменённый <code>Task.sleep</code> бросает <code>CancellationError</code> немедленно, <code>try?</code> её глотает, а цикл флаг отмены не проверяет. Неважно, успела ли задача уснуть до <code>cancel()</code>: сон прервётся в любом случае.</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Почему свойство кеша нельзя прочитать без await и зачем ему T: Sendable?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p><code>value</code> вычисляется из изменяемого состояния актора, а снаружи такое обращение асинхронное: вызов встаёт в очередь актора и может приостановиться (SE-0306). Без <code>await</code> снаружи читаются только <code>let</code>-свойства <code>Sendable</code>-типа из того же модуля и члены с пометкой <code>nonisolated</code>. Значение кеша хранится внутри актора и уходит из его изоляции в чужую, поэтому должно быть <code>Sendable</code>, иначе ссылка на изменяемый объект оказалась бы доступна из двух мест сразу. Swift 6 проверяет это при компиляции.</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Как вы используете ИИ, когда изучаете новую тему?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>В хорошем ответе вы называете, что решаете сами (прогноз, форма кода, разбор ошибки), что отдаёте ассистенту и как убеждаетесь, что поняли решение: сверяете прогноз с компилятором и закрепляете поведение тестом. Добавьте случай из своей практики, например тест, который, как в задаче 4, ловит <code>try?</code> перед <code>Task.sleep</code> в цикле без проверки отмены.</p></div></details>
+<h3 id="итог"><span id="_7" class="legacy-anchor" aria-hidden="true"></span>Итог</h3>
+<ul>
+<li>Пять шагов: предсказать, описать форму кода, отдать реализацию, попросить объяснение со ссылкой, сверить свой прогноз с компилятором и тестом.</li>
+<li>В эксперименте Shen и Tamkin (52 человека, одна библиотека, тест сразу после задач) группа с чат-ассистентом набрала 50% против 67% и почти не выиграла во времени. Высокие баллы были у тех, кто спрашивал о понятиях или просил объяснить сгенерированный код; группы по 2-7 человек, причинность не доказана.</li>
+<li><code>CheckedContinuation</code> падает на втором <code>resume</code>, а если continuation отпустили без <code>resume</code>, только пишет в консоль; <code>cancel()</code> ожидающую задачу не будит.</li>
+<li><code>try?</code> перед <code>Task.sleep</code> глотает <code>CancellationError</code>, и цикл, который больше нигде не проверяет отмену, после <code>cancel()</code> крутится без пауз.</li>
+<li>Изменяемые и вычисляемые свойства актора снаружи читаются только через <code>await</code>, а значения, которые покидают актор, должны быть <code>Sendable</code>.</li>
+</ul>
+<h3 id="практика"><span id="_8" class="legacy-anchor" aria-hidden="true"></span>Практика</h3>
+<p>Первые две задачи решайте сами, последние две вместе с ассистентом по пяти шагам.</p>
+<p><strong>1.</strong> Переделайте <code>ExpiringCache</code> на <code>ContinuousClock</code> и <code>Duration</code> и перепишите тест так, чтобы он по-прежнему не ждал реального времени.</p>
+<details class="callout callout--fold" data-callout="success" data-callout-type="success" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">✓</span><span class="callout__title">Решение</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><div class="code-block" data-code="" data-glow="" data-lang="swift"><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">public actor </span><span class="tk-ty">MonotonicCache</span>&#x3C;<span class="tk-ty">T</span>: <span class="tk-ty">Sendable</span>> {</span></span>
+<span class="line"><span>    <span class="tk-kw">private struct </span><span class="tk-ty">Cache</span> {</span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> value: <span class="tk-ty">T</span></span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> storedAt: <span class="tk-ty">ContinuousClock</span>.<span class="tk-ty">Instant</span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> lifetime: <span class="tk-ty">Duration</span></span></span>
+<span class="line"><span>    <span class="tk-kw">private let</span> now: <span class="tk-kw">@Sendable</span> () -> <span class="tk-ty">ContinuousClock</span>.<span class="tk-ty">Instant</span></span></span>
+<span class="line"><span>    <span class="tk-kw">private var</span> cache: <span class="tk-ty">Cache</span>?</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public init</span>(lifetime: <span class="tk-ty">Duration</span>, now: <span class="tk-kw">@escaping @Sendable</span> () -> <span class="tk-ty">ContinuousClock</span>.<span class="tk-ty">Instant</span> = { .now }) {</span></span>
+<span class="line"><span>        <span class="tk-kw">self</span>.lifetime = lifetime</span></span>
+<span class="line"><span>        <span class="tk-kw">self</span>.now = now</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public var</span> value: (value: <span class="tk-ty">T</span>?, shouldUpdate: <span class="tk-ty">Bool</span>) {</span></span>
+<span class="line"><span>        <span class="tk-kw">guard let</span> cache, cache.storedAt.<span class="tk-fn">duration</span>(to: <span class="tk-fn">now</span>()) &#x3C; lifetime <span class="tk-kw">else</span> {</span></span>
+<span class="line"><span>            <span class="tk-kw">return</span> (<span class="tk-kw">nil</span>, <span class="tk-kw">true</span>)</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        <span class="tk-kw">return</span> (cache.value, <span class="tk-kw">false</span>)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-kw">public func </span><span class="tk-fn">set</span>(_ newValue: <span class="tk-ty">T</span>?) {</span></span>
+<span class="line"><span>        cache = newValue.<span class="tk-fn">map</span> { <span class="tk-ty">Cache</span>(value: <span class="tk-kw">$0</span>, storedAt: <span class="tk-fn">now</span>()) }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre></div><p>В тесте подменяем источник времени: храним <code>ContinuousClock.Instant</code> в <code>Mutex</code> и сдвигаем его через <code>advanced(by:)</code>.</p></div></details>
+<p><strong>2.</strong> Добавьте к тестам задачи 4 две проверки: двойной <code>start()</code> не запускает второй цикл, а после <code>stop()</code>, вызванного сразу после <code>start()</code>, не уходит ни одной отправки. Проверьте тесты на двух неправильных реализациях: где <code>start()</code> просто перезаписывает ссылку на задачу без <code>cancel()</code> и где в цикле нет <code>checkCancellation()</code>.</p>
+<details class="callout callout--fold" data-callout="success" data-callout-type="success" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">✓</span><span class="callout__title">Решение</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><div class="code-block" data-code="" data-glow="" data-lang="swift"><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">@Test func </span><span class="tk-fn">повторныйStartНеУдваиваетОтправку</span>() <span class="tk-kw">async throws</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> log = <span class="tk-ty">SendLog</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> service = <span class="tk-ty">LookingService</span>(interval: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">50</span>)) { log.<span class="tk-fn">record</span>() }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    service.start()</span></span>
+<span class="line"><span>    service.start()</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">120</span>))</span></span>
+<span class="line"><span>    service.<span class="tk-fn">stop</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">50</span>))</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-com">// Один цикл отправляет в 0, 50 и 100 мс. Первый, уже отменённый цикл</span></span></span>
+<span class="line"><span>    <span class="tk-com">// добавит одну отправку, только если успел начать проход до отмены.</span></span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(log.value &#x3C;= <span class="tk-num">4</span>)</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@Test func </span><span class="tk-fn">stopСразуПослеStartБезОтправок</span>() <span class="tk-kw">async throws</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> log = <span class="tk-ty">SendLog</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> service = <span class="tk-ty">LookingService</span>(interval: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">20</span>)) { log.<span class="tk-fn">record</span>() }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    service.start()</span></span>
+<span class="line"><span>    service.<span class="tk-fn">stop</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">try await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">100</span>))</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-fn">#expect</span>(log.value == <span class="tk-num">0</span>)</span></span>
+<span class="line"><span>}</span></span></code></pre></div><p>На реализации без <code>cancel()</code> в <code>start()</code> первый тест у нас падал с 7 отправками: первый цикл никто не отменил, и он продолжал отправлять после <code>stop()</code>. Без <code>checkCancellation()</code> второй тест падает с одной отправкой.</p></div></details>
+<p><strong>3.</strong> Задача 9 из <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/" class="wikilink">1. Практический путь</a>: своя <code>AsyncSequence</code>, которая отдаёт числа до лимита с паузой в секунду и учитывает отмену (основы в <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/3.%20AsyncSequence%20%26%20AsyncStream/" class="wikilink">3. AsyncSequence &#x26; AsyncStream</a>). Шаги 1 и 2 сделайте сами. Реализацию попросите у ассистента со стилем Learning, с правилом из <code>AGENTS.md</code> или, с локальной моделью, отправив это правило первым сообщением в чат. Тест на отмену напишите до того, как увидите код.</p>
+<details class="callout callout--fold" data-callout="tip" data-callout-type="tip" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">*</span><span class="callout__title">Подсказка</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Передайте паузу в инициализатор, как интервал в задаче 4, чтобы тест не ждал секундами. Перебирайте последовательность внутри <code>Task</code> и считайте элементы в <code>SendLog</code> из задачи 4. Отмените задачу и дождитесь <code>await task.value</code>: если цикл не завершился, тест зависнет. Потом проверьте, что счётчик больше не растёт. Вспомните, что уже знаете про <code>Task.sleep</code> и <code>try?</code>.</p></div></details>
+<p><strong>4.</strong> Спросите ассистента, почему <code>Task.sleep(for:)</code> в отменённой задаче бросает <code>CancellationError</code>, и попросите ссылку на строку исходников на теге вашей версии Swift. Откройте файлы и пройдите цепочку вызовов сами.</p>
+<details class="callout callout--fold" data-callout="success" data-callout-type="success" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">✓</span><span class="callout__title">Где искать (swift-6.3.1-RELEASE)</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p><code>sleep(for:tolerance:clock:)</code> объявлен в <code>stdlib/public/Concurrency/TaskSleepDuration.swift</code> (строки 228-245), и в документации к нему написано: «If the task is canceled before the time ends, this function throws <code>CancellationError</code>». В строке 244 вызов уходит в <code>clock.sleep(for:tolerance:)</code> из <code>Clock.swift</code> (строки 108-113), оттуда в <code>ContinuousClock.sleep(until:tolerance:)</code> (<code>ContinuousClock.swift</code>, строки 113-123) и дальше в <code>Task._sleep(until:tolerance:clock:)</code> в <code>TaskSleepDuration.swift</code> (строка 80). Там сон обёрнут в <code>withTaskCancellationHandler</code> (строка 92). При отмене обработчик (строки 175-177) вызывает <code>onSleepCancel</code> из <code>TaskSleep.swift</code>, и тот в строке 219 будит continuation с <code>CancellationError</code>. Если задачу отменили ещё до начала сна, ошибку бросает строка 199 в <code>TaskSleepDuration.swift</code>.</p></div></details>
+<h3 id="источники"><span id="_9" class="legacy-anchor" aria-hidden="true"></span>Источники</h3>
+<ul>
+<li><a href="https://arxiv.org/abs/2601.20245">Shen J. H., Tamkin A. How AI Impacts Skill Formation, arXiv:2601.20245</a> и <a href="https://www.anthropic.com/research/AI-assistance-coding-skills">пост Anthropic от 29.01.2026</a>: эксперимент, таблица 1 с опытом участников, паттерны работы с ассистентом.</li>
+<li><a href="https://doi.org/10.1037/0278-7393.4.6.592">Slamecka, Graf, 1978. The generation effect</a> и <a href="https://doi.org/10.3758/BF03193441">метаанализ Bertsch и соавторов, 2007</a>.</li>
+<li><a href="https://doi.org/10.1111/j.1467-9280.2006.01693.x">Roediger, Karpicke, 2006. Test-enhanced learning</a>.</li>
+<li><a href="https://doi.org/10.1037/a0015729">Kornell, Hays, Bjork, 2009. Unsuccessful retrieval attempts enhance subsequent learning</a> и <a href="https://doi.org/10.1037/a0016496">Richland, Kornell, Kao, 2009. The pretesting effect</a>.</li>
+<li><a href="https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/04/EBjork_RBjork_2011.pdf">Bjork E. L., Bjork R. A., 2011. Making things hard on yourself, but in a good way</a>.</li>
+<li><a href="https://doi.org/10.1073/pnas.2422633122">Bastani и соавторы, 2025. Generative AI without guardrails can harm learning, PNAS</a>.</li>
+<li>Заметки к выпускам Xcode: <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-26-release-notes">26</a>, <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-26_3-release-notes">26.3</a>, <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-26_6-release-notes">26.6</a>, <a href="https://developer.apple.com/documentation/xcode-release-notes/xcode-27-release-notes">27</a>; <a href="https://www.apple.com/newsroom/2026/02/xcode-26-point-3-unlocks-the-power-of-agentic-coding/">Apple Newsroom об агентах в Xcode 26.3</a>.</li>
+<li><a href="https://developer.apple.com/documentation/xcode/setting-up-coding-intelligence">Setting up coding intelligence</a> и <a href="https://developer.apple.com/documentation/xcode/giving-external-agents-access-to-xcode">Giving external agents access to Xcode</a>: провайдеры, Locally Hosted, <code>AGENTS.md</code> для внешних агентов.</li>
+<li>WWDC26: <a href="https://developer.apple.com/videos/play/wwdc2026/259/">Xcode, agents, and you (259)</a>, <a href="https://developer.apple.com/videos/play/wwdc2026/232/">Run local agentic AI on the Mac using MLX (232)</a>, <a href="https://developer.apple.com/videos/play/wwdc2026/382/">Inside Apple Intelligence and Xcode (382)</a>, <a href="https://developer.apple.com/videos/play/wwdc2026/8007/">Coding Intelligence for Beginners Group Lab (8007)</a>; WWDC25: <a href="https://developer.apple.com/videos/play/wwdc2025/247/">What's new in Xcode 26 (247)</a>.</li>
+<li><a href="https://code.claude.com/docs/en/output-styles">Claude Code: output styles</a> и <a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md">CHANGELOG Claude Code</a>: стиль Learning, <code>TODO(human)</code>, версия с <code>/output-style</code>. <a href="https://openai.com/index/chatgpt-study-mode/">ChatGPT study mode</a>, <a href="https://blog.google/products-and-platforms/products/education/guided-learning/">Gemini Guided Learning</a>.</li>
+<li><a href="https://docs.ollama.com/faq">Ollama FAQ</a>, <a href="https://docs.ollama.com/context-length">Ollama: context length</a>, <a href="https://docs.ollama.com/integrations/xcode">Ollama и Xcode</a>, <a href="https://lmstudio.ai/docs/developer/openai-compat">LM Studio: OpenAI-совместимый API</a>, <a href="https://developers.openai.com/api/docs/models/gpt-oss-20b">модель gpt-oss-20b</a>.</li>
+<li>Списки стран: <a href="https://www.anthropic.com/supported-countries">Anthropic</a>, <a href="https://developers.openai.com/api/docs/supported-countries">OpenAI</a>, <a href="https://ai.google.dev/gemini-api/docs/available-regions">Gemini API</a>.</li>
+<li>Выпуски Swift: <a href="https://www.swift.org/blog/announcing-swift-6/">6.0</a>, <a href="https://www.swift.org/blog/swift-6.2-released/">6.2</a>, <a href="https://www.swift.org/blog/swift-6.3-released/">6.3</a>, <a href="https://www.swift.org/blog/swift-6.4-released/">6.4</a>.</li>
+<li><a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0300-continuation.md">SE-0300 Continuations for interfacing async tasks with synchronous code</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0302-concurrent-value-and-concurrent-closures.md">SE-0302 Sendable and @Sendable closures</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0304-structured-concurrency.md">SE-0304 Structured concurrency</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0306-actors.md">SE-0306 Actors</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0329-clock-instant-duration.md">SE-0329 Clock, Instant, and Duration</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0433-mutex.md">SE-0433 Mutex</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0458-strict-memory-safety.md">SE-0458 Opt-in Strict Memory Safety Checking</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0466-control-default-actor-isolation.md">SE-0466 Control default actor isolation inference</a>.</li>
+<li>Исходники Swift на теге swift-6.3.1-RELEASE: <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/CheckedContinuation.swift#L169">CheckedContinuation.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskSleepDuration.swift#L228">TaskSleepDuration.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/Clock.swift#L108">Clock.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/ContinuousClock.swift#L113">ContinuousClock.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskSleep.swift#L219">TaskSleep.swift</a>.</li>
+</ul>
+<section data-footnotes="" class="footnotes"><h2 class="sr-only" id="footnote-label"><span id="_10" class="legacy-anchor" aria-hidden="true"></span>Сноски</h2>
+<ol>
+<li id="user-content-fn-1">
+<p>В таблице 24 человека из 26: для одного участника записи экрана нет, ещё один в препринте ни к одному паттерну не отнесён. <a href="#user-content-fnref-1" data-footnote-backref="" aria-label="Вернуться к тексту" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-2">
+<p>В препринте та же разница записана как 4,15 балла из 27 и тоже названа «17%», хотя 4,15 из 27 дают 15,4 процентного пункта. <a href="#user-content-fnref-2" data-footnote-backref="" aria-label="Вернуться к тексту" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-3">
+<p>В нашем выводе строка 172, а на теге <code>fatalError</code> стоит на строке 169. Скорее всего, на Apple-платформах библиотека Concurrency поставляется с ОС, и номер берётся из её сборки. <a href="#user-content-fnref-3" data-footnote-backref="" aria-label="Вернуться к тексту" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section></div><script>
+  // The prose (right above) reveals child by child, as the concept's paragraphs do. Set here,
+  // synchronously while parsing, so it is in place before the shell's fx script collects targets.
+  document.currentScript?.parentElement?.querySelector('[data-prose]')?.setAttribute('data-reveal-children', '');
+</script><nav class="pager" aria-label="Соседние статьи" data-pagefind-ignore><a class="pager__card pager__card--prev" href="/ios_deep_tech/UI/SwiftUI/Junior/4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/" rel="prev" data-reveal><div class="pager__label">← НАЗАД</div><div class="pager__title">Тур по жестам в SwiftUI</div></a><span class="pager__spacer" aria-hidden="true"></span></nav></article></main><aside class="toc" aria-label="Оглавление"><button type="button" class="toc__toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-body"><span class="toc__chev" aria-hidden="true">›</span><span class="toc__toggle-label">На этой странице</span><span class="toc__count" aria-hidden="true">12</span></button><div class="toc__label" id="toc-label">На этой странице</div><div class="toc__scroll" id="toc-body" data-toc-scroll><nav class="toc__rail" aria-labelledby="toc-label"><div class="toc__ind" data-toc-ind aria-hidden="true"></div><a class="toc__link" href="#что-показал-эксперимент" data-toc="что-показал-эксперимент" data-level="1">Что показал эксперимент</a><a class="toc__link" href="#почему-помогают-ошибки-и-попытка-до-ответа" data-toc="почему-помогают-ошибки-и-попытка-до-ответа" data-level="1">Почему помогают ошибки и попытка до ответа</a><a class="toc__link" href="#пять-шагов-работы-с-ассистентом" data-toc="пять-шагов-работы-с-ассистентом" data-level="1">Пять шагов работы с ассистентом</a><a class="toc__link" href="#где-выполнять-эти-шаги" data-toc="где-выполнять-эти-шаги" data-level="1">Где выполнять эти шаги</a><a class="toc__link" href="#задача-10-completion-в-async" data-toc="задача-10-completion-в-async" data-level="1">Задача 10. Completion в async</a><a class="toc__link" href="#задача-4-сервис-онлайн-в-чате" data-toc="задача-4-сервис-онлайн-в-чате" data-level="1">Задача 4. Сервис «онлайн» в чате</a><a class="toc__link" href="#задача-12-кеш-со-временем-жизни" data-toc="задача-12-кеш-со-временем-жизни" data-level="1">Задача 12. Кеш со временем жизни</a><a class="toc__link" href="#вопросы-на-собеседовании" data-toc="вопросы-на-собеседовании" data-level="1">Вопросы на собеседовании</a><a class="toc__link" href="#итог" data-toc="итог" data-level="1">Итог</a><a class="toc__link" href="#практика" data-toc="практика" data-level="1">Практика</a><a class="toc__link" href="#источники" data-toc="источники" data-level="1">Источники</a><a class="toc__link" href="#footnote-label" data-toc="footnote-label" data-level="1">Сноски</a></nav></div><div class="toc__progress" aria-hidden="true"><span data-pct="2">00%</span><span class="toc__rule"></span></div></aside><script>
+      // Below 1024px the rail is a card under the article header (mobile.css / mobile.ts). It moves
+      // there while the page parses, so first paint already has it in place: moving it later from
+      // the deferred module shifted the whole article down.
+      (function () {
+        var toc = document.currentScript && document.currentScript.previousElementSibling;
+        var head = document.querySelector('.article > .article-header');
+        if (!toc || !head || !matchMedia('(max-width: 1023px)').matches) return;
+        toc.setAttribute('data-inline', '');
+        toc.setAttribute('data-reveal', '');
+        head.after(toc);
+      })();
+    </script></div><div class="palette" data-palette><div class="palette__box" data-palette-box role="dialog" aria-modal="true" aria-label="Поиск по базе знаний"><div class="palette__bar"><span class="palette__prompt" aria-hidden="true">›</span><input class="palette__input" data-palette-input type="text" placeholder="Найти статью, тему или метод…" role="combobox" aria-label="Поиск" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go"><button type="button" class="palette__esc" data-palette-close aria-label="Закрыть поиск">ESC</button></div><div class="palette__list" id="palette-list" role="listbox" aria-label="Результаты поиска" data-palette-list><div class="palette__group" role="group" aria-labelledby="palette-label-default"><div class="palette__label" id="palette-label-default">СТАТЬИ</div><a class="palette__item" data-pi role="option" id="palette-item-0" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/" tabindex="-1" aria-selected="true"><span class="palette__row"><span class="palette__title">Как изучать iOS вместе с ассистентом и не терять понимание</span><span class="palette__meta">Изучение</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-1" href="/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Подробнее про ARC</span><span class="palette__meta">ARC</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-2" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Оптимизации и устройство массивов</span><span class="palette__meta">Коллекции</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-3" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Task Local</span><span class="palette__meta">Многопоточность</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-4" href="/ios_deep_tech/UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Основы</span><span class="palette__meta">SwiftUI</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-5" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Практический путь</span><span class="palette__meta">Многопоточность</span></span></a></div></div><div class="palette__foot" aria-hidden="true"><span>↑↓ навигация</span><span>↵ открыть</span><span>esc закрыть</span></div><div class="visually-hidden" role="status" aria-live="polite" data-palette-status></div></div><script type="application/json" data-palette-index>[{"t":"С чего все началось? (MRC)","c":"ARC","h":"/ios_deep_tech/Swift/ARC/Junior/1.%20%D0%A1%20%D1%87%D0%B5%D0%B3%D0%BE%20%D0%B2%D1%81%D0%B5%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3F%20(MRC)/"},{"t":"Подробнее про ARC","c":"ARC","h":"/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/"},{"t":"Поговорим о массивах","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/1.%20%D0%9F%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D0%BC%20%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0%D1%85/"},{"t":"Оптимизации и устройство массивов","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/"},{"t":"Set в Swift","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0/Junior/1.%20Set%20%D0%B2%20Swift/"},{"t":"Что такое словари в Swift?","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/"},{"t":"Потокобезопасность. Введение","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/"},{"t":"Actor Reentrancy","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/2.%20Actor%20Reentrancy/"},{"t":"Actor Hopping","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/3.%20Actor%20Hopping/"},{"t":"Sendable","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/4.%20Sendable/"},{"t":"Global Actor","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/5.%20Global%20Actor/"},{"t":"Actor isolation","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/6.%20Actor%20isolation/"},{"t":"Continuation","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/1.%20Continuation/"},{"t":"Task Group","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/2.%20Task%20Group/"},{"t":"AsyncSequence & AsyncStream","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/3.%20AsyncSequence%20%26%20AsyncStream/"},{"t":"Введение","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/1.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/"},{"t":"Task(Detached) - техническое определение","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/2.%20Task(Detached)%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/"},{"t":"Асинхронные функции и await","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/"},{"t":"Отмена задач","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/"},{"t":"Task Priority","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/5.%20Task%20Priority/"},{"t":"Практический путь","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/"},{"t":"Actor и Executor","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Executors/1.%20Actor%20%D0%B8%20Executor/"},{"t":"Task Local","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/"},{"t":"Основы","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/"},{"t":"Property Wrappers","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/2.%20Property%20Wrappers/"},{"t":"Основные концепции анимаций в SwiftUI","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/3.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D0%B8%D0%B8%20%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D0%B9%20%D0%B2%20SwiftUI/"},{"t":"Тур по жестам в SwiftUI","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/"},{"t":"Как изучать iOS вместе с ассистентом и не терять понимание","c":"Изучение","h":"/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/"}]</script></div></div><script type="module" src="/ios_deep_tech/_astro/Base.astro_astro_type_script_index_0_lang.Cha2ZpVJ.js"></script></body></html>

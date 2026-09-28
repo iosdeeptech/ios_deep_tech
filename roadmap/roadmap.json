@@ -1,30 +1,31 @@
 {
-  "generatedAt": "2026-09-27T13:24:27+03:00",
+  "generatedAt": "2026-09-28T17:20:29+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "b882549"
+    "commit": "9f8d116"
   },
-  "date": "2026-09-27",
+  "date": "2026-09-28",
   "highlighted": [
     {
-      "path": "Swift/Многопоточность/Structured Concurrency/Middle/Tasks (deep)/1. Task Local",
-      "label": "1. Task Local",
-      "title": "Task Local",
+      "path": "Разработка с ИИ/Изучение/Junior/1. Как изучать iOS вместе с ассистентом и не терять понимание",
+      "label": "1. Как изучать iOS вместе с ассистентом и не терять понимание",
+      "title": "Как изучать iOS вместе с ассистентом и не терять понимание",
       "addedIn": {
-        "commit": "ba7ffe8",
-        "date": "2025-03-09T19:14:55+03:00"
+        "commit": "9f8d116",
+        "date": "2026-09-28T17:20:29+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 27,
-    "nodes": 51,
+    "articles": 28,
+    "nodes": 55,
     "sections": {
       "Swift": 23,
-      "UI": 4
+      "UI": 4,
+      "Разработка с ИИ": 1
     },
     "grades": {
-      "Junior": 25,
+      "Junior": 26,
       "Middle": 2,
       "Senior": 0
     }
@@ -35,9 +36,9 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 1890.71,
+      "width": 2102.52,
       "height": 982.41,
-      "pngWidth": 3781,
+      "pngWidth": 4205,
       "pngHeight": 1965
     },
     "light": {
@@ -45,9 +46,9 @@
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 1890.71,
+      "width": 2102.52,
       "height": 982.41,
-      "pngWidth": 3781,
+      "pngWidth": 4205,
       "pngHeight": 1965
     },
     "telegram": {
@@ -55,10 +56,10 @@
       "theme": "brand",
       "layout": "stacked",
       "aspect": "4:5",
-      "width": 1099.47,
-      "height": 1374.34,
-      "pngWidth": 2199,
-      "pngHeight": 2749
+      "width": 1217.13,
+      "height": 1521.41,
+      "pngWidth": 2434,
+      "pngHeight": 3043
     }
   },
   "warnings": []
