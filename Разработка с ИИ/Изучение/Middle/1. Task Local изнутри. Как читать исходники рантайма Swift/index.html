@@ -1,0 +1,1069 @@
+<!DOCTYPE html><html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Task Local изнутри. Как читать исходники рантайма Swift — iOS Deep Tech</title><meta name="description" content="Как с ассистентом в роли проводника дойти от @TaskLocal до C++ рантайма на теге своего компилятора и подтвердить устройство хранилища task-local тестом и замером."><link rel="canonical" href="https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Middle/1.%20Task%20Local%20%D0%B8%D0%B7%D0%BD%D1%83%D1%82%D1%80%D0%B8.%20%D0%9A%D0%B0%D0%BA%20%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C%20%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8%20%D1%80%D0%B0%D0%BD%D1%82%D0%B0%D0%B9%D0%BC%D0%B0%20Swift/"><meta name="theme-color" content="#08090a"><meta name="color-scheme" content="dark light"><meta name="generator" content="Astro v7.3.5"><meta property="og:site_name" content="iOS Deep Tech"><meta property="og:locale" content="ru_RU"><meta property="og:type" content="article"><meta property="og:title" content="Task Local изнутри. Как читать исходники рантайма Swift"><meta property="og:description" content="Как с ассистентом в роли проводника дойти от @TaskLocal до C++ рантайма на теге своего компилятора и подтвердить устройство хранилища task-local тестом и замером."><meta property="og:url" content="https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Middle/1.%20Task%20Local%20%D0%B8%D0%B7%D0%BD%D1%83%D1%82%D1%80%D0%B8.%20%D0%9A%D0%B0%D0%BA%20%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C%20%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8%20%D1%80%D0%B0%D0%BD%D1%82%D0%B0%D0%B9%D0%BC%D0%B0%20Swift/"><meta property="og:image" content="https://iosdeeptech.github.io/ios_deep_tech/brand/og-512.jpg"><meta name="twitter:card" content="summary"><link rel="icon" href="/ios_deep_tech/favicon.ico" sizes="48x48"><link rel="icon" href="/ios_deep_tech/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/ios_deep_tech/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="/ios_deep_tech/apple-touch-icon.png"><link rel="alternate" type="application/rss+xml" title="iOS Deep Tech — новые статьи" href="/ios_deep_tech/feed_rss_created.xml"><link rel="alternate" type="application/rss+xml" title="iOS Deep Tech — обновления" href="/ios_deep_tech/feed_rss_updated.xml"><link rel="alternate" type="application/feed+json" title="iOS Deep Tech — новые статьи" href="/ios_deep_tech/feed_json_created.json"><link rel="preload" href="/ios_deep_tech/_astro/geist-latin.BGnTDqni.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/ios_deep_tech/_astro/geist-cyrillic.D_Kiv5N3.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/ios_deep_tech/_astro/geist-mono-latin.pyAoGB9p.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/ios_deep_tech/_astro/geist-mono-cyrillic.C58l5Ba4.woff2" as="font" type="font/woff2" crossorigin><script>
+      // Pre-paint: enables the reveal CSS and applies the stored theme, else the OS one (the rest
+      // of the theme behaviour is src/scripts/theme.ts). The browser-chrome colour is --bg of
+      // tokens.css / light.css.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var t = null;
+        try { t = localStorage.getItem('idt-theme'); } catch (e) {}
+        d.dataset.themeSource = t === 'light' || t === 'dark' ? 'manual' : 'system';
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        d.dataset.theme = t;
+        d.style.colorScheme = t;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', t === 'light' ? '#fafaf9' : '#08090a');
+        // Fail-open watchdog. The reveal CSS keeps the article hidden until src/scripts/fx.ts
+        // runs (it sets window.__idtFx). Scripts that did not load or did not run by the time the
+        // document is complete: the no-script layout. Scripts that are only slow (2s after the
+        // document is parsed): the content shows without its entrance.
+        document.addEventListener('readystatechange', function () {
+          if (document.readyState !== 'interactive') return;
+          setTimeout(function () {
+            if (!window.__idtFx) d.classList.add('fx-off');
+          }, 2000);
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+          if (!window.__idtFx) d.classList.remove('js');
+        });
+      })();
+    </script><link rel="stylesheet" href="/ios_deep_tech/_astro/Base.C147cM2F.css"></head><body><a class="skip-link" href="#main">К содержанию</a><div class="root" data-root><header class="site-header"><a class="site-header__brand" href="/ios_deep_tech/"><!-- 1x/2x/3x captures of Chrome drawing the concept's 1254px logo at 28px (pixel-identical to
+         it), 1–8 KB each and fetched first, so the mark paints with the bar. --><img class="site-header__logo" src="/ios_deep_tech/brand/logo-84.webp" srcset="/ios_deep_tech/brand/logo-28.webp 1x, /ios_deep_tech/brand/logo-56.webp 2x, /ios_deep_tech/brand/logo-84.webp 3x" alt="" width="28" height="28" fetchpriority="high"><span class="site-header__name">iOS Deep Tech</span></a><nav class="site-header__crumbs" aria-label="Раздел"><span aria-hidden="true">/</span><a class="site-header__crumb" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/">Разработка с ИИ</a><span aria-hidden="true">/</span><span class="site-header__crumb-current">Изучение</span></nav><div class="site-header__spacer"></div><!-- Left of the search, the toggle takes its width from the spacer: search, GitHub and the pill
+       stay exactly where the concept draws them. --><button type="button" class="theme-toggle" data-theme-toggle aria-label="Сменить тему" title="Сменить тему"><span class="theme-toggle__icon" aria-hidden="true"></span></button><button type="button" class="site-header__search" data-open-palette aria-haspopup="dialog" aria-keyshortcuts="Meta+K Control+K /"><span class="site-header__search-label">Поиск по базе знаний</span><span class="site-header__keys" aria-hidden="true"><kbd data-kbd-mod>⌘</kbd><kbd>K</kbd></span></button><a class="site-header__link" href="https://github.com/iosdeeptech/ios_deep_tech" rel="noopener">GitHub</a><a class="site-header__support" href="https://t.me/tribute/app?startapp=dcYS-5hL96tXcw3d" rel="noopener">Поддержать</a><!-- Mobile hook (owner: mobile): below 900px the sidebar becomes a drawer opened by this
+       button; hidden on desktop. Behaviour: src/scripts/mobile.ts, styles: src/styles/mobile.css. --><button type="button" class="site-header__menu" data-nav-toggle aria-expanded="false" aria-label="Открыть навигацию"><span class="site-header__menu-icon" aria-hidden="true"></span></button><div class="site-header__progress" data-progress aria-hidden="true"></div></header><div class="shell" data-layout="docs"><aside class="sidebar" data-sidebar><nav class="sb-nav" aria-label="Навигация по базе знаний"><div class="sb-label">IOS DEEP TECH</div><a class="sb-link" href="/ios_deep_tech/">Кто мы?</a><a class="sb-link sb-link--map" href="/ios_deep_tech/#актуальная-схема" data-sb-map>Актуальная схема<span class="sb-badge">MAP</span></a><div class="sb-label">SWIFT</div><button class="sb-toggle" type="button" data-toggle="Swift/ARC" aria-expanded="false" aria-controls="sb-group-0-0"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">ARC</span><span class="sb-count">2</span></button><div class="sb-group" id="sb-group-0-0" data-group="Swift/ARC" data-closed="1" style="display:none"><a class="sb-child" href="/ios_deep_tech/Swift/ARC/Junior/1.%20%D0%A1%20%D1%87%D0%B5%D0%B3%D0%BE%20%D0%B2%D1%81%D0%B5%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3F%20(MRC)/">С чего все началось? (MRC)</a><a class="sb-child" href="/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/">Подробнее про ARC</a></div><button class="sb-toggle" type="button" data-toggle="Swift/Коллекции" aria-expanded="false" aria-controls="sb-group-0-1"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">Коллекции</span><span class="sb-count">4</span></button><div class="sb-group" id="sb-group-0-1" data-group="Swift/Коллекции" data-closed="1" style="display:none"><div class="sb-sublabel">МАССИВЫ</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/1.%20%D0%9F%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D0%BC%20%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0%D1%85/">Поговорим о массивах</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/">Оптимизации и устройство массивов</a><div class="sb-sublabel">МНОЖЕСТВА</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0/Junior/1.%20Set%20%D0%B2%20Swift/">Set в Swift</a><div class="sb-sublabel">СЛОВАРИ</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/">Что такое словари в Swift?</a></div><button class="sb-toggle" type="button" data-toggle="Swift/Многопоточность" aria-expanded="false" aria-controls="sb-group-0-2"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">Многопоточность</span><span class="sb-count">17</span></button><div class="sb-group" id="sb-group-0-2" data-group="Swift/Многопоточность" data-closed="1" style="display:none"><div class="sb-sublabel">ACTORS</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/">Потокобезопасность. Введение</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/2.%20Actor%20Reentrancy/">Actor Reentrancy</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/3.%20Actor%20Hopping/">Actor Hopping</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/4.%20Sendable/">Sendable</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/5.%20Global%20Actor/">Global Actor</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/6.%20Actor%20isolation/">Actor isolation</a><div class="sb-sublabel">SEQUENCE</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/1.%20Continuation/">Continuation</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/2.%20Task%20Group/">Task Group</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/3.%20AsyncSequence%20%26%20AsyncStream/">AsyncSequence &amp; AsyncStream</a><div class="sb-sublabel">TASKS</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/1.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/">Введение</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/2.%20Task(Detached)%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/">Task(Detached) - техническое определение</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/">Асинхронные функции и await</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/">Отмена задач</a><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/5.%20Task%20Priority/">Task Priority</a><div class="sb-sublabel">ПРАКТИКА</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/">Практический путь</a><div class="sb-sublabel">EXECUTORS</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Executors/1.%20Actor%20%D0%B8%20Executor/">Actor и Executor</a><div class="sb-sublabel">TASKS (DEEP)</div><a class="sb-child" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/">Task Local</a></div><div class="sb-label">UI</div><button class="sb-toggle" type="button" data-toggle="UI/SwiftUI" aria-expanded="false" aria-controls="sb-group-1-0"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">SwiftUI</span><span class="sb-count">4</span></button><div class="sb-group" id="sb-group-1-0" data-group="UI/SwiftUI" data-closed="1" style="display:none"><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/">Основы</a><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/2.%20Property%20Wrappers/">Property Wrappers</a><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/3.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D0%B8%D0%B8%20%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D0%B9%20%D0%B2%20SwiftUI/">Основные концепции анимаций в SwiftUI</a><a class="sb-child" href="/ios_deep_tech/UI/SwiftUI/Junior/4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/">Тур по жестам в SwiftUI</a></div><div class="sb-label">РАЗРАБОТКА С ИИ</div><button class="sb-toggle" type="button" data-toggle="Разработка с ИИ/Изучение" data-current aria-expanded="true" aria-controls="sb-group-2-0"><span class="sb-chev" data-chev aria-hidden="true">›</span><span class="sb-title">Изучение</span><span class="sb-count">2</span></button><div class="sb-group" id="sb-group-2-0" data-group="Разработка с ИИ/Изучение"><a class="sb-child" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/">Как изучать iOS вместе с ассистентом и не терять понимание</a><a class="sb-child" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Middle/1.%20Task%20Local%20%D0%B8%D0%B7%D0%BD%D1%83%D1%82%D1%80%D0%B8.%20%D0%9A%D0%B0%D0%BA%20%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C%20%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8%20%D1%80%D0%B0%D0%BD%D1%82%D0%B0%D0%B9%D0%BC%D0%B0%20Swift/" aria-current="page">Task Local изнутри. Как читать исходники рантайма Swift<span class="sb-dot" aria-hidden="true"></span></a></div></nav><script>
+    // Pre-paint, runs as soon as the nav is parsed: applies the reader's saved open/closed groups
+    // (the current page's group always stays open), restores the sidebar scroll position from the
+    // previous page and keeps the active item in view. Storage keys are shared with sidebar.ts.
+    (function () {
+      var aside = document.currentScript && document.currentScript.parentElement;
+      if (!aside) return;
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem('idt-nav-groups') || '{}') || {}; } catch (e) {}
+      aside.querySelectorAll('[data-toggle]').forEach(function (t) {
+        var key = t.getAttribute('data-toggle');
+        if (t.hasAttribute('data-current') || !Object.prototype.hasOwnProperty.call(saved, key)) return;
+        var g = document.getElementById(t.getAttribute('aria-controls'));
+        if (!g) return;
+        var open = saved[key] === 1;
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        g.style.display = open ? '' : 'none';
+        if (open) g.removeAttribute('data-closed'); else g.setAttribute('data-closed', '1');
+      });
+      var top = null;
+      try { top = sessionStorage.getItem('idt-nav-scroll'); } catch (e) {}
+      function place() {
+        if (top !== null) aside.scrollTop = Number(top) || 0;
+        var a = aside.querySelector('[aria-current="page"]');
+        if (!a) return;
+        var r = a.getBoundingClientRect(), s = aside.getBoundingClientRect(), pad = 24;
+        if (r.top < s.top + pad || r.bottom > s.bottom - pad) aside.scrollTop += r.top - s.top - (s.height - r.height) / 2;
+      }
+      place();
+      // Row heights change when Geist replaces the fallback font; place again unless the reader scrolled.
+      if (document.fonts && document.fonts.status !== 'loaded') {
+        var placed = aside.scrollTop;
+        document.fonts.ready.then(function () { if (aside.scrollTop === placed) place(); });
+      }
+    })();
+  </script></aside><main class="main" id="main"><article class="page article" data-pagefind-body data-article-id="Разработка с ИИ/Изучение/Middle/1. Task Local изнутри. Как читать исходники рантайма Swift"><div hidden data-pagefind-ignore><span data-pagefind-meta="title">Task Local изнутри. Как читать исходники рантайма Swift</span><span data-pagefind-meta="group">Изучение</span><span data-pagefind-filter="section">Разработка с ИИ</span><span data-pagefind-filter="level">Middle</span></div><header class="article-header"><div class="article-meta" data-reveal data-pagefind-ignore><span class="article-chip"><span class="article-chip__dot" aria-hidden="true"></span>Разработка с ИИ · Изучение</span><span class="article-level" data-level="middle">MIDDLE</span><span class="article-time">45 мин чтения</span></div><h1 class="article-title" data-reveal><span class="article-title__text">Task Local изнутри. Как читать исходники рантайма Swift</span></h1><p class="article-lead" data-reveal>Как с ассистентом в роли проводника дойти от @TaskLocal до C++ рантайма на теге своего компилятора и подтвердить устройство хранилища task-local тестом и замером.</p><p class="article-tags" data-reveal><span class="tag" data-tag="swift" data-pagefind-filter="tag:swift">#swift</span><span class="tag" data-tag="concurrency" data-pagefind-filter="tag:concurrency">#concurrency</span><span class="tag" data-tag="task-local" data-pagefind-filter="tag:task-local">#task-local</span><span class="tag" data-tag="runtime" data-pagefind-filter="tag:runtime">#runtime</span><span class="tag" data-tag="ai" data-pagefind-filter="tag:ai">#ai</span></p></header><script type="module">var e=document.querySelector(`[data-prose]`),t=1500,n=90;e?.querySelectorAll(`:scope > :is(h2, h3, h4, h5, h6)[id]`).forEach(e=>{let r=document.createElement(`a`);r.className=`heading-anchor`,r.href=`#${encodeURIComponent(e.id)}`,r.textContent=`#`,r.setAttribute(`aria-hidden`,`true`),r.tabIndex=-1;let i=0;r.addEventListener(`click`,a=>{a.preventDefault();let o=new URL(location.href);o.hash=e.id,history.replaceState(history.state,``,o),navigator.clipboard?.writeText(o.href).catch(()=>{}),r.setAttribute(`data-copied`,``),clearTimeout(i),i=window.setTimeout(()=>r.removeAttribute(`data-copied`),t);let s=e.getBoundingClientRect().top+window.scrollY-n;window.__idtJumpTo?window.__idtJumpTo(s):window.scrollTo({top:s,behavior:`smooth`})}),e.append(r)});var r=/^O\(([^()]+)\)\*?$/;e?.querySelectorAll(`td`).forEach(e=>{let t=r.exec(e.textContent?.trim()??``);if(!t)return;let n=t[1].replace(/\s+/g,` `).trim();e.dataset.complexity=n===`1`?`const`:n===`log n`?`log`:`other`});</script><div class="prose" data-prose><p>В <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/" class="wikilink">1. Task Local</a> мы разбирали, как объявить task-local значение и привязать его через <code>withValue</code>. В <a href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/" class="wikilink">прошлой статье</a> четвёртый шаг работы с ассистентом предлагал попросить ссылку на proposal, документацию или строку исходников на теге и прочитать источник самим. Здесь вы возьмёте строку исходников и пройдёте этот шаг целиком на одном механизме, от макроса <code>@TaskLocal</code> до функций рантайма на C++.</p>
+<p>Объяснений task-local много, и они расходятся. SE-0311 пишет, что операция <code>async {}</code> (сегодня <code>Task {}</code>) получает копию всех привязок. В сессии WWDC23 о structured concurrency говорят, что рантайм держит прямую ссылку на задачу с нужным ключом. Популярные статьи, например в Hacking with Swift, объясняют, что <code>Task.detached</code> не наследует значения, потому что у неё нет родителя, хотя родителя нет и у <code>Task {}</code>. Какое из этих объяснений верно для компилятора из вашего Xcode и как убедиться в этом самим?</p>
+<p>После статьи вы сможете:</p>
+<ul>
+<li>по выводу <code>xcrun swiftc --version</code> найти тег исходников своего компилятора и сказать, какой код пришёл из SDK, а какой из рантайма ОС;</li>
+<li>пройти от <code>@TaskLocal</code> через <code>@_silgen_name</code>, <code>Builtins.def</code> и <code>GenBuiltin.cpp</code> до функций рантайма на C++ и убедиться, что нужная ветка <code>#if</code> собирается для вашей платформы;</li>
+<li>нарисовать список task-local значений задачи после каждого <code>withValue</code> и объяснить, что получают <code>async let</code>, <code>addTask</code>, <code>Task {}</code> и <code>Task.detached</code>;</li>
+<li>поставить замер, который отличает односвязный список от хеш-таблицы, записав прогноз до запуска;</li>
+<li>запустить тест из <code>test/Concurrency/Runtime</code> без сборки компилятора и прочитать его строки <code>REQUIRES</code> и <code>CHECK</code>.</li>
+</ul>
+<div class="callout" data-callout="warning" data-callout-type="warning" data-tone="amber" role="note"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">!</span><div class="callout__body"><p><strong class="callout__title">Нужно знать, как объявить task-local и чем Task отличается от Task.detached.</strong> Перед чтением полезно освежить API из <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/" class="wikilink">1. Task Local</a>, <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/2.%20Task(Detached)%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/" class="wikilink">2. Task(Detached) - техническое определение</a>, <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/2.%20Task%20Group/" class="wikilink">2. Task Group</a> и <a href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/#%D0%BF%D1%8F%D1%82%D1%8C-%D1%88%D0%B0%D0%B3%D0%BE%D0%B2-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC" class="wikilink">пять шагов работы с ассистентом</a>. Писать на C++ не придётся, но читать будем: указатели, цикл по списку и <code>std::set</code>.</p></div></div>
+<h3 id="где-лежит-код-вашей-версии"><span id="_1" class="legacy-anchor" aria-hidden="true"></span>Где лежит код вашей версии</h3>
+<p>Версию компилятора показывает <code>xcrun swiftc --version</code>:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>swift-driver version: 1.148.6 Apple Swift version 6.3.1 (swiftlang-6.3.1.1.2 clang-2100.0.123.102)</span></span>
+<span class="line"><span>Target: arm64-apple-macosx26.0</span></span></code></pre></div>
+<p>Для <code>Apple Swift version 6.3.1</code> тег в репозитории <a href="https://github.com/swiftlang/swift">swiftlang/swift</a> называется <code>swift-6.3.1-RELEASE</code>. Ссылки и номера строк в статье даны по этому тегу и по <code>swift-6.4.0-RELEASE</code>, а не по <code>main</code>. Все примеры собраны Swift 6.3.1 из Xcode 26.4.1 в режиме Swift 6 и запущены на Mac mini с Apple M4 и macOS 26.3.1. Программы, чей вывод зависит от порядка работы задач, и программы из <a href="#%D0%BB%D0%BE%D0%B2%D1%83%D1%88%D0%BA%D0%B8" class="wikilink">ловушек</a> мы запускали от 10 до 200 раз, и их вывод не менялся.</p>
+<p>Кроме компилятора, версию кода в программе задают SDK и ОС. Тела функций стандартной библиотеки с <code>@_alwaysEmitIntoClient</code>, а в сборке с <code>-O</code> обычно и с <code>@inlinable</code>, компилятор берёт из <code>.swiftinterface</code> в SDK и встраивает в приложение. Вторая строка этого файла называет компилятор, которым он создан:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="shellscript" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SHELL</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-shellscript"><span class="line"><span><span class="tk-fn">head </span><span class="tk-str">-2 "</span>$(<span class="tk-fn">xcrun</span><span class="tk-str"> --sdk iphoneos --show-sdk-path</span>)<span class="tk-str">/usr/lib/swift/_Concurrency.swiftmodule/arm64e-apple-ios.swiftinterface"</span></span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>// swift-interface-format-version: 1.0</span></span>
+<span class="line"><span>// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)</span></span></code></pre></div>
+<p>В iOS 26.4 SDK из Xcode 26.4.1 это компилятор 6.3.0, и встраиваемый из SDK код сверяйте с тегом <code>swift-6.3-RELEASE</code>.</p>
+<p>C++ рантайм <code>libswift_Concurrency</code> приходит из ОС. На Mac системные библиотеки лежат в общем кэше dyld (<a href="https://developer.apple.com/documentation/macos-release-notes/macos-big-sur-11_0_1-release-notes">заметки к macOS Big Sur 11.0.1</a>), и версию рантайма оттуда читает <code>dyld_info</code>:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="shellscript" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SHELL</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-shellscript"><span class="line"><span><span class="tk-fn">dyld_info </span><span class="tk-str">-load_commands /usr/lib/swift/libswift_Concurrency.dylib</span> | <span class="tk-fn">grep </span><span class="tk-str">-A2 LC_SOURCE_VERSION</span></span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>             cmd: LC_SOURCE_VERSION</span></span>
+<span class="line"><span>         cmdsize: 0x10</span></span>
+<span class="line"><span>         version: 6.2.4.1.4</span></span></code></pre></div>
+<p>Номер устроен так же, как <code>swiftlang-6.3.1.1.2</code> у компилятора, поэтому 6.2.4.1.4 означает, что на macOS 26.3.1 работает рантайм Swift 6.2.4.</p>
+<p>На iPhone <code>dyld_info</code> не запустить, и линию рантайма там подсказывает версия ОС по таблице <code>utils/availability-macros.def</code>, где iOS 26.4 стоит у <code>SwiftStdlib 6.3</code> (строка 49). Хранилище task-local в 6.2.4 отличается от 6.3.1 только функцией <code>MarkerItem::create</code>, и поведение всех программ статьи совпало с исходниками 6.3.1.</p>
+<p>Части механизма на теге <code>swift-6.3.1-RELEASE</code> лежат в таких файлах:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Что ищем</th><th>Где на теге</th></tr></thead><tbody><tr><td>Макрос <code>@TaskLocal</code></td><td><code>lib/Macros/Sources/SwiftMacros/TaskLocalMacro.swift</code></td></tr><tr><td>Класс <code>TaskLocal</code>, <code>get()</code>, <code>withValue</code></td><td><code>stdlib/public/Concurrency/TaskLocal.swift</code></td></tr><tr><td>Элементы списка и <code>Storage</code></td><td><code>stdlib/public/Concurrency/TaskLocal.h</code></td></tr><tr><td>Добавление, снятие, поиск, копирование</td><td><code>stdlib/public/Concurrency/TaskLocal.cpp</code></td></tr><tr><td>Создание задач и флаги наследования</td><td><code>Task+init.swift.gyb</code>, <code>TaskGroup+addTask.swift.gyb</code> и <code>Task.cpp</code> в той же папке</td></tr><tr><td>Встроенные функции компилятора</td><td><code>include/swift/AST/Builtins.def</code>, <code>lib/IRGen/GenBuiltin.cpp</code></td></tr><tr><td>Тесты</td><td><code>test/Concurrency/Runtime/async_task_locals_*.swift</code>, <code>test/Concurrency/task_local.swift</code></td></tr></tbody></table>
+<h3 id="от-tasklocal-до-c"><span id="tasklocal-c" class="legacy-anchor" aria-hidden="true"></span>От <code>@TaskLocal</code> до C++</h3>
+<p>Флаг <code>-dump-macro-expansions</code> (через <code>-Xfrontend</code>) показывает, что для <code>enum RequestContext { @TaskLocal static var userID: Int = 0 }</code> макрос создаёт свойство только для чтения <code>get { $userID.get() }</code> и <code>static let $userID: TaskLocal&#x3C;Int> = TaskLocal(wrappedValue: 0)</code>. Адрес объекта <code>TaskLocal</code> в <code>$userID</code> и служит ключом в рантайме:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">stdlib/public/Concurrency/TaskLocal.swift, swift-6.3.1-RELEASE, строки 170-189 и 375-379</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span>  <span class="tk-kw">@_alwaysEmitIntoClient</span></span></span>
+<span class="line"><span>  <span class="tk-kw">var</span> key: <span class="tk-ty">Builtin</span>.<span class="tk-ty">RawPointer</span> {</span></span>
+<span class="line"><span>    unsafe <span class="tk-fn">unsafeBitCast</span>(<span class="tk-kw">self</span>, to: <span class="tk-ty">Builtin</span>.<span class="tk-ty">RawPointer</span>.<span class="tk-kw">self</span>)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  <span class="tk-com">// ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">public func </span><span class="tk-fn">get</span>() -> <span class="tk-ty">Value</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">guard let</span> rawValue = unsafe <span class="tk-fn">_taskLocalValueGet</span>(key: key) <span class="tk-kw">else</span> {</span></span>
+<span class="line"><span>      <span class="tk-kw">return self</span>.defaultValue</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-com">// Take the value; The type should be correct by construction</span></span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> storagePtr =</span></span>
+<span class="line"><span>        unsafe rawValue.<span class="tk-fn">bindMemory</span>(to: <span class="tk-ty">Value</span>.<span class="tk-kw">self</span>, capacity: <span class="tk-num">1</span>)</span></span>
+<span class="line"><span>    <span class="tk-kw">return</span> unsafe <span class="tk-ty">UnsafeMutablePointer</span>&#x3C;<span class="tk-ty">Value</span>>(mutating: storagePtr).pointee</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span><span class="tk-kw">@_silgen_name</span>(<span class="tk-str">"swift_task_localValueGet"</span>)</span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">_taskLocalValueGet</span>(</span></span>
+<span class="line"><span>  key: <span class="tk-ty">Builtin</span>.<span class="tk-ty">RawPointer</span><span class="tk-com">/*Key*/</span></span></span>
+<span class="line"><span>) -> <span class="tk-ty">UnsafeMutableRawPointer</span>? <span class="tk-com">// where Key: TaskLocal</span></span></span></code></pre></div>
+<p><code>@_silgen_name</code> задаёт имя символа. Если у функции нет тела, как у <code>_taskLocalValueGet</code>, тело написано на C++ в рантайме, и его ищем в <code>.cpp</code> той же папки по имени с суффиксом <code>Impl</code>. Так находится <code>swift_task_localValueGetImpl</code> в <code>TaskLocal.cpp</code> (строки 109-128). Пара с <code>Impl</code> есть не у всех функций рантайма, поэтому, если поиск с суффиксом ничего не дал, ищите имя целиком. Такой переход удобно поручить ассистенту, назвав тег в вопросе: «Где на теге swift-6.3.1-RELEASE определена <code>swift_task_localValueGet</code>? Дай путь, функцию и строку».</p>
+<p>Привязка идёт через встроенную функцию компилятора <code>Builtin.addTaskLocalValue</code>, у которой нет исходника на Swift. Её запись <code>BUILTIN_MISC_OPERATION(AddTaskLocalValue, "addTaskLocalValue", ...)</code> лежит в <code>include/swift/AST/Builtins.def</code> (строка 1222). Второй аргумент записи это имя из Swift, а первый называет элемент <code>BuiltinValueKind</code>. По нему в <code>lib/IRGen/GenBuiltin.cpp</code> находится <code>case</code> (строки 1586-1592), который через <code>emitBuiltinTaskLocalValuePush</code> превращает встроенную функцию в вызов <code>swift_task_localValuePush</code> с ключом, значением и метаданными типа значения. В <code>.swiftinterface</code> SDK, как и на теге <code>swift-6.3-RELEASE</code>, тело <code>withValue</code> вызывает <code>Builtin.taskLocalValuePush</code>, которую обрабатывает тот же <code>case</code>. Оба пути целиком:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Чтение <code>RequestContext.userID</code></th><th>Привязка <code>$userID.withValue(1) { ... }</code></th></tr></thead><tbody><tr><td>Swift</td><td><code>get { $userID.get() }</code> из макроса (<code>TaskLocalMacro.swift</code>, 120)</td><td>синхронный <code>withValue</code> сам вызывает <code>Builtin.addTaskLocalValue</code> (<code>TaskLocal.swift</code>, 310-321), асинхронный через <code>withValueImpl</code> (258-271)</td></tr><tr><td>Переход в C++</td><td><code>@_silgen_name("swift_task_localValueGet")</code> (<code>TaskLocal.swift</code>, 375-379)</td><td><code>Builtin.addTaskLocalValue</code> становится вызовом <code>swift_task_localValuePush</code> (<code>GenBuiltin.cpp</code>, 1586-1592)</td></tr><tr><td>Вход в рантайм</td><td><code>swift_task_localValueGetImpl</code> (<code>TaskLocal.cpp</code>, 109-128)</td><td><code>swift_task_localValuePushImpl</code> (<code>TaskLocal.cpp</code>, 84-107)</td></tr><tr><td>Метод задачи</td><td><code>AsyncTask::localValueGet</code> (<code>TaskPrivate.h</code>, 1277-1279)</td><td><code>AsyncTask::localValuePush</code> (<code>TaskPrivate.h</code>, 1271-1275)</td></tr><tr><td>Работа со списком</td><td><code>Storage::getValue</code> (<code>TaskLocal.cpp</code>, 479-497)</td><td><code>Storage::pushValue</code> (<code>TaskLocal.cpp</code>, 420-447)</td></tr><tr><td>Тест</td><td><code>async_task_locals_basic.swift</code>, 158-172</td><td><code>async_task_locals_basic.swift</code>, 96-123</td></tr></tbody></table>
+<p>Метод задачи поиском по одному файлу не найти, потому что его объявление, тело и вызов лежат в трёх разных файлах. Поиск по коду на GitHub работает только по ветке по умолчанию <code>main</code> (<a href="https://docs.github.com/en/search-github/github-code-search/about-github-code-search">документация GitHub</a>), поэтому для поиска по тегу скачайте архив тега и распакуйте только нужные папки:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="shellscript" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SHELL</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-shellscript"><span class="line"><span><span class="tk-fn">curl </span><span class="tk-str">-sL https://github.com/swiftlang/swift/archive/refs/tags/swift-6.3.1-RELEASE.tar.gz</span> | <span class="tk-fn">tar </span><span class="tk-str">-xz --include='*/stdlib/public/Concurrency/*' --include='*/include/swift/ABI/*'</span></span></span>
+<span class="line"><span><span class="tk-fn">grep </span><span class="tk-str">-rn 'localValueGet(' swift-swift-6.3.1-RELEASE</span> | <span class="tk-fn">sort</span></span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>swift-swift-6.3.1-RELEASE/include/swift/ABI/Task.h:514:  OpaqueValue *localValueGet(const HeapObject *key);</span></span>
+<span class="line"><span>swift-swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskLocal.cpp:113:    auto value = task->localValueGet(key);</span></span>
+<span class="line"><span>swift-swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskPrivate.h:1277:inline OpaqueValue *AsyncTask::localValueGet(const HeapObject *key) {</span></span></code></pre></div>
+<h3 id="хранилище-как-один-односвязный-список"><span id="_2" class="legacy-anchor" aria-hidden="true"></span>Хранилище как один односвязный список</h3>
+<h4 id="элементы-и-голова"><span id="_3" class="legacy-anchor" aria-hidden="true"></span>Элементы и голова</h4>
+<div class="code-block" data-code="" data-glow="" data-lang="cpp" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">C++</span><span class="code-block__title">stdlib/public/Concurrency/TaskLocal.h, swift-6.3.1-RELEASE, строки 36-71 и 158-191</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-cpp"><span class="line"><span>  <span class="tk-kw">class </span><span class="tk-ty">Item</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">public</span>:</span></span>
+<span class="line"><span>    <span class="tk-kw">enum class </span><span class="tk-ty">Kind</span> {</span></span>
+<span class="line"><span><span class="tk-com">      /// Regular task local binding.</span></span></span>
+<span class="line"><span>      Value = <span class="tk-num">0</span>,</span></span>
+<span class="line"><span><span class="tk-com">      // ...</span></span></span>
+<span class="line"><span>      ValueInTaskGroupBody = <span class="tk-num">1</span>,</span></span>
+<span class="line"><span><span class="tk-com">      // ...</span></span></span>
+<span class="line"><span>      ParentTaskMarker = <span class="tk-num">2</span>,</span></span>
+<span class="line"><span><span class="tk-com">      // ...</span></span></span>
+<span class="line"><span>      StopLookupMarker = <span class="tk-num">3</span>,</span></span>
+<span class="line"><span>    };</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-kw">private</span>:</span></span>
+<span class="line"><span>    <span class="tk-ty">llvm</span>::<span class="tk-ty">PointerIntPair</span>&#x3C;<span class="tk-ty">Item</span> *, <span class="tk-num">2</span>, <span class="tk-ty">Kind</span>> nextAndKind;</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">class </span><span class="tk-ty">Storage</span> {</span></span>
+<span class="line"><span><span class="tk-com">    // ...</span></span></span>
+<span class="line"><span><span class="tk-com">    /// A stack (single-linked list) of task local values.</span></span></span>
+<span class="line"><span><span class="tk-com">    ///</span></span></span>
+<span class="line"><span><span class="tk-com">    /// Once task local values within this task are traversed, the list continues</span></span></span>
+<span class="line"><span><span class="tk-com">    /// to the "next parent that contributes task local values," or if no such</span></span></span>
+<span class="line"><span><span class="tk-com">    /// parent exists it terminates with null.</span></span></span>
+<span class="line"><span><span class="tk-com">    // ...</span></span></span>
+<span class="line"><span>    <span class="tk-ty">TaskLocal</span>::<span class="tk-ty">Item</span> *head = <span class="tk-kw">nullptr</span>;</span></span></code></pre></div>
+<p><mark>Всё хранилище task-local значений задачи состоит из одного поля <code>head</code>, указателя на первый элемент односвязного списка.</mark> Поле лежит в приватной части задачи (<code>TaskLocal::Storage Local</code> в <code>TaskPrivate.h</code>, строка 812).</p>
+<p>Вид элемента хранится в младших битах указателя на следующий элемент. Элементы выровнены по 8 байт, три младших бита их адреса всегда нулевые, и <code>llvm::PointerIntPair&#x3C;Item *, 2, Kind></code> кладёт два бита вида в биты 1 и 2. Видов четыре:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Вид</th><th>Кто создаёт</th><th>Что значит</th></tr></thead><tbody><tr><td><code>Value</code></td><td><code>withValue</code></td><td>обычная привязка: ключ, метаданные типа и само значение</td></tr><tr><td><code>ValueInTaskGroupBody</code></td><td><code>withValue</code> в теле <code>withTaskGroup</code></td><td>дочерняя задача группы обязана такую привязку скопировать</td></tr><tr><td><code>ParentTaskMarker</code></td><td>создание дочерней задачи</td><td>собственные элементы задачи кончились, <code>next</code> указывает в список предка</td></tr><tr><td><code>StopLookupMarker</code></td><td>изолированный <code>deinit</code> (SE-0371)</td><td>всё, что ниже, при поиске не видно</td></tr></tbody></table>
+<p>У элемента-значения после <code>nextAndKind</code> идут два поля: <code>key</code> с адресом объекта <code>TaskLocal</code> и <code>valueType</code> с метаданными типа значения (<code>TaskLocal.h</code>, строки 97-100). Само значение лежит сразу за ними.</p>
+<h4 id="добавление-снятие-и-поиск"><span id="_4" class="legacy-anchor" aria-hidden="true"></span>Добавление, снятие и поиск</h4>
+<div class="code-block" data-code="" data-glow="" data-lang="cpp" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">C++</span><span class="code-block__title">stdlib/public/Concurrency/TaskLocal.cpp, swift-6.3.1-RELEASE, строки 420-497</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-cpp"><span class="line"><span><span class="tk-ty">void TaskLocal</span>::<span class="tk-ty">Storage</span>::<span class="tk-fn">pushValue</span>(<span class="tk-ty">AsyncTask</span> *task,</span></span>
+<span class="line"><span>                                   <span class="tk-kw">const </span><span class="tk-ty">HeapObject</span> *key,</span></span>
+<span class="line"><span><span class="tk-com">                                   /* +1 */ </span><span class="tk-ty">OpaqueValue</span> *value,</span></span>
+<span class="line"><span>                                   <span class="tk-kw">const </span><span class="tk-ty">Metadata</span> *valueType) {</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  <span class="tk-ty">bool</span> inTaskGroupBody = <span class="tk-fn">swift_task_hasTaskGroupStatusRecord</span>();</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-ty">TaskLocal</span>::<span class="tk-ty">ValueItem</span> *item =</span></span>
+<span class="line"><span>      <span class="tk-ty">ValueItem</span>::<span class="tk-fn">create</span>(task, key, valueType, inTaskGroupBody);</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  valueType-><span class="tk-fn">vw_initializeWithTake</span>(item-><span class="tk-fn">getStoragePtr</span>(), value);</span></span>
+<span class="line"><span>  head = item;</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-ty">bool TaskLocal</span>::<span class="tk-ty">Storage</span>::<span class="tk-fn">popValue</span>(<span class="tk-ty">AsyncTask</span> *task) {</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  <span class="tk-ty">auto</span> old = head;</span></span>
+<span class="line"><span>  head = head-><span class="tk-fn">getNext</span>();</span></span>
+<span class="line"><span>  old-><span class="tk-fn">destroy</span>(task);</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span><span class="tk-ty">OpaqueValue</span>* <span class="tk-ty">TaskLocal</span>::<span class="tk-ty">Storage</span>::<span class="tk-fn">getValue</span>(<span class="tk-ty">AsyncTask</span> *task,</span></span>
+<span class="line"><span>                                          <span class="tk-kw">const </span><span class="tk-ty">HeapObject</span> *key) {</span></span>
+<span class="line"><span>  <span class="tk-fn">assert</span>(key &#x26;&#x26; <span class="tk-str">"TaskLocal key must not be null."</span>);</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-ty">auto</span> item = head;</span></span>
+<span class="line"><span>  <span class="tk-kw">while</span> (item) {</span></span>
+<span class="line"><span>    <span class="tk-kw">if</span> (<span class="tk-ty">auto</span> valueItem = <span class="tk-fn">dyn_cast</span>&#x3C;<span class="tk-ty">ValueItem</span>>(item)) {</span></span>
+<span class="line"><span>      <span class="tk-kw">if</span> (valueItem->key == key) {</span></span>
+<span class="line"><span>        <span class="tk-kw">return</span> valueItem-><span class="tk-fn">getStoragePtr</span>();</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    } <span class="tk-kw">else if</span> (item-><span class="tk-fn">getKind</span>() == <span class="tk-ty">Item</span>::<span class="tk-ty">Kind</span>::StopLookupMarker) {</span></span>
+<span class="line"><span>      <span class="tk-kw">break</span>;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    item = item-><span class="tk-fn">getNext</span>();</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-kw">return nullptr</span>;</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p><code>ValueItem::create</code> записывает в <code>next</code> нового элемента текущую голову (строки 266-267) и берёт память из аллокатора задачи, а без задачи из <code>malloc</code> (строки 269-271). <code>popValue</code> сдвигает голову и уничтожает старый элемент. В элемент попадает копия значения, которую делает сам <code>withValue</code> (комментарий в <code>TaskLocal.swift</code>, строки 243-248), и для класса это retain, который держит объект до конца области.</p>
+<p>Поиск идёт от головы к первому элементу с тем же ключом. <code>dyn_cast&#x3C;ValueItem></code> подходит обоим видам значений, а маркер родителя не обрабатывается, и обход продолжается по элементам предка. Остановить поиск могут только <code>StopLookupMarker</code> и конец списка, и тогда <code>get()</code> отдаёт значение по умолчанию из самого объекта <code>TaskLocal</code> (<code>TaskLocal.swift</code>, строки 164-168 и 181-183).</p>
+<p>Отсюда цена чтения. Она растёт с числом элементов до первого совпадения, а ключ, который нигде не привязан, проходит весь видимый список.</p>
+<p>Без задачи, когда <code>swift_task_getCurrent()</code> возвращает <code>nullptr</code>, такое же хранилище живёт в thread-local переменной потока (<code>TaskLocal.cpp</code>, строки 94-106 и 137-145).</p>
+<h4 id="трасса-по-шагам"><span id="_5" class="legacy-anchor" aria-hidden="true"></span>Трасса по шагам</h4>
+<p>Возьмём три вложенные привязки двух ключей:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">ListDump.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">enum </span><span class="tk-ty">RequestContext</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">@TaskLocal static var</span> userID: <span class="tk-ty">Int</span> = <span class="tk-num">0</span></span></span>
+<span class="line"><span>  <span class="tk-kw">@TaskLocal static var</span> debugMode: <span class="tk-ty">Bool</span> = <span class="tk-kw">false</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">log</span>(_ step: <span class="tk-ty">String</span>) {</span></span>
+<span class="line"><span>  <span class="tk-fn">print</span>(<span class="tk-str">"\(</span>step<span class="tk-str">): userID=\(</span><span class="tk-ty">RequestContext</span>.userID<span class="tk-str">) debugMode=\(</span><span class="tk-ty">RequestContext</span>.debugMode<span class="tk-str">)"</span>)</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span>    <span class="tk-fn">log</span>(<span class="tk-str">"до привязок"</span>)</span></span>
+<span class="line"><span>    <span class="tk-kw">await </span><span class="tk-ty">RequestContext</span>.$userID.<span class="tk-fn">withValue</span>(<span class="tk-num">1</span>) {</span></span>
+<span class="line"><span>      <span class="tk-kw">await </span><span class="tk-ty">RequestContext</span>.$debugMode.<span class="tk-fn">withValue</span>(<span class="tk-kw">true</span>) {</span></span>
+<span class="line"><span>        <span class="tk-kw">await </span><span class="tk-ty">RequestContext</span>.$userID.<span class="tk-fn">withValue</span>(<span class="tk-num">2</span>) {</span></span>
+<span class="line"><span>          <span class="tk-fn">log</span>(<span class="tk-str">"три привязки"</span>)</span></span>
+<span class="line"><span>          <span class="tk-fn">dump</span>(<span class="tk-str">"родитель"</span>)</span></span>
+<span class="line"><span>          <span class="tk-kw">async let</span> child: <span class="tk-ty">Void</span> = <span class="tk-fn">dump</span>(<span class="tk-str">"async let"</span>)</span></span>
+<span class="line"><span>          <span class="tk-kw">await</span> child</span></span>
+<span class="line"><span>          <span class="tk-kw">await </span><span class="tk-ty">Task</span> { <span class="tk-fn">dump</span>(<span class="tk-str">"Task {}"</span>) }.value</span></span>
+<span class="line"><span>          <span class="tk-kw">await </span><span class="tk-ty">Task</span>.<span class="tk-fn">detached</span> { <span class="tk-fn">dump</span>(<span class="tk-str">"Task.detached"</span>) }.value</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        <span class="tk-fn">log</span>(<span class="tk-str">"снята userID=2"</span>)</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    <span class="tk-fn">log</span>(<span class="tk-str">"всё снято"</span>)</span></span></code></pre></div>
+<p>Обозначим привязки U1 (<code>userID=1</code>), D (<code>debugMode=true</code>) и U2 (<code>userID=2</code>):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Шаг</th><th>Что происходит</th><th>Код рантайма (<code>TaskLocal.cpp</code>)</th><th>Список от <code>head</code></th><th>Чтение</th></tr></thead><tbody><tr><td>0</td><td>до привязок</td><td><code>head == nullptr</code></td><td>пусто</td><td>оба ключа дают значение по умолчанию</td></tr><tr><td>1</td><td><code>withValue(1)</code> для <code>userID</code></td><td><code>pushValue</code>: новый элемент, его <code>next</code> равен старой голове (420-447, 262-273)</td><td>U1</td><td></td></tr><tr><td>2</td><td><code>withValue(true)</code> для <code>debugMode</code></td><td>то же</td><td>D → U1</td><td></td></tr><tr><td>3</td><td><code>withValue(2)</code> для <code>userID</code></td><td>то же, U1 остаётся в списке</td><td>U2 → D → U1</td><td><code>userID</code>: 1 шаг, 2; <code>debugMode</code>: 2 шага, true; непривязанный ключ: 3 шага до конца</td></tr><tr><td>4</td><td>выход из <code>withValue(2)</code></td><td><code>popValue</code>: голова сдвигается, U2 уничтожается (449-462)</td><td>D → U1</td><td><code>userID</code> снова 1</td></tr><tr><td>5</td><td>выход из <code>withValue(true)</code></td><td><code>popValue</code></td><td>U1</td><td><code>debugMode</code> снова false</td></tr><tr><td>6</td><td>выход из <code>withValue(1)</code></td><td><code>popValue</code></td><td>пусто</td><td>значения по умолчанию</td></tr></tbody></table>
+<p>Чтобы увидеть список в памяти, мы написали отладочную функцию <code>dump</code>. Она идёт по нему, как <code>getValue</code>, и печатает вид и адрес каждого элемента. Смещение <code>head</code> в памяти задачи находит <code>findHeadOffset</code>: она привязывает служебный ключ <code>Probe.$marker</code> и ищет слово, которое стало указателем на его элемент.</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">ListDump.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">currentTask</span>() -> <span class="tk-ty">UnsafeRawPointer</span>? {</span></span>
+<span class="line"><span>  <span class="tk-fn">withUnsafeCurrentTask</span> { task <span class="tk-kw">in</span> task.<span class="tk-fn">map</span> { <span class="tk-fn">unsafeBitCast</span>(<span class="tk-kw">$0</span>, to: <span class="tk-ty">UnsafeRawPointer</span>.<span class="tk-kw">self</span>) } }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">findHeadOffset</span>() <span class="tk-kw">async</span> -> <span class="tk-ty">Int</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">await </span><span class="tk-ty">Task</span>.<span class="tk-fn">detached</span> { () -> <span class="tk-ty">Int </span><span class="tk-kw">in</span></span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> task = <span class="tk-fn">currentTask</span>()!</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> before = (<span class="tk-num">0</span>..&#x3C;<span class="tk-num">48</span>).<span class="tk-fn">map</span> { task.<span class="tk-fn">load</span>(fromByteOffset: <span class="tk-kw">$0</span> * <span class="tk-num">8</span>, as: <span class="tk-ty">UInt</span>.<span class="tk-kw">self</span>) }</span></span>
+<span class="line"><span>    <span class="tk-kw">return </span><span class="tk-ty">Probe</span>.$marker.<span class="tk-fn">withValue</span>(<span class="tk-num">0x5EED</span>) { () -> <span class="tk-ty">Int </span><span class="tk-kw">in</span></span></span>
+<span class="line"><span>      <span class="tk-kw">for</span> i <span class="tk-kw">in </span><span class="tk-num">0</span>..&#x3C;<span class="tk-num">48 </span><span class="tk-kw">where</span> before[i] == <span class="tk-num">0</span> {</span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> word = task.<span class="tk-fn">load</span>(fromByteOffset: i * <span class="tk-num">8</span>, as: <span class="tk-ty">UInt</span>.<span class="tk-kw">self</span>)</span></span>
+<span class="line"><span>        <span class="tk-kw">guard</span> word > <span class="tk-num">0x1_0000_0000</span>, word % <span class="tk-num">8</span> == <span class="tk-num">0</span>, <span class="tk-kw">let</span> item = <span class="tk-ty">UnsafeRawPointer</span>(bitPattern: word) <span class="tk-kw">else</span> { <span class="tk-kw">continue</span> }</span></span>
+<span class="line"><span>        <span class="tk-kw">if</span> item.<span class="tk-fn">load</span>(fromByteOffset: <span class="tk-num">8</span>, as: <span class="tk-ty">UInt</span>.<span class="tk-kw">self</span>) == <span class="tk-fn">address</span>(<span class="tk-ty">Probe</span>.$marker),</span></span>
+<span class="line"><span>           item.<span class="tk-fn">load</span>(fromByteOffset: <span class="tk-num">24</span>, as: <span class="tk-ty">Int</span>.<span class="tk-kw">self</span>) == <span class="tk-num">0x5EED</span> {</span></span>
+<span class="line"><span>          <span class="tk-kw">return</span> i * <span class="tk-num">8</span></span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>      <span class="tk-kw">return </span><span class="tk-num">-1</span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }.value</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">dump</span>(_ label: <span class="tk-ty">String</span>) {</span></span>
+<span class="line"><span>  <span class="tk-kw">guard let</span> task = <span class="tk-fn">currentTask</span>() <span class="tk-kw">else</span> { <span class="tk-kw">return</span> }</span></span>
+<span class="line"><span>  <span class="tk-kw">var</span> item = task.<span class="tk-fn">load</span>(fromByteOffset: headOffset, as: <span class="tk-ty">UInt</span>.<span class="tk-kw">self</span>)</span></span>
+<span class="line"><span>  <span class="tk-fn">print</span>(<span class="tk-str">"== \(</span>label<span class="tk-str">)"</span>)</span></span>
+<span class="line"><span>  <span class="tk-kw">while</span> item != <span class="tk-num">0</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> p = <span class="tk-ty">UnsafeRawPointer</span>(bitPattern: item)!</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> word0 = p.<span class="tk-fn">load</span>(as: <span class="tk-ty">UInt</span>.<span class="tk-kw">self</span>)</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> kind = <span class="tk-ty">Int</span>((word0 >> <span class="tk-num">1</span>) &#x26; <span class="tk-num">3</span>)   <span class="tk-com">// вид в битах 1-2</span></span></span>
+<span class="line"><span>    <span class="tk-kw">var</span> text = kinds[kind]</span></span>
+<span class="line"><span>    <span class="tk-com">// ...</span></span></span>
+<span class="line"><span>    <span class="tk-fn">print</span>(<span class="tk-str">"   \(</span>text<span class="tk-str">)  [биты вида: \(</span>word0 &#x26; <span class="tk-num">7</span><span class="tk-str">), адрес: 0x\(</span><span class="tk-ty">String</span>(item, radix: <span class="tk-num">16</span>)<span class="tk-str">)]"</span>)</span></span>
+<span class="line"><span>    item = word0 &#x26; ~<span class="tk-ty">UInt</span>(<span class="tk-num">7</span>)               <span class="tk-com">// следующий элемент</span></span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  <span class="tk-fn">print</span>(<span class="tk-str">"   конец списка"</span>)</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Программа собрана с <code>-Onone</code> и опирается на непубличную раскладку <code>ValueItem</code> из <code>TaskLocal.h</code>, поэтому годится только для изучения. От запуска к запуску адреса в её выводе меняются, а совпадения адресов между списками остаются. Для трёх привязок она печатает:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>до привязок: userID=0 debugMode=false</span></span>
+<span class="line"><span>три привязки: userID=2 debugMode=true</span></span>
+<span class="line"><span>== родитель</span></span>
+<span class="line"><span>   Value userID=2  [биты вида: 0, адрес: 0x101587a50]</span></span>
+<span class="line"><span>   Value debugMode=true  [биты вида: 0, адрес: 0x101587870]</span></span>
+<span class="line"><span>   Value userID=1  [биты вида: 0, адрес: 0x101587000]</span></span>
+<span class="line"><span>   конец списка</span></span>
+<span class="line"><span>== async let</span></span>
+<span class="line"><span>   ParentTaskMarker  [биты вида: 4, адрес: 0x101589a60]</span></span>
+<span class="line"><span>   Value userID=2  [биты вида: 0, адрес: 0x101587a50]</span></span>
+<span class="line"><span>   Value debugMode=true  [биты вида: 0, адрес: 0x101587870]</span></span>
+<span class="line"><span>   Value userID=1  [биты вида: 0, адрес: 0x101587000]</span></span>
+<span class="line"><span>   конец списка</span></span>
+<span class="line"><span>== Task {}</span></span>
+<span class="line"><span>   Value debugMode=true  [биты вида: 0, адрес: 0x101589e20]</span></span>
+<span class="line"><span>   Value userID=2  [биты вида: 0, адрес: 0x101589df0]</span></span>
+<span class="line"><span>   конец списка</span></span>
+<span class="line"><span>== Task.detached</span></span>
+<span class="line"><span>   конец списка</span></span>
+<span class="line"><span>снята userID=2: userID=1 debugMode=true</span></span>
+<span class="line"><span>всё снято: userID=0 debugMode=false</span></span></code></pre></div>
+<p>У родителя три элемента в том порядке, который предсказывает таблица. Старое значение <code>userID=1</code> никуда не делось, его просто не видно, пока над ним лежит <code>userID=2</code>. Но почему у <code>async let</code> адреса те же, что у родителя, у <code>Task {}</code> новые, а у <code>Task.detached</code> список пуст?</p>
+<h3 id="что-получает-новая-задача"><span id="_6" class="legacy-anchor" aria-hidden="true"></span>Что получает новая задача</h3>
+<p>Дочерними мы, как и рантайм, называем только задачи <code>async let</code> и группы, у которых при создании стоит флаг <code>isChildTask</code>. <code>Task {}</code> документация стандартной библиотеки называет неструктурированной задачей верхнего уровня (<code>Task+init.swift.gyb</code>, строка 246).</p>
+<p class="embeds"><img src="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Middle/Attachments/task-local-sources-lists.png" alt="Списки задач после трёх привязок: async let ссылается на память родителя, Task {} получает копии, у Task.detached список пуст" class="embed embed--image" width="2080" height="1120" loading="eager" decoding="async"></p>
+<h4 id="флаги-при-создании"><span id="_7" class="legacy-anchor" aria-hidden="true"></span>Флаги при создании</h4>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">stdlib/public/Concurrency/Task+init.swift.gyb, swift-6.3.1-RELEASE, строки 294-297</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span>    <span class="tk-kw">let</span> flags = <span class="tk-fn">taskCreateFlags</span>(</span></span>
+<span class="line"><span>      priority: priority,</span></span>
+<span class="line"><span>      isChildTask: <span class="tk-kw">false</span>,</span></span>
+<span class="line"><span>      copyTaskLocals: ${'<span class="tk-kw">true</span>' <span class="tk-kw">if</span> not <span class="tk-ty">IS_DETACHED </span><span class="tk-kw">else</span> '<span class="tk-kw">false </span><span class="tk-com">/* detached */</span>'},</span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">stdlib/public/Concurrency/TaskGroup+addTask.swift.gyb, swift-6.3.1-RELEASE, строки 267-270</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span>    <span class="tk-kw">let</span> flags = <span class="tk-fn">taskCreateFlags</span>(</span></span>
+<span class="line"><span>      priority: ${'priority' <span class="tk-kw">if </span><span class="tk-ty">HAS_TASK_PRIORITY </span><span class="tk-kw">else</span> '<span class="tk-kw">nil</span>'},</span></span>
+<span class="line"><span>      isChildTask: <span class="tk-kw">true</span>,</span></span>
+<span class="line"><span>      copyTaskLocals: <span class="tk-kw">false</span>,</span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="cpp" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">C++</span><span class="code-block__title">stdlib/public/Concurrency/Task.cpp, swift-6.3.1-RELEASE, строки 677-679, 1106-1134, 1159-1162</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-cpp"><span class="line"><span><span class="tk-kw">static inline </span><span class="tk-ty">bool </span><span class="tk-fn">taskIsDetached</span>(<span class="tk-ty">TaskCreateFlags</span> createFlags, <span class="tk-ty">JobFlags</span> jobFlags) {</span></span>
+<span class="line"><span>  <span class="tk-kw">return </span><span class="tk-fn">taskIsUnstructured</span>(createFlags, jobFlags) &#x26;&#x26; !createFlags.<span class="tk-fn">copyTaskLocals</span>();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">if</span> (parent) {</span></span>
+<span class="line"><span><span class="tk-com">    // ...</span></span></span>
+<span class="line"><span>    task-><span class="tk-fn">_private</span>().Local.<span class="tk-fn">initializeLinkParent</span>(task, parent);</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">if</span> (taskCreateFlags.<span class="tk-fn">copyTaskLocals</span>()) {</span></span>
+<span class="line"><span>    <span class="tk-fn">swift_task_localsCopyTo</span>(task);</span></span>
+<span class="line"><span>  }</span></span></code></pre></div>
+<p>Из шаблона <code>.gyb</code> генерируются и <code>Task.init</code>, и <code>Task.detached</code>, а значение флага зависит от имени метода (<code>IS_DETACHED</code>, строка 143). Строки 294-297 стоят в ветке <code>#else</code> (строка 232), которая собирается для Apple-платформ, а такой же текст в ветке <code>#elseif $Embedded</code> (строка 203) в ваше приложение не попадает. Прежде чем ссылаться на строку, поднимитесь до ближайшей директивы условной компиляции и проверьте, что ветка собирается для вашей платформы.</p>
+<p>Родитель есть только у дочерней задачи (<code>Task.cpp</code>, строка 824), и только для неё рантайм вызывает <code>initializeLinkParent</code>. Флаг копирования не ставят ни <code>addTask</code>, ни <code>async let</code> (<code>AsyncLet.cpp</code>, строки 192-198).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Как создана</th><th>Что делает рантайм</th><th>Список новой задачи</th></tr></thead><tbody><tr><td><code>async let</code>, <code>group.addTask</code></td><td><code>initializeLinkParent</code></td><td>маркер, который указывает на голову списка родителя</td></tr><tr><td><code>Task {}</code>, <code>Task.immediate</code> (SE-0472)</td><td><code>swift_task_localsCopyTo</code>, затем <code>Storage::copyTo</code></td><td>копия последней привязки каждого ключа</td></tr><tr><td><code>Task.detached</code>, <code>Task.immediateDetached</code></td><td>ничего</td><td>пустой</td></tr></tbody></table>
+<h4 id="async-let-и-addtask-ссылаются-на-список-родителя"><span id="async-let-addtask" class="legacy-anchor" aria-hidden="true"></span><code>async let</code> и <code>addTask</code> ссылаются на список родителя</h4>
+<div class="code-block" data-code="" data-glow="" data-lang="cpp" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">C++</span><span class="code-block__title">stdlib/public/Concurrency/TaskLocal.cpp, swift-6.3.1-RELEASE, строки 172-248</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-cpp"><span class="line"><span><span class="tk-ty">void TaskLocal</span>::<span class="tk-ty">Storage</span>::<span class="tk-fn">initializeLinkParent</span>(<span class="tk-ty">AsyncTask</span>* task,</span></span>
+<span class="line"><span>                                              <span class="tk-ty">AsyncTask</span>* parent) {</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  <span class="tk-ty">auto</span> item = parent-><span class="tk-fn">_private</span>().Local.head;</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-com">  // Don't create parent task marker if there are no values at all.</span></span></span>
+<span class="line"><span>  <span class="tk-kw">if</span> (!item)</span></span>
+<span class="line"><span>    <span class="tk-kw">return</span>;</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-ty">auto</span> tail = <span class="tk-ty">TaskLocal</span>::<span class="tk-ty">MarkerItem</span>::<span class="tk-fn">createParentTaskMarker</span>(task);</span></span>
+<span class="line"><span>  head = tail;</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">while</span> (item &#x26;&#x26; item-><span class="tk-fn">getKind</span>() == <span class="tk-ty">Item</span>::<span class="tk-ty">Kind</span>::ValueInTaskGroupBody) {</span></span>
+<span class="line"><span><span class="tk-com">    // ...</span></span></span>
+<span class="line"><span>  }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-kw">if</span> (item &#x26;&#x26; item-><span class="tk-fn">getKind</span>() == <span class="tk-ty">Item</span>::<span class="tk-ty">Kind</span>::ParentTaskMarker) {</span></span>
+<span class="line"><span><span class="tk-com">    // ...</span></span></span>
+<span class="line"><span>    item = item-><span class="tk-fn">getNext</span>();</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  tail-><span class="tk-fn">setNext</span>(item);</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>Кроме привязок в теле группы (о них ниже), дочерняя задача ничего не копирует. Рантайм создаёт в её памяти один <code>ParentTaskMarker</code> и направляет его на текущую голову списка родителя. Так можно, потому что дочерняя задача гарантированно завершается раньше, чем родитель снимет свои элементы (комментарий в <code>TaskLocal.h</code>, строки 184-190). В выводе <code>dump</code> у <code>async let</code> первым идёт маркер с битами 4 (вид 2, сдвинутый на один бит), за ним три элемента родителя с теми же адресами.</p>
+<p>Из этого же следует требование <code>Value: Sendable</code> в объявлении <code>TaskLocal</code> (<code>TaskLocal.swift</code>, строка 163), ведь дочерние задачи читают одно и то же значение из памяти родителя, иногда одновременно (SE-0311, раздел «Reading task-local values»).</p>
+<p>Если у родителя есть только собственный маркер, дочерняя задача перешагивает через него к ближайшему предку со значениями (строки 229-235). SE-0311 описывает эту оптимизацию в разделе «Reading task-local values: implementation details», а в сессии WWDC23 её называют прямой ссылкой на задачу с нужным ключом. В коде маркер указывает на голову списка предка, и ключ дальше ищется обычным обходом.</p>
+<h4 id="task--копирует-последнюю-привязку-каждого-ключа"><span id="task" class="legacy-anchor" aria-hidden="true"></span><code>Task {}</code> копирует последнюю привязку каждого ключа</h4>
+<div class="code-block" data-code="" data-glow="" data-lang="cpp" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">C++</span><span class="code-block__title">stdlib/public/Concurrency/TaskLocal.cpp, swift-6.3.1-RELEASE, строки 499-531</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-cpp"><span class="line"><span><span class="tk-ty">void TaskLocal</span>::<span class="tk-ty">Storage</span>::<span class="tk-fn">copyTo</span>(<span class="tk-ty">AsyncTask</span> *target) {</span></span>
+<span class="line"><span><span class="tk-com">  // ...</span></span></span>
+<span class="line"><span>  <span class="tk-ty">std</span>::set&#x3C;<span class="tk-kw">const</span> HeapObject *,</span></span>
+<span class="line"><span>           <span class="tk-ty">std</span>::less&#x3C;<span class="tk-kw">const</span> HeapObject *>,</span></span>
+<span class="line"><span>           <span class="tk-ty">swift</span>::cxx_allocator&#x3C;<span class="tk-kw">const</span> HeapObject *>> copied = {};</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>  <span class="tk-ty">auto</span> item = head;</span></span>
+<span class="line"><span>  <span class="tk-kw">while</span> (item) {</span></span>
+<span class="line"><span>    <span class="tk-kw">if</span> (<span class="tk-ty">auto</span> valueItem = <span class="tk-fn">dyn_cast</span>&#x3C;<span class="tk-ty">ValueItem</span>>(item)) {</span></span>
+<span class="line"><span><span class="tk-com">      // we only have to copy an item if it is the most recent binding of a key.</span></span></span>
+<span class="line"><span><span class="tk-com">      // i.e. if we've already seen an item for this key, we can skip it.</span></span></span>
+<span class="line"><span>      <span class="tk-kw">if</span> (copied.<span class="tk-fn">emplace</span>(valueItem->key).second) {</span></span>
+<span class="line"><span>        valueItem-><span class="tk-fn">copyTo</span>(target);</span></span>
+<span class="line"><span>      } <span class="tk-kw">else</span> {</span></span>
+<span class="line"><span><span class="tk-com">        // ...</span></span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    } <span class="tk-kw">else if</span> (item-><span class="tk-fn">getKind</span>() == <span class="tk-ty">Item</span>::<span class="tk-ty">Kind</span>::StopLookupMarker) {</span></span>
+<span class="line"><span>      <span class="tk-kw">break</span>;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    item = item-><span class="tk-fn">getNext</span>();</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p><code>copyTo</code> идёт от головы списка через маркеры родителей и копирует первое встреченное, то есть самое свежее, значение каждого ключа, а скопированные ключи запоминает в <code>std::set</code>. Каждая копия встаёт в голову списка новой задачи (<code>ValueItem::copyTo</code>, строки 275-286), поэтому в выводе <code>dump</code> у <code>Task {}</code> сначала идёт <code>debugMode</code>, а за ним <code>userID=2</code>. Адреса у копий новые, а <code>userID=1</code> в список не попал.</p>
+<p>Комментарий к <code>copyTo</code> в <code>TaskLocal.h</code> (строки 217-226), как и SE-0311, говорит о копии всех привязок и уточняет, что ради оптимизации копируется только последняя привязка ключа. Копию делает <code>vw_initializeWithCopy</code> (<code>TaskLocal.cpp</code>, строка 280), и для класса это ещё одна сильная ссылка. Чтением копию всех привязок от копии последней не отличить, ведь поиск всё равно находит последнюю. Их различает время жизни объектов:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">CopyLatest.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-com">// Task {} копирует только последнюю привязку ключа</span></span></span>
+<span class="line"><span><span class="tk-kw">final class </span><span class="tk-ty">Session</span>: <span class="tk-ty">Sendable </span>{</span></span>
+<span class="line"><span>  <span class="tk-kw">let</span> name: <span class="tk-ty">String</span></span></span>
+<span class="line"><span>  <span class="tk-kw">init</span>(_ name: <span class="tk-ty">String</span>) { <span class="tk-kw">self</span>.name = name }</span></span>
+<span class="line"><span>  <span class="tk-kw">deinit</span> { <span class="tk-fn">print</span>(<span class="tk-str">"deinit"</span>, name) }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">enum </span><span class="tk-ty">RequestContext</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">@TaskLocal static var</span> session: <span class="tk-ty">Session</span>?</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@main</span></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">CopyLatest</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">static func </span><span class="tk-fn">main</span>() <span class="tk-kw">async</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> (gate, <span class="tk-kw">open</span>) = <span class="tk-ty">AsyncStream</span>&#x3C;<span class="tk-ty">Void</span>>.<span class="tk-fn">makeStream</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> task = <span class="tk-ty">RequestContext</span>.$session.<span class="tk-fn">withValue</span>(<span class="tk-ty">Session</span>(<span class="tk-str">"A"</span>)) {</span></span>
+<span class="line"><span>      <span class="tk-ty">RequestContext</span>.$session.<span class="tk-fn">withValue</span>(<span class="tk-ty">Session</span>(<span class="tk-str">"B"</span>)) {</span></span>
+<span class="line"><span>        <span class="tk-ty">Task</span> {</span></span>
+<span class="line"><span>          <span class="tk-kw">for await</span> _ <span class="tk-kw">in</span> gate {}  <span class="tk-com">// ждём, пока main закроет обе области</span></span></span>
+<span class="line"><span>          <span class="tk-fn">print</span>(<span class="tk-str">"задача видит"</span>, <span class="tk-ty">RequestContext</span>.session?.name ?? <span class="tk-str">"nil"</span>)</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    <span class="tk-fn">print</span>(<span class="tk-str">"обе области withValue закрыты"</span>)</span></span>
+<span class="line"><span>    <span class="tk-kw">open</span>.<span class="tk-fn">finish</span>()</span></span>
+<span class="line"><span>    <span class="tk-kw">await</span> task.value</span></span>
+<span class="line"><span>    <span class="tk-fn">print</span>(<span class="tk-str">"задача завершилась"</span>)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>deinit A</span></span>
+<span class="line"><span>обе области withValue закрыты</span></span>
+<span class="line"><span>задача видит B</span></span>
+<span class="line"><span>deinit B</span></span>
+<span class="line"><span>задача завершилась</span></span></code></pre></div>
+<p><code>A</code> освобождается при выходе из внешней области, хотя задача ещё жива, потому что копии <code>A</code> у неё нет. <code>B</code> живёт до конца задачи, потому что ссылку из копии рантайм отпускает, только когда уничтожает элементы завершившейся задачи (<code>TaskPrivate.h</code>, строки 895-898).</p>
+<h4 id="у-taskdetached-список-пуст"><span id="taskdetached" class="legacy-anchor" aria-hidden="true"></span>У <code>Task.detached</code> список пуст</h4>
+<p>Для <code>Task.detached</code> рантайм не вызывает ни <code>initializeLinkParent</code>, ни <code>copyTo</code>. Для task-local значений от <code>Task {}</code>, у которой родителя тоже нет, её отличает только флаг <code>copyTaskLocals</code>.</p>
+<h4 id="привязка-в-теле-группы"><span id="_8" class="legacy-anchor" aria-hidden="true"></span>Привязка в теле группы</h4>
+<p>SE-0311 описывает <code>withValue</code> прямо вокруг <code>group.addTask</code> как ошибку, которая роняет программу, потому что группа живёт дольше области <code>withValue</code> и дочерняя задача могла бы прочитать снятый элемент. Рантайм Swift 6.0 (iOS 18 и macOS 15, <code>utils/availability-macros.def</code>, строка 46) такие привязки вместо этого копирует (<a href="https://github.com/swiftlang/swift/pull/73978">PR #73978</a>). На теге 6.3.1 <code>pushValue</code> помечает элемент видом <code>ValueInTaskGroupBody</code>, если у задачи есть запись группы (<code>TaskLocal.cpp</code>, строка 438), а <code>initializeLinkParent</code> копирует в дочернюю задачу подряд идущие элементы этого вида из головы списка родителя (строки 213-227).</p>
+<p>Вторая часть <code>ListDump.swift</code> работает с группой. Внутри <code>withTaskGroup</code> идут три вложенные привязки (<code>userID=30</code>, <code>debugMode=true</code>, <code>userID=31</code>) поверх <code>userID=10</code>, привязанного до группы, а <code>addTask</code> с вызовом <code>dump</code> стоит в самой внутренней области. Вывод такой:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>== родитель в теле группы</span></span>
+<span class="line"><span>   ValueInTaskGroupBody userID=31  [биты вида: 2, адрес: 0x101587990]</span></span>
+<span class="line"><span>   ValueInTaskGroupBody debugMode=true  [биты вида: 2, адрес: 0x101587960]</span></span>
+<span class="line"><span>   ValueInTaskGroupBody userID=30  [биты вида: 2, адрес: 0x101587930]</span></span>
+<span class="line"><span>   Value userID=10  [биты вида: 0, адрес: 0x101587000]</span></span>
+<span class="line"><span>   конец списка</span></span>
+<span class="line"><span>== addTask внутри withValue в теле группы</span></span>
+<span class="line"><span>   Value debugMode=true  [биты вида: 0, адрес: 0x101589e40]</span></span>
+<span class="line"><span>   Value userID=31  [биты вида: 0, адрес: 0x101589e10]</span></span>
+<span class="line"><span>   ParentTaskMarker  [биты вида: 4, адрес: 0x101589df0]</span></span>
+<span class="line"><span>   Value userID=10  [биты вида: 0, адрес: 0x101587000]</span></span>
+<span class="line"><span>   конец списка</span></span></code></pre></div>
+<p>Дочерняя задача скопировала <code>userID=31</code> и <code>debugMode</code>, пропустила более старую привязку <code>userID=30</code> и маркером сослалась на <code>userID=10</code> родителя, адрес у него тот же. Копия принадлежит самой дочерней задаче, поэтому значение остаётся у неё и после того, как родитель снимет привязку. Адрес <code>0x101587000</code> раньше занимал уже снятый <code>userID=1</code>, так что адреса сравнивайте только у списков, напечатанных в одно время.</p>
+<p>Копирование делает рантайм ОС, а не компилятор, поэтому результат зависит от версии ОС на устройстве. SE-0311 советует привязывать значение вокруг всей группы или внутри замыкания <code>addTask</code>. Тогда у привязывающей задачи нет записи группы (если она сама не в теле другой группы), элемент получает вид <code>Value</code>, и рантайм ничего не копирует.</p>
+<details class="callout callout--fold" data-callout="warning" data-callout-type="warning" data-tone="amber"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">!</span><span class="callout__title">Если приложение поддерживает iOS 17</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>В рантайме 5.10 (iOS 17.4 и macOS 14.4) вида <code>ValueInTaskGroupBody</code> нет, и привязка в теле группы не копируется. На теге 5.10 заголовок <code>TaskLocal.h</code> лежит в <code>include/swift/ABI/</code>. С <code>-Onone</code> синхронный <code>withValue</code> берётся из библиотеки ОС и на iOS 17 падает на проверке <code>_checkIllegalTaskLocalBindingWithinWithTaskGroup</code> (<code>TaskLocal.swift</code> на теге <code>swift-5.10-RELEASE</code>, строки 193-204). С <code>-O</code> синхронный <code>withValue</code> встраивается из SDK, а асинхронный помечен <code>@backDeployed(before: SwiftStdlib 6.0)</code> (<code>TaskLocal.swift</code> на 6.3.1, строка 206), и до iOS 18 работает его копия из SDK. В коде из SDK этой проверки нет, и дочерняя задача ссылается на элемент, который родитель освободит при выходе из <code>withValue</code>. Поэтому на iOS 17 держитесь совета SE-0311 выше. Это вывод по исходникам и по <code>nm -u</code> программы с <code>withValue</code> вокруг <code>addTask</code> в теле группы, собранной с <code>-target arm64-apple-macos14.0 -Onone</code>. Ни на iOS 17, ни на macOS 14 мы её не запускали.</p></div></details>
+<h3 id="список-или-хеш-таблица-по-времени-чтения"><span id="-" class="legacy-anchor" aria-hidden="true"></span>Список или хеш-таблица по времени чтения</h3>
+<p>Поведение <code>withValue</code> объясняет и другая гипотеза, хеш-таблица от ключа к стеку его значений, где чтение берёт вершину стека нужного ключа и другие привязки на цену не влияют. Для замера гипотезы предсказывают разное:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Серия</th><th>Что меряем</th><th>Односвязный список</th><th>Хеш-таблица со стеком на ключ</th></tr></thead><tbody><tr><td><code>first</code></td><td>ключ привязан первым, поверх него N других ключей</td><td>растёт с N</td><td>не зависит от N</td></tr><tr><td><code>rebind-other</code></td><td>поверх ключа N раз привязан один и тот же другой ключ</td><td>растёт с N</td><td>не зависит от N</td></tr><tr><td><code>last</code></td><td>ключ привязан последним</td><td>не зависит от N</td><td>не зависит от N</td></tr><tr><td><code>asynclet-first</code></td><td><code>async let</code> читает ключ из серии <code>first</code></td><td>растёт, как <code>first</code></td><td>не зависит от N</td></tr><tr><td><code>task-first</code>, <code>task-last</code></td><td><code>Task {}</code> читает первый и последний привязанный ключ</td><td>первый не зависит от N, последний растёт</td><td>оба не зависят от N</td></tr></tbody></table>
+<p>Ключом служит адрес объекта <code>TaskLocal</code>, а инициализатор <code>TaskLocal(wrappedValue:)</code> открытый (<code>TaskLocal.swift</code>, строка 166), поэтому 128 посторонних ключей программа создаёт во время выполнения:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">LookupBench.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">let</span> target = <span class="tk-ty">TaskLocal</span>(wrappedValue: <span class="tk-num">0</span>)                          <span class="tk-com">// ключ, который читаем</span></span></span>
+<span class="line"><span><span class="tk-kw">let</span> rebound = <span class="tk-ty">TaskLocal</span>(wrappedValue: <span class="tk-num">0</span>)                         <span class="tk-com">// ключ для повторных привязок</span></span></span>
+<span class="line"><span><span class="tk-kw">let</span> fillers = (<span class="tk-num">1</span>...<span class="tk-num">128</span>).<span class="tk-fn">map</span> { _ <span class="tk-kw">in </span><span class="tk-ty">TaskLocal</span>(wrappedValue: <span class="tk-num">0</span>) }  <span class="tk-com">// посторонние ключи</span></span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span><span class="tk-com">/// Привязывает ключи по порядку: keys.first привязан первым, keys.last последним.</span></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">withBindings</span>(_ keys: <span class="tk-ty">ArraySlice</span>&#x3C;<span class="tk-ty">TaskLocal</span>&#x3C;<span class="tk-ty">Int</span>>>, _ body: () -> <span class="tk-ty">Void</span>) {</span></span>
+<span class="line"><span>  <span class="tk-kw">guard let</span> key = keys.first <span class="tk-kw">else</span> { <span class="tk-kw">return </span><span class="tk-fn">body</span>() }</span></span>
+<span class="line"><span>  key.<span class="tk-fn">withValue</span>(<span class="tk-num">1</span>) { <span class="tk-fn">withBindings</span>(keys.<span class="tk-fn">dropFirst</span>(), body) }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span>  <span class="tk-kw">for</span> n <span class="tk-kw">in</span> sizes {</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> others = fillers.<span class="tk-fn">prefix</span>(n)</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span>    <span class="tk-com">// first: target привязан первым, поверх него n других ключей</span></span></span>
+<span class="line"><span>    <span class="tk-fn">withBindings</span>([target] + others) { <span class="tk-fn">report</span>(<span class="tk-str">"first"</span>, n, <span class="tk-fn">nsPerLookup</span>(target, sink: &#x26;sink)) }</span></span>
+<span class="line"><span>    <span class="tk-com">// ...</span></span></span>
+<span class="line"><span>    <span class="tk-com">// rebind-other: target первым, затем один и тот же ключ rebound n раз подряд</span></span></span>
+<span class="line"><span>    <span class="tk-fn">withBindings</span>([target] + <span class="tk-ty">Array</span>(repeating: rebound, count: n)) {</span></span>
+<span class="line"><span>      <span class="tk-fn">report</span>(<span class="tk-str">"rebind-other"</span>, n, <span class="tk-fn">nsPerLookup</span>(target, sink: &#x26;sink))</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    <span class="tk-com">// ...</span></span></span>
+<span class="line"><span>  }</span></span></code></pre></div>
+<p>Программа собрана с <code>-O</code>. Функция <code>nsPerLookup</code> на каждую конфигурацию делает 100 000 чтений прогрева и пять замеров по 1 000 000 чтений, берёт лучший и складывает прочитанное в <code>sink</code>, чтобы цикл не выбросили. В ассемблере измеряемого цикла на каждой итерации остаётся вызов <code>TaskLocal.get()</code>. Замер стоит в функции <code>@concurrent</code>, поэтому при любых настройках модуля он выполняется на общем пуле потоков. Программу запускали 7 раз отдельными процессами при load average около 2,5.</p>
+<p>Медиана семи запусков, наносекунды на одно чтение:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>N</th><th><code>first</code></th><th><code>rebind-other</code></th><th><code>last</code></th><th><code>asynclet-first</code></th><th><code>task-first</code></th><th><code>task-last</code></th></tr></thead><tbody><tr><td>0</td><td>4,04</td><td>4,20</td><td>4,32</td><td>4,49</td><td>4,06</td><td>4,14</td></tr><tr><td>1</td><td>4,48</td><td>4,49</td><td>4,46</td><td>4,87</td><td>4,26</td><td>4,48</td></tr><tr><td>4</td><td>5,16</td><td>5,17</td><td>4,04</td><td>5,38</td><td>4,17</td><td>5,16</td></tr><tr><td>8</td><td>6,06</td><td>6,06</td><td>4,05</td><td>6,28</td><td>4,04</td><td>6,05</td></tr><tr><td>16</td><td>12,79</td><td>12,81</td><td>4,26</td><td>13,48</td><td>4,07</td><td>12,73</td></tr><tr><td>32</td><td>33,37</td><td>33,41</td><td>4,08</td><td>33,86</td><td>4,08</td><td>33,37</td></tr><tr><td>64</td><td>80,50</td><td>77,22</td><td>4,31</td><td>81,18</td><td>4,29</td><td>80,65</td></tr><tr><td>128</td><td>198,68</td><td>190,18</td><td>4,30</td><td>198,80</td><td>4,10</td><td>198,40</td></tr></tbody></table>
+<p><code>first</code> растёт с N быстрее, чем по прямой. До 8 привязок каждая добавляет к чтению около 0,25 нс, а между 64 и 128 около 1,8 нс. Почему шаг дорожает с длиной списка, этот замер не показывает. <code>rebind-other</code> идёт вровень с <code>first</code>, потому что каждая повторная привязка становится отдельным элементом списка, а в хеш-таблице поиск <code>target</code> в чужой стек не заглядывал бы. В серии <code>last</code> нужный элемент лежит в голове, и чтение держится около 4 нс при любом N. <code>asynclet-first</code> повторяет <code>first</code>, ведь дочерняя задача идёт по списку родителя.</p>
+<p>У <code>Task {}</code> картина зеркальная. Ключ, привязанный первым, в копии оказался в голове, а привязанный последним ушёл в хвост, и <code>task-last</code> растёт так же, как <code>first</code>.</p>
+<p>Вторая программа, <code>SpawnBench.swift</code>, после прогрева меряет пару «создать задачу и дождаться результата» для <code>Task {}</code>, <code>Task.detached</code> и <code>async let</code> под N привязанными разными ключами (<code>-O</code>, 20 000 пар на конфигурацию, 7 запусков при load average около 2, медиана). В последнем столбце под <code>Task {}</code> лежат N привязок одного и того же ключа.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>N</th><th><code>Task {}</code>, нс</th><th><code>Task.detached</code>, нс</th><th><code>async let</code>, нс</th><th><code>Task {}</code>, один ключ N раз, нс</th></tr></thead><tbody><tr><td>0</td><td>719</td><td>666</td><td>491</td><td>708</td></tr><tr><td>8</td><td>1056</td><td>664</td><td>503</td><td>772</td></tr><tr><td>32</td><td>2353</td><td>652</td><td>512</td><td>750</td></tr><tr><td>64</td><td>3464</td><td>651</td><td>501</td><td>842</td></tr><tr><td>128</td><td>6334</td><td>666</td><td>505</td><td>1056</td></tr></tbody></table>
+<p>При 128 ключах создание <code>Task {}</code> стоит на 5615 нс больше, чем без привязок, в среднем около 44 нс за ключ. По коду на каждый ключ рантайм выделяет элемент и добавляет ключ в <code>std::set</code>. <code>Task.detached</code> и <code>async let</code> от N не зависят. Если один ключ привязан 128 раз, копируется одно значение, но список проходится целиком, и создание стоит 1056 нс против 708 при N = 0.</p>
+<p>Оба замера сняты на рантайме 6.2.4 из macOS 26.3.1 на Apple M4, и абсолютные числа на другой машине будут другими.</p>
+<h3 id="тесты-как-исполняемая-спецификация"><span id="_9" class="legacy-anchor" aria-hidden="true"></span>Тесты как исполняемая спецификация</h3>
+<p>Большинство тестов из <code>test/Concurrency/Runtime</code> сравнивают вывод программы со строками <code>// CHECK:</code> в том же файле, а тесты компилятора вроде <code>task_local.swift</code> сверяют диагностики с комментариями <code>expected-error</code>.</p>
+<p>На теге 6.3.1 в <code>test/Concurrency/Runtime</code> 11 файлов с <code>task_local</code> в имени. Прежде чем опираться на тест, посмотрите на его строки <code>REQUIRES</code>. Два теста копирования в <code>Task {}</code> (<code>async_task_locals_copy_to_async.swift</code> и <code>async_task_locals_copy_to_sync.swift</code>) требуют возможность <code>rdar80824152</code>, которую конфигурация тестов на этом теге нигде не объявляет, поэтому по правилам lit они не запускаются. Ни один из 11 тестов не проверяет, что отсоединённая задача ничего не наследует. Это правило записано в коде (<code>taskIsDetached</code> в <code>Task.cpp</code>, строки 677-679) и в документации <code>TaskLocal.swift</code> (строки 86-88).</p>
+<p>Чтобы запустить тест, компилятор собирать не нужно. Начните со строки <code>RUN</code>:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">test/Concurrency/Runtime/async_task_locals_basic.swift, swift-6.3.1-RELEASE, строка 1</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-com">// RUN: %target-run-simple-swift( -plugin-path %swift-plugin-dir -parse-as-library %import-libdispatch) | %FileCheck %s</span></span></span></code></pre></div>
+<p><code>%target-run-simple-swift( флаги )</code> значит собрать файл с этими флагами и запустить, а <code>| %FileCheck %s</code> значит сравнить вывод со строками <code>CHECK</code> этого файла. Вручную к сборке добавляют <code>-module-name main</code>, как делает конфигурация lit (<code>test/lit.cfg</code>), и задают макросы доступности <code>SwiftStdlib 5.1</code> и <code>5.10</code> флагом <code>-define-availability</code> со значениями из <code>utils/availability-macros.def</code> того же тега:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="shellscript" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SHELL</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-shellscript"><span class="line"><span><span class="tk-fn">curl </span><span class="tk-str">-O https://raw.githubusercontent.com/swiftlang/swift/swift-6.3.1-RELEASE/test/Concurrency/Runtime/async_task_locals_basic.swift</span></span></span>
+<span class="line"><span><span class="tk-fn">xcrun </span><span class="tk-str">swiftc -parse-as-library -module-name main \</span></span></span>
+<span class="line"><span>  <span class="tk-str">-Xfrontend -define-availability -Xfrontend "SwiftStdlib 5.1:macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0" \</span></span></span>
+<span class="line"><span>  <span class="tk-str">-Xfrontend -define-availability -Xfrontend "SwiftStdlib 5.10:macOS 14.4, iOS 17.4, watchOS 10.4, tvOS 17.4, visionOS 1.1" \</span></span></span>
+<span class="line"><span>  <span class="tk-str">async_task_locals_basic.swift -o basic</span></span></span>
+<span class="line"><span><span class="tk-fn">./basic</span></span></span></code></pre></div>
+<p><code>-plugin-path</code> и <code>%import-libdispatch</code> из строки <code>RUN</code> при сборке через <code>xcrun swiftc</code> не нужны.</p>
+<p>Командой выше мы собрали и запустили 9 из 11 тестов тега 6.3.1, включая два выключенных. Два оставшихся, тесты изолированного <code>deinit</code>, требуют библиотеку <code>StdlibUnittest</code>, которой в Xcode нет. Утилиты FileCheck в Xcode тоже нет, поэтому мы сравнивали вывод небольшим скриптом по её правилам. У каждого из девяти тестов вывод совпал со всеми строками <code>CHECK</code>.</p>
+<details class="callout callout--fold" data-callout="tip" data-callout-type="tip" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">*</span><span class="callout__title">Как сравнить вывод без FileCheck</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Строки <code>// CHECK:</code> должны встретиться в выводе по порядку, в любом месте строки, <code>CHECK-NEXT</code> на следующей строке после предыдущего совпадения, <code>{{...}}</code> означает регулярное выражение, а <code>[[X:...]]</code> запоминает найденное. Для одного теста хватает <code>grep -n CHECK async_task_locals_basic.swift</code> и сравнения с выводом <code>./basic</code> на глаз.</p></div></details>
+<h3 id="ассистент-как-проводник-по-репозиторию"><span id="_10" class="legacy-anchor" aria-hidden="true"></span>Ассистент как проводник по репозиторию</h3>
+<p>Путь от <code>@TaskLocal</code> до <code>getValue</code> состоит из коротких переходов: имя в Swift, строка <code>@_silgen_name</code>, функция с суффиксом <code>Impl</code>, метод задачи, структура в заголовке, тест. На каждом переходе можно спросить ассистента, в каком файле, функции и строке на нужном теге искать дальше. Пять шагов из прошлой статьи на примере task-local выглядят так:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Шаг</th><th>Что делаете на примере task-local</th></tr></thead><tbody><tr><td>1. Предсказать</td><td>До запроса записываете, что увидит <code>Task {}</code> при двух привязках одного ключа и сколько элементов будет в его списке</td></tr><tr><td>2. Описать форму кода</td><td>Описываете, что ищете: какая функция решает, получит ли задача копию, по какому флагу и в каком файле</td></tr><tr><td>3. Отдать реализацию</td><td>Просите сгенерировать рутину: прогрев и повторы замера, таблицу медиан, команду запуска теста. Серии, которые различают гипотезы, выбираете сами</td></tr><tr><td>4. Попросить объяснение со ссылкой</td><td>«Где в swift-6.3.1-RELEASE решается, копирует ли новая задача task-local значения? Дай путь к файлу, имя функции и номер строки». Открываете файл на теге и читаете функцию целиком</td></tr><tr><td>5. Сверить прогноз с компилятором и тестом</td><td>Собираете программу или тест, который для двух гипотез даёт разный результат, и сравниваете вывод с прогнозом из шага 1</td></tr></tbody></table>
+<p>Номера строк сдвигаются даже между соседними тегами (<code>getValue</code> на 6.3.1 стоит на строке 479, на 6.4.0 на 481), и на другом теге функцию вы найдёте поиском по имени.</p>
+<h3 id="что-изменилось-в-swift-640"><span id="swift-640" class="legacy-anchor" aria-hidden="true"></span>Что изменилось в Swift 6.4.0</h3>
+<p>Swift 6.4.0 уже вышел, но в Xcode 26.4.1 его нет. Всё в этом разделе взято из исходников и тестов на теге <code>swift-6.4.0-RELEASE</code>, а компилятором 6.4.0 мы ничего не запускали.</p>
+<p>Хранилище не изменилось. <code>TaskLocal.h</code> совпадает с 6.3.1 байт в байт, а в <code>TaskLocal.cpp</code> одна новая пара <code>#if</code> вокруг отчёта для отладчика сдвинула функции ниже на две строки. Изменились Swift-слой, макрос и генератор кода:</p>
+<ul>
+<li><code>get()</code> стал <code>@_alwaysEmitIntoClient</code>, и его тело всегда попадает в код приложения (<a href="https://github.com/swiftlang/swift/pull/88334">PR #88334</a>). Для непривязанного ключа он вызывает <code>__abi_get()</code>, под которым остался прежний символ <code>get()</code>, и тот проходит список ещё раз (<code>TaskLocal.swift</code>, строки 184-186 и 209-210).</li>
+<li>Появилась перегрузка <code>nonisolated(nonsending) func withValue</code> (<a href="https://github.com/swiftlang/swift/pull/89061">PR #89061</a>), где изоляцию вызывающего задаёт сам тип функции, а не параметр <code>isolation: isolated (any Actor)? = #isolation</code>, как у прежней перегрузки. Прежнюю пометили <code>deprecated</code> (<code>TaskLocal.swift</code>, строка 264).</li>
+<li>Макрос добавляет к <code>$name</code> слово <code>nonisolated</code> (<code>TaskLocalMacro.swift</code>, строки 109 и 114), и тест <code>async_task_locals_basic_warnings.swift</code> с <code>-default-isolation MainActor</code> (строки 7-9) объявляет <code>@TaskLocal nonisolated static var number</code> (строка 35), что на 6.3.1 в этом режиме не собирается (<a href="#%D0%B8%D0%B7%D0%BE%D0%BB%D1%8F%D1%86%D0%B8%D1%8F-mainactor-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E" class="wikilink">ловушка ниже</a>).</li>
+<li>В <code>GenBuiltin.cpp</code> исправлено падение при значении-замыкании в релизной сборке (<a href="https://github.com/swiftlang/swift/commit/7118b1848fda9074d0490e83622c70cd5bc2ae0f">коммит 7118b18</a>).</li>
+</ul>
+<h3 id="ловушки"><span id="_11" class="legacy-anchor" aria-hidden="true"></span>Ловушки</h3>
+<h4 id="чтение-в-горячем-цикле"><span id="_12" class="legacy-anchor" aria-hidden="true"></span>Чтение в горячем цикле</h4>
+<p>Каждое обращение к <code>RequestContext.userID</code> проходит список до нужного ключа и возвращает копию значения (<code>TaskLocal.swift</code>, строка 188 на 6.3.1), а для класса копия означает retain. В горячем цикле прочитайте значение один раз до цикла и работайте с локальной константой, как советует SE-0311.</p>
+<h4 id="колбэк-на-очереди-gcd"><span id="gcd" class="legacy-anchor" aria-hidden="true"></span>Колбэк на очереди GCD</h4>
+<p>Если внутри задачи вызвать старый API с колбэком, колбэк выполнится на потоке GCD и привязку задачи не увидит:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">Callback.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-com">// Колбэк на очереди GCD и task-local значение задачи</span></span></span>
+<span class="line"><span><span class="tk-kw">import </span><span class="tk-ty">Dispatch</span></span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">enum </span><span class="tk-ty">RequestContext</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">@TaskLocal static var</span> requestID: <span class="tk-ty">String</span>?</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">log</span>(_ message: <span class="tk-ty">String</span>) {</span></span>
+<span class="line"><span>  <span class="tk-fn">print</span>(<span class="tk-str">"[\(</span><span class="tk-ty">RequestContext</span>.requestID ?? <span class="tk-str">"nil")] \(</span>message<span class="tk-str">)"</span>)</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-com">/// Старый API с колбэком на глобальной очереди</span></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">loadAvatar</span>(completion: <span class="tk-kw">@escaping @Sendable</span> () -> <span class="tk-ty">Void</span>) {</span></span>
+<span class="line"><span>  <span class="tk-ty">DispatchQueue</span>.<span class="tk-fn">global</span>().<span class="tk-fn">async</span> { <span class="tk-fn">completion</span>() }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span>    <span class="tk-kw">await </span><span class="tk-ty">RequestContext</span>.$requestID.<span class="tk-fn">withValue</span>(<span class="tk-str">"req-42"</span>) {</span></span>
+<span class="line"><span>      <span class="tk-fn">log</span>(<span class="tk-str">"в задаче"</span>)</span></span>
+<span class="line"><span>      <span class="tk-kw">await </span><span class="tk-fn">withCheckedContinuation</span> { done <span class="tk-kw">in</span></span></span>
+<span class="line"><span>        <span class="tk-fn">loadAvatar</span> {</span></span>
+<span class="line"><span>          <span class="tk-fn">log</span>(<span class="tk-str">"в колбэке"</span>)</span></span>
+<span class="line"><span>          done.<span class="tk-fn">resume</span>()</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>      <span class="tk-kw">let</span> requestID = <span class="tk-ty">RequestContext</span>.requestID  <span class="tk-com">// читаем в задаче</span></span></span>
+<span class="line"><span>      <span class="tk-kw">await </span><span class="tk-fn">withCheckedContinuation</span> { done <span class="tk-kw">in</span></span></span>
+<span class="line"><span>        <span class="tk-fn">loadAvatar</span> {</span></span>
+<span class="line"><span>          <span class="tk-ty">RequestContext</span>.$requestID.<span class="tk-fn">withValue</span>(requestID) {  <span class="tk-com">// и привязываем заново</span></span></span>
+<span class="line"><span>            <span class="tk-fn">log</span>(<span class="tk-str">"в колбэке после новой привязки"</span>)</span></span>
+<span class="line"><span>          }</span></span>
+<span class="line"><span>          done.<span class="tk-fn">resume</span>()</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span></code></pre></div>
+<div class="code-block" data-code="" data-glow="" data-lang="text" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>[req-42] в задаче</span></span>
+<span class="line"><span>[nil] в колбэке</span></span>
+<span class="line"><span>[req-42] в колбэке после новой привязки</span></span></code></pre></div>
+<p>Колбэк <code>DispatchQueue.global().async</code> выполняется вне задачи, и рантайм ищет значение в thread-local хранилище потока (<code>TaskLocal.cpp</code>, строки 118-127), где ничего не привязано. Прочитайте значение в задаче, захватите его в колбэк и привяжите заново, как во второй половине программы.</p>
+<h4 id="замыкание-как-значение-в-релизной-сборке-swift-631"><span id="swift-631" class="legacy-anchor" aria-hidden="true"></span>Замыкание как значение в релизной сборке Swift 6.3.1</h4>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">ClosureValue.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-com">// Task-local со значением-замыканием</span></span></span>
+<span class="line"><span><span class="tk-kw">@TaskLocal var</span> onLog: (<span class="tk-kw">@Sendable</span> () -> <span class="tk-ty">Void</span>)?</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@main</span></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">ClosureValue</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">static func </span><span class="tk-fn">main</span>() {</span></span>
+<span class="line"><span>    $onLog.<span class="tk-fn">withValue</span>({ <span class="tk-fn">print</span>(<span class="tk-str">"log"</span>) }) {</span></span>
+<span class="line"><span>      onLog?()</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    <span class="tk-fn">print</span>(<span class="tk-str">"done"</span>)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<p>С <code>-Onone</code> программа печатает <code>log</code> и <code>done</code>, а с <code>-O</code> падает с кодом 139 (SIGSEGV), ничего не напечатав. Причина в <code>GenBuiltin.cpp</code> (строки 1586-1592 на 6.3.1). Для функционального типа компилятор передаёт там в <code>swift_task_localValuePush</code> метаданные пониженного типа вместо настоящего, и программа падает внутри <code>swift_task_localValuePushImpl</code>.</p>
+<p>Падение видно только с <code>-O</code>, потому что синхронный <code>withValue</code> объявлен <code>@inlinable</code> и только тогда его тело встраивается в приложение, которое само вызывает <code>swift_task_localValuePush</code>. С <code>-Onone</code> приложение вызывает обобщённый <code>withValue</code> из библиотеки ОС. <code>nm -u</code> у такой сборки показывает <code>Swift.TaskLocal.withValue&#x3C;A>(…)</code>, а с <code>-O</code> вместо него <code>_swift_task_localValuePush</code>. На теге 6.4.0 ошибка исправлена, а на 6.3.1 помогает обёртка в структуру, с ней сборка с <code>-O</code> работает:</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">ClosureWrapped.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-com">// То же замыкание, завёрнутое в структуру</span></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">LogHandler</span>: <span class="tk-ty">Sendable </span>{</span></span>
+<span class="line"><span>  <span class="tk-kw">let</span> call: <span class="tk-kw">@Sendable</span> () -> <span class="tk-ty">Void</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@TaskLocal var</span> onLog: <span class="tk-ty">LogHandler</span>?</span></span>
+<span class="line"><span><span class="tk-com">// ...</span></span></span>
+<span class="line"><span>    $onLog.<span class="tk-fn">withValue</span>(<span class="tk-ty">LogHandler</span> { <span class="tk-fn">print</span>(<span class="tk-str">"log"</span>) }) {</span></span>
+<span class="line"><span>      onLog?.<span class="tk-fn">call</span>()</span></span>
+<span class="line"><span>    }</span></span></code></pre></div>
+<h4 id="изоляция-mainactor-по-умолчанию"><span id="mainactor" class="legacy-anchor" aria-hidden="true"></span>Изоляция MainActor по умолчанию</h4>
+<p>Шаблон приложения в Xcode 26.4.1 ставит <code>SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor</code>, и тип с <code>@TaskLocal</code> целиком изолирован на главном акторе. Тогда Swift 6.3.1 не даёт читать значение без <code>await</code> из <code>Task.detached</code>, <code>addTask</code> или синхронной <code>nonisolated</code> функции. Программа из задачи «Что будет выведено?» ниже в таком модуле не собирается, компилятор отвечает <code>main actor-isolated static property 'spanID' cannot be accessed from outside of the actor</code>. Пометка <code>nonisolated</code> у самого свойства не помогает, потому что сгенерированное макросом свойство с <code>$</code> остаётся изолированным. Собирается вариант с <code>nonisolated</code> на всём типе, например <code>nonisolated enum Trace</code>. Программы статьи собраны через <code>xcrun swiftc</code> без этого режима.</p>
+<h4 id="task-local-вместо-параметра"><span id="task-local" class="legacy-anchor" aria-hidden="true"></span>Task-local вместо параметра</h4>
+<p>SE-0311 просит не заменять обычные параметры task-local значениями (разделы «Binding values for the duration of a child-task» и «Intended use-cases»). Task-local подходит для метаданных вроде идентификатора трассировки, которые не меняют результат функции. Если без привязанного значения функция работает неправильно, передавайте его параметром.</p>
+<h3 id="вопросы-на-собеседовании"><span id="_13" class="legacy-anchor" aria-hidden="true"></span>Вопросы на собеседовании</h3>
+<p>Ответьте сами, прежде чем раскрыть подсказку.</p>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Где хранятся task-local значения задачи и сколько стоит чтение?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>В односвязном списке, на который указывает поле <code>head</code> задачи. Чтение идёт от головы до первого элемента с ключом, и в горячем цикле на Apple M4 стоит около 4 нс для ключа в голове и около 200 нс под 128 привязками.</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Что получают async let, addTask, Task и Task.detached?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p><code>async let</code> и <code>addTask</code> получают <code>ParentTaskMarker</code> на голову списка родителя и, кроме привязок в теле <code>withTaskGroup</code>, ничего не копируют, потому что дочерняя задача завершится раньше, чем родитель снимет привязки. <code>Task {}</code> и <code>Task.immediate</code> получают копию последней привязки каждого ключа, а <code>Task.detached</code> без флага <code>copyTaskLocals</code> не получает ничего.</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Что будет выведено?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><div class="code-block" data-code="" data-glow="" data-lang="swift"><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-kw">enum </span><span class="tk-ty">Trace</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">@TaskLocal static var</span> spanID: <span class="tk-ty">String</span> = <span class="tk-str">"none"</span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@main</span></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">Puzzle</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">static func </span><span class="tk-fn">main</span>() <span class="tk-kw">async</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">await </span><span class="tk-ty">Trace</span>.$spanID.<span class="tk-fn">withValue</span>(<span class="tk-str">"a"</span>) {</span></span>
+<span class="line"><span>      <span class="tk-kw">await </span><span class="tk-ty">Trace</span>.$spanID.<span class="tk-fn">withValue</span>(<span class="tk-str">"b"</span>) {</span></span>
+<span class="line"><span>        <span class="tk-kw">async let</span> child = <span class="tk-ty">Trace</span>.spanID</span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> copy = <span class="tk-ty">Task</span> { <span class="tk-ty">Trace</span>.spanID }</span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> clean = <span class="tk-ty">Task</span>.<span class="tk-fn">detached</span> { <span class="tk-ty">Trace</span>.spanID }</span></span>
+<span class="line"><span>        <span class="tk-fn">print</span>(<span class="tk-kw">await</span> child, <span class="tk-kw">await</span> copy.value, <span class="tk-kw">await</span> clean.value)</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    <span class="tk-kw">let</span> fromGroup = <span class="tk-kw">await </span><span class="tk-fn">withTaskGroup</span>(of: <span class="tk-ty">String</span>.<span class="tk-kw">self</span>) { group <span class="tk-kw">in</span></span></span>
+<span class="line"><span>      <span class="tk-ty">Trace</span>.$spanID.<span class="tk-fn">withValue</span>(<span class="tk-str">"c"</span>) {</span></span>
+<span class="line"><span>        group.<span class="tk-fn">addTask</span> {</span></span>
+<span class="line"><span>          <span class="tk-kw">try</span>? <span class="tk-kw">await </span><span class="tk-ty">Task</span>.<span class="tk-fn">sleep</span>(for: .<span class="tk-fn">milliseconds</span>(<span class="tk-num">50</span>))</span></span>
+<span class="line"><span>          <span class="tk-kw">return </span><span class="tk-ty">Trace</span>.spanID</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>      <span class="tk-kw">return await</span> group.<span class="tk-fn">next</span>()!</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    <span class="tk-fn">print</span>(fromGroup, <span class="tk-ty">Trace</span>.spanID)</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre></div><div class="code-block" data-code="" data-glow="" data-lang="text"><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>b b none</span></span>
+<span class="line"><span>c none</span></span></code></pre></div><p><code>async let</code> читает голову списка родителя, где лежит <code>b</code>. <code>Task {}</code> получила копию последней привязки, тоже <code>b</code>. <code>Task.detached</code> видит значение по умолчанию. Во второй строке дочерняя задача группы читает значение через 50 мс, когда область <code>withValue("c")</code> уже закрыта, и видит <code>c</code>, потому что привязка в теле группы скопирована в неё рантаймом Swift 6.0 и новее.</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Почему значение нельзя присвоить, а только привязать через withValue?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Привязка снимается сама при выходе из области, и никакой код не может забыть её снять. Автор SE-0311 в первом ревью назвал это главной целью и от неструктурированного <code>set</code> отказался сознательно. Из-за областей родитель только кладёт элементы в голову списка и снимает их, а элементы, которые видит дочерняя задача, снимает лишь после её завершения (комментарий в <code>TaskLocal.h</code>, строки 173-190). Поэтому дочерние задачи читают его список без блокировок.</p></div></details>
+<details class="callout callout--fold" data-callout="question" data-callout-type="faq" data-tone="gold"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">?</span><span class="callout__title">Как вы разбираетесь в незнакомом коде рантайма вместе с ассистентом?</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Хороший ответ называет порядок: тег компилятора и записанный прогноз, запрос к ассистенту на файл, функцию и строку на этом теге, чтение функции целиком, затем тест или своя программа, которая различает гипотезы. Добавьте пример: путь по <code>@_silgen_name</code> и суффиксу <code>Impl</code> до <code>Storage::getValue</code> и замер, который подтвердил список.</p></div></details>
+<h3 id="итог"><span id="_14" class="legacy-anchor" aria-hidden="true"></span>Итог</h3>
+<ul>
+<li>У задачи один указатель <code>head</code> на односвязный список привязок, и цена чтения растёт с позицией привязки.</li>
+<li><code>async let</code> и <code>addTask</code> получают маркер на список родителя, <code>Task {}</code> копирует последнюю привязку каждого ключа, <code>Task.detached</code> не получает ничего.</li>
+<li>Начиная с рантайма Swift 6.0 (iOS 18, macOS 15), привязка в теле <code>withTaskGroup</code> вокруг <code>addTask</code> копируется в дочернюю задачу.</li>
+<li>Имя тега исходников следует из вывода <code>xcrun swiftc --version</code>. Встраиваемый код приходит из <code>.swiftinterface</code> SDK, C++ рантайм из ОС, и на Mac его версию показывает <code>dyld_info</code>.</li>
+<li>От Swift до C++ ведут <code>@_silgen_name</code> и суффикс <code>Impl</code>, от <code>Builtin.*</code> ведут <code>Builtins.def</code> и <code>GenBuiltin.cpp</code>. Перед ссылкой на строку проверьте ветку <code>#if</code>, а у теста строки <code>REQUIRES</code>.</li>
+<li>В Swift 6.4.0 хранилище то же, а тело <code>get()</code> попадает в код приложения.</li>
+</ul>
+<h3 id="практика"><span id="_15" class="legacy-anchor" aria-hidden="true"></span>Практика</h3>
+<p>Первую задачу решайте сами, две другие вместе с ассистентом по пяти шагам.</p>
+<p><strong>1.</strong> Предскажите вывод программы и объясните его по строкам <code>TaskLocal.cpp</code>.</p>
+<div class="code-block" data-code="" data-glow="" data-lang="swift" data-reveal=""><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">SWIFT</span><span class="code-block__title">LateChild.swift</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-swift"><span class="line"><span><span class="tk-com">// async let создан при req-1 и читает значение, когда родитель уже внутри req-2</span></span></span>
+<span class="line"><span><span class="tk-kw">enum </span><span class="tk-ty">RequestContext</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">@TaskLocal static var</span> requestID: <span class="tk-ty">String</span>?</span></span>
+<span class="line"><span>}</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">func </span><span class="tk-fn">current</span>() -> <span class="tk-ty">String</span> { <span class="tk-ty">RequestContext</span>.requestID ?? <span class="tk-str">"nil"</span> }</span></span>
+<span class="line empty"><span><br></span></span>
+<span class="line"><span><span class="tk-kw">@main</span></span></span>
+<span class="line"><span><span class="tk-kw">struct </span><span class="tk-ty">LateChild</span> {</span></span>
+<span class="line"><span>  <span class="tk-kw">static func </span><span class="tk-fn">main</span>() <span class="tk-kw">async</span> {</span></span>
+<span class="line"><span>    <span class="tk-kw">await </span><span class="tk-ty">RequestContext</span>.$requestID.<span class="tk-fn">withValue</span>(<span class="tk-str">"req-1"</span>) {</span></span>
+<span class="line"><span>      <span class="tk-kw">let</span> (childGate, openChild) = <span class="tk-ty">AsyncStream</span>&#x3C;<span class="tk-ty">Void</span>>.<span class="tk-fn">makeStream</span>()</span></span>
+<span class="line"><span>      <span class="tk-kw">let</span> (readDone, markRead) = <span class="tk-ty">AsyncStream</span>&#x3C;<span class="tk-ty">Void</span>>.<span class="tk-fn">makeStream</span>()</span></span>
+<span class="line"><span>      <span class="tk-kw">async let</span> late: <span class="tk-ty">String</span> = {</span></span>
+<span class="line"><span>        <span class="tk-kw">for await</span> _ <span class="tk-kw">in</span> childGate { <span class="tk-kw">break</span> }  <span class="tk-com">// ждём, пока родитель войдёт в req-2</span></span></span>
+<span class="line"><span>        <span class="tk-kw">let</span> seen = <span class="tk-fn">current</span>()</span></span>
+<span class="line"><span>        markRead.<span class="tk-fn">yield</span>()</span></span>
+<span class="line"><span>        <span class="tk-kw">return</span> seen</span></span>
+<span class="line"><span>      }()</span></span>
+<span class="line"><span>      <span class="tk-kw">await </span><span class="tk-ty">RequestContext</span>.$requestID.<span class="tk-fn">withValue</span>(<span class="tk-str">"req-2"</span>) {</span></span>
+<span class="line"><span>        <span class="tk-fn">print</span>(<span class="tk-str">"родитель:"</span>, <span class="tk-fn">current</span>())</span></span>
+<span class="line"><span>        openChild.<span class="tk-fn">yield</span>()</span></span>
+<span class="line"><span>        <span class="tk-kw">for await</span> _ <span class="tk-kw">in</span> readDone { <span class="tk-kw">break</span> }    <span class="tk-com">// дочерняя задача прочитала значение</span></span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>      <span class="tk-fn">print</span>(<span class="tk-str">"async let:"</span>, <span class="tk-kw">await</span> late)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span></code></pre></div>
+<details class="callout callout--fold" data-callout="success" data-callout-type="success" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">✓</span><span class="callout__title">Решение</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><div class="code-block" data-code="" data-glow="" data-lang="text"><div class="code-block__glow" aria-hidden="true"></div><div class="code-block__head" data-pagefind-ignore=""><span class="code-block__meta"><span class="code-block__lang">TEXT</span></span><button type="button" class="code-block__copy" data-copy=""><span data-copy-label="" aria-live="polite">Копировать</span></button></div><pre class="code-block__body"><code class="language-text"><span class="line"><span>родитель: req-2</span></span>
+<span class="line"><span>async let: req-1</span></span></code></pre></div><p>При создании <code>async let</code> рантайм записывает в маркер текущую голову списка родителя (<code>auto item = parent->_private().Local.head</code>, строка 178; <code>tail->setNext(item)</code>, строка 247). Привязка <code>req-2</code> ложится в голову списка родителя, выше элемента, на который смотрит маркер, и обход дочерней задачи до неё не доходит.</p></div></details>
+<p><strong>2.</strong> В <a href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/" class="wikilink">1. Task Local</a> было обещание разобрать, как хранится <code>Task.isCancelled</code>. Запишите, где, по-вашему, лежит флаг отмены и участвует ли в этом список task-local. Потом попросите ассистента назвать путь, функцию и строку на теге вашей версии Swift, пройдите цепочку сами до бита в памяти задачи и сравните с прогнозом.</p>
+<details class="callout callout--fold" data-callout="success" data-callout-type="success" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">✓</span><span class="callout__title">Где искать (swift-6.3.1-RELEASE)</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p><code>Task.isCancelled</code> (<code>TaskCancellation.swift</code>, строки 143-147) берёт <code>UnsafeCurrentTask.isCancelled</code> (<code>Task.swift</code>, строки 750-752), а тот вызывает <code>_taskIsCancelled</code> с <code>@_silgen_name("swift_task_isCancelled")</code> (строки 913-915). Функция определена в <code>Task.cpp</code> без суффикса <code>Impl</code> (строка 1748) и через <code>AsyncTask::isCancelled()</code> (<code>TaskPrivate.h</code>, строки 968-971) проверяет флаг <code>IsCancelled = 0x100</code> (строка 442) в атомарном слове статуса задачи. Списка task-local в цепочке нет, и SE-0311 в разделе «Task Local Values» оговаривает, что отмена и приоритет хранятся иначе.</p></div></details>
+<p><strong>3.</strong> Запишите, когда, по-вашему, напечатается <code>deinit</code> объекта, привязанного в родителе, если две <code>Task {}</code> созданы без ожидания. Попросите ассистента найти тест, который это проверяет, посмотрите строки <code>REQUIRES</code>, запустите тест вручную командой из раздела про тесты и сравните вывод с прогнозом.</p>
+<details class="callout callout--fold" data-callout="success" data-callout-type="success" data-tone="green"><summary class="callout__summary"><span class="callout__icon" aria-hidden="true" data-pagefind-ignore="">✓</span><span class="callout__title">Решение</span><span class="callout__chevron" aria-hidden="true" data-pagefind-ignore="">›</span></summary><div class="callout__body"><p>Это <code>test_unstructured_retains</code> в <code>test/Concurrency/Runtime/async_task_locals_copy_to_async.swift</code> (строки 100-123), где комментарий на строке 120 требует, чтобы <code>deinit</code> не случился раньше, чем задачи выполнятся. Из-за <code>REQUIRES: rdar80824152</code> в первой строке тест в обычном прогоне не запускается, а вручную собирается той же командой. У нас <code>deinit</code> напечатался после обеих строк <code>in async task</code>, и вывод совпал со всеми 16 строками <code>CHECK</code>.</p></div></details>
+<h3 id="источники"><span id="_16" class="legacy-anchor" aria-hidden="true"></span>Источники</h3>
+<ul>
+<li><a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0311-task-locals.md">SE-0311 Task Local Values</a>, разделы <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0311-task-locals.md#reading-task-local-values">Reading task-local values</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0311-task-locals.md#reading-task-local-values-implementation-details">implementation details</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0311-task-locals.md#task-local-value-and-tasks-which-outlive-their-scope">tasks which outlive their scope</a>, <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0311-task-locals.md#intended-use-cases">Intended use-cases</a>; <a href="https://forums.swift.org/t/se-0311-task-local-values/47478">первое ревью</a> и <a href="https://forums.swift.org/t/se-0311-task-local-values/47478/48">ответ автора о <code>set</code></a>.</li>
+<li><a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0371-isolated-synchronous-deinit.md#task-local-values">SE-0371, раздел Task-local values</a> и <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0472-task-start-synchronously-on-caller-context.md">SE-0472</a> о <code>Task.immediate</code>.</li>
+<li>Исходники на теге swift-6.3.1-RELEASE: <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskLocal.h#L36-L233">TaskLocal.h</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskLocal.cpp">TaskLocal.cpp</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/Task.cpp">Task.cpp</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/AsyncLet.cpp#L192-L198">AsyncLet.cpp</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskPrivate.h">TaskPrivate.h</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskLocal.swift#L163-L405">TaskLocal.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/lib/Macros/Sources/SwiftMacros/TaskLocalMacro.swift">TaskLocalMacro.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskCancellation.swift">TaskCancellation.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/Task.swift">Task.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/Task%2Binit.swift.gyb">Task+init.swift.gyb</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/stdlib/public/Concurrency/TaskGroup%2BaddTask.swift.gyb#L267-L271">TaskGroup+addTask.swift.gyb</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/include/swift/AST/Builtins.def#L1203-L1227">Builtins.def</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/lib/IRGen/GenBuiltin.cpp#L1581-L1592">GenBuiltin.cpp</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/utils/availability-macros.def">availability-macros.def</a>.</li>
+<li>Тесты на теге swift-6.3.1-RELEASE: <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/test/Concurrency/Runtime/async_task_locals_basic.swift#L158-L172">async_task_locals_basic.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/test/Concurrency/Runtime/async_task_locals_copy_to_async.swift#L100-L123">async_task_locals_copy_to_async.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.3.1-RELEASE/test/lit.cfg#L2750-L2760">test/lit.cfg</a>; правила <code>REQUIRES</code> в <a href="https://llvm.org/docs/TestingGuide.html">LLVM Testing Guide</a>.</li>
+<li>Теги swift-6.2.4-RELEASE (<a href="https://github.com/swiftlang/swift/blob/swift-6.2.4-RELEASE/stdlib/public/Concurrency/TaskLocal.h">TaskLocal.h</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.2.4-RELEASE/stdlib/public/Concurrency/TaskLocal.cpp">TaskLocal.cpp</a>) и swift-5.10-RELEASE (<a href="https://github.com/swiftlang/swift/blob/swift-5.10-RELEASE/stdlib/public/Concurrency/TaskLocal.swift#L193-L204">TaskLocal.swift</a>); <a href="https://developer.apple.com/documentation/macos-release-notes/macos-big-sur-11_0_1-release-notes">заметки к macOS Big Sur 11.0.1</a> об общем кэше dyld.</li>
+<li>Тег swift-6.4.0-RELEASE: <a href="https://github.com/swiftlang/swift/blob/swift-6.4.0-RELEASE/stdlib/public/Concurrency/TaskLocal.swift#L180-L276">TaskLocal.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.4.0-RELEASE/lib/Macros/Sources/SwiftMacros/TaskLocalMacro.swift">TaskLocalMacro.swift</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.4.0-RELEASE/stdlib/public/Concurrency/TaskLocal.cpp#L338-L358">TaskLocal.cpp</a>, <a href="https://github.com/swiftlang/swift/blob/swift-6.4.0-RELEASE/test/Concurrency/async_task_locals_basic_warnings.swift">async_task_locals_basic_warnings.swift</a>.</li>
+<li>PR и коммиты: <a href="https://github.com/swiftlang/swift/pull/73978">#73978</a>, <a href="https://github.com/swiftlang/swift/pull/88334">#88334</a>, <a href="https://github.com/swiftlang/swift/pull/89061">#89061</a>, <a href="https://github.com/swiftlang/swift/commit/7118b1848fda9074d0490e83622c70cd5bc2ae0f">7118b18</a>.</li>
+<li><a href="https://docs.github.com/en/search-github/github-code-search/about-github-code-search">About GitHub Code Search</a>.</li>
+<li>WWDC23 <a href="https://developer.apple.com/videos/play/wwdc2023/10170/">Beyond the basics of structured concurrency (10170)</a>.</li>
+<li>Hacking with Swift о <a href="https://www.hackingwithswift.com/quick-start/concurrency/how-to-create-and-use-task-local-values">task-local</a> и о <a href="https://www.hackingwithswift.com/quick-start/concurrency/whats-the-difference-between-a-task-and-a-detached-task">Task.detached</a>.</li>
+</ul></div><script>
+  // The prose (right above) reveals child by child, as the concept's paragraphs do. Set here,
+  // synchronously while parsing, so it is in place before the shell's fx script collects targets.
+  document.currentScript?.parentElement?.querySelector('[data-prose]')?.setAttribute('data-reveal-children', '');
+</script><nav class="pager" aria-label="Соседние статьи" data-pagefind-ignore><a class="pager__card pager__card--prev" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/" rel="prev" data-reveal><div class="pager__label">← НАЗАД</div><div class="pager__title">Как изучать iOS вместе с ассистентом и не терять понимание</div></a><span class="pager__spacer" aria-hidden="true"></span></nav></article></main><aside class="toc" aria-label="Оглавление"><button type="button" class="toc__toggle" data-toc-toggle aria-expanded="false" aria-controls="toc-body"><span class="toc__chev" aria-hidden="true">›</span><span class="toc__toggle-label">На этой странице</span><span class="toc__count" aria-hidden="true">26</span></button><div class="toc__label" id="toc-label">На этой странице</div><div class="toc__scroll" id="toc-body" data-toc-scroll><nav class="toc__rail" aria-labelledby="toc-label"><div class="toc__ind" data-toc-ind aria-hidden="true"></div><a class="toc__link" href="#где-лежит-код-вашей-версии" data-toc="где-лежит-код-вашей-версии" data-level="1">Где лежит код вашей версии</a><a class="toc__link" href="#от-tasklocal-до-c" data-toc="от-tasklocal-до-c" data-level="1">От @TaskLocal до C++</a><a class="toc__link" href="#хранилище-как-один-односвязный-список" data-toc="хранилище-как-один-односвязный-список" data-level="1">Хранилище как один односвязный список</a><a class="toc__link" href="#элементы-и-голова" data-toc="элементы-и-голова" data-level="2">Элементы и голова</a><a class="toc__link" href="#добавление-снятие-и-поиск" data-toc="добавление-снятие-и-поиск" data-level="2">Добавление, снятие и поиск</a><a class="toc__link" href="#трасса-по-шагам" data-toc="трасса-по-шагам" data-level="2">Трасса по шагам</a><a class="toc__link" href="#что-получает-новая-задача" data-toc="что-получает-новая-задача" data-level="1">Что получает новая задача</a><a class="toc__link" href="#флаги-при-создании" data-toc="флаги-при-создании" data-level="2">Флаги при создании</a><a class="toc__link" href="#async-let-и-addtask-ссылаются-на-список-родителя" data-toc="async-let-и-addtask-ссылаются-на-список-родителя" data-level="2">async let и addTask ссылаются на список родителя</a><a class="toc__link" href="#task--копирует-последнюю-привязку-каждого-ключа" data-toc="task--копирует-последнюю-привязку-каждого-ключа" data-level="2">Task {} копирует последнюю привязку каждого ключа</a><a class="toc__link" href="#у-taskdetached-список-пуст" data-toc="у-taskdetached-список-пуст" data-level="2">У Task.detached список пуст</a><a class="toc__link" href="#привязка-в-теле-группы" data-toc="привязка-в-теле-группы" data-level="2">Привязка в теле группы</a><a class="toc__link" href="#список-или-хеш-таблица-по-времени-чтения" data-toc="список-или-хеш-таблица-по-времени-чтения" data-level="1">Список или хеш-таблица по времени чтения</a><a class="toc__link" href="#тесты-как-исполняемая-спецификация" data-toc="тесты-как-исполняемая-спецификация" data-level="1">Тесты как исполняемая спецификация</a><a class="toc__link" href="#ассистент-как-проводник-по-репозиторию" data-toc="ассистент-как-проводник-по-репозиторию" data-level="1">Ассистент как проводник по репозиторию</a><a class="toc__link" href="#что-изменилось-в-swift-640" data-toc="что-изменилось-в-swift-640" data-level="1">Что изменилось в Swift 6.4.0</a><a class="toc__link" href="#ловушки" data-toc="ловушки" data-level="1">Ловушки</a><a class="toc__link" href="#чтение-в-горячем-цикле" data-toc="чтение-в-горячем-цикле" data-level="2">Чтение в горячем цикле</a><a class="toc__link" href="#колбэк-на-очереди-gcd" data-toc="колбэк-на-очереди-gcd" data-level="2">Колбэк на очереди GCD</a><a class="toc__link" href="#замыкание-как-значение-в-релизной-сборке-swift-631" data-toc="замыкание-как-значение-в-релизной-сборке-swift-631" data-level="2">Замыкание как значение в релизной сборке Swift 6.3.1</a><a class="toc__link" href="#изоляция-mainactor-по-умолчанию" data-toc="изоляция-mainactor-по-умолчанию" data-level="2">Изоляция MainActor по умолчанию</a><a class="toc__link" href="#task-local-вместо-параметра" data-toc="task-local-вместо-параметра" data-level="2">Task-local вместо параметра</a><a class="toc__link" href="#вопросы-на-собеседовании" data-toc="вопросы-на-собеседовании" data-level="1">Вопросы на собеседовании</a><a class="toc__link" href="#итог" data-toc="итог" data-level="1">Итог</a><a class="toc__link" href="#практика" data-toc="практика" data-level="1">Практика</a><a class="toc__link" href="#источники" data-toc="источники" data-level="1">Источники</a></nav></div><div class="toc__progress" aria-hidden="true"><span data-pct="2">00%</span><span class="toc__rule"></span></div></aside><script>
+      // Below 1024px the rail is a card under the article header (mobile.css / mobile.ts). It moves
+      // there while the page parses, so first paint already has it in place: moving it later from
+      // the deferred module shifted the whole article down.
+      (function () {
+        var toc = document.currentScript && document.currentScript.previousElementSibling;
+        var head = document.querySelector('.article > .article-header');
+        if (!toc || !head || !matchMedia('(max-width: 1023px)').matches) return;
+        toc.setAttribute('data-inline', '');
+        toc.setAttribute('data-reveal', '');
+        head.after(toc);
+      })();
+    </script></div><div class="palette" data-palette><div class="palette__box" data-palette-box role="dialog" aria-modal="true" aria-label="Поиск по базе знаний"><div class="palette__bar"><span class="palette__prompt" aria-hidden="true">›</span><input class="palette__input" data-palette-input type="text" placeholder="Найти статью, тему или метод…" role="combobox" aria-label="Поиск" aria-expanded="true" aria-controls="palette-list" aria-autocomplete="list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go"><button type="button" class="palette__esc" data-palette-close aria-label="Закрыть поиск">ESC</button></div><div class="palette__list" id="palette-list" role="listbox" aria-label="Результаты поиска" data-palette-list><div class="palette__group" role="group" aria-labelledby="palette-label-default"><div class="palette__label" id="palette-label-default">СТАТЬИ</div><a class="palette__item" data-pi role="option" id="palette-item-0" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Middle/1.%20Task%20Local%20%D0%B8%D0%B7%D0%BD%D1%83%D1%82%D1%80%D0%B8.%20%D0%9A%D0%B0%D0%BA%20%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C%20%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8%20%D1%80%D0%B0%D0%BD%D1%82%D0%B0%D0%B9%D0%BC%D0%B0%20Swift/" tabindex="-1" aria-selected="true"><span class="palette__row"><span class="palette__title">Task Local изнутри. Как читать исходники рантайма Swift</span><span class="palette__meta">Изучение</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-1" href="/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Как изучать iOS вместе с ассистентом и не терять понимание</span><span class="palette__meta">Изучение</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-2" href="/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Подробнее про ARC</span><span class="palette__meta">ARC</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-3" href="/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Оптимизации и устройство массивов</span><span class="palette__meta">Коллекции</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-4" href="/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Task Local</span><span class="palette__meta">Многопоточность</span></span></a><a class="palette__item" data-pi role="option" id="palette-item-5" href="/ios_deep_tech/UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/" tabindex="-1" aria-selected="false"><span class="palette__row"><span class="palette__title">Основы</span><span class="palette__meta">SwiftUI</span></span></a></div></div><div class="palette__foot" aria-hidden="true"><span>↑↓ навигация</span><span>↵ открыть</span><span>esc закрыть</span></div><div class="visually-hidden" role="status" aria-live="polite" data-palette-status></div></div><script type="application/json" data-palette-index>[{"t":"С чего все началось? (MRC)","c":"ARC","h":"/ios_deep_tech/Swift/ARC/Junior/1.%20%D0%A1%20%D1%87%D0%B5%D0%B3%D0%BE%20%D0%B2%D1%81%D0%B5%20%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D0%BE%D1%81%D1%8C%3F%20(MRC)/"},{"t":"Подробнее про ARC","c":"ARC","h":"/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/"},{"t":"Поговорим о массивах","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/1.%20%D0%9F%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D0%B8%D0%BC%20%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%B0%D1%85/"},{"t":"Оптимизации и устройство массивов","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D1%8B/Junior/2.%20%D0%9E%D0%BF%D1%82%D0%B8%D0%BC%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B8%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE%20%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2%D0%BE%D0%B2/"},{"t":"Set в Swift","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%9C%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0/Junior/1.%20Set%20%D0%B2%20Swift/"},{"t":"Что такое словари в Swift?","c":"Коллекции","h":"/ios_deep_tech/Swift/%D0%9A%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8/%D0%A1%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8/Junior/1.%20%D0%A7%D1%82%D0%BE%20%D1%82%D0%B0%D0%BA%D0%BE%D0%B5%20%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%20%D0%B2%20Swift%3F/"},{"t":"Потокобезопасность. Введение","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/1.%20%D0%9F%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/"},{"t":"Actor Reentrancy","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/2.%20Actor%20Reentrancy/"},{"t":"Actor Hopping","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/3.%20Actor%20Hopping/"},{"t":"Sendable","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/4.%20Sendable/"},{"t":"Global Actor","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/5.%20Global%20Actor/"},{"t":"Actor isolation","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Actors/6.%20Actor%20isolation/"},{"t":"Continuation","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/1.%20Continuation/"},{"t":"Task Group","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/2.%20Task%20Group/"},{"t":"AsyncSequence & AsyncStream","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Sequence/3.%20AsyncSequence%20%26%20AsyncStream/"},{"t":"Введение","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/1.%20%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5/"},{"t":"Task(Detached) - техническое определение","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/2.%20Task(Detached)%20-%20%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5%20%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5/"},{"t":"Асинхронные функции и await","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/3.%20%D0%90%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8%20%D0%B8%20await/"},{"t":"Отмена задач","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/4.%20%D0%9E%D1%82%D0%BC%D0%B5%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87/"},{"t":"Task Priority","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/5.%20Task%20Priority/"},{"t":"Практический путь","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0/1.%20%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D0%BF%D1%83%D1%82%D1%8C/"},{"t":"Actor и Executor","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Executors/1.%20Actor%20%D0%B8%20Executor/"},{"t":"Task Local","c":"Многопоточность","h":"/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Middle/Tasks%20(deep)/1.%20Task%20Local/"},{"t":"Основы","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/1.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B/"},{"t":"Property Wrappers","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/2.%20Property%20Wrappers/"},{"t":"Основные концепции анимаций в SwiftUI","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/3.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5%20%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D0%B8%D0%B8%20%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D0%B9%20%D0%B2%20SwiftUI/"},{"t":"Тур по жестам в SwiftUI","c":"SwiftUI","h":"/ios_deep_tech/UI/SwiftUI/Junior/4.%20%D0%A2%D1%83%D1%80%20%D0%BF%D0%BE%20%D0%B6%D0%B5%D1%81%D1%82%D0%B0%D0%BC%20%D0%B2%20SwiftUI/"},{"t":"Как изучать iOS вместе с ассистентом и не терять понимание","c":"Изучение","h":"/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Junior/1.%20%D0%9A%D0%B0%D0%BA%20%D0%B8%D0%B7%D1%83%D1%87%D0%B0%D1%82%D1%8C%20iOS%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B5%20%D1%81%20%D0%B0%D1%81%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BD%D0%B5%20%D1%82%D0%B5%D1%80%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BD%D0%B8%D0%BC%D0%B0%D0%BD%D0%B8%D0%B5/"},{"t":"Task Local изнутри. Как читать исходники рантайма Swift","c":"Изучение","h":"/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%98%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5/Middle/1.%20Task%20Local%20%D0%B8%D0%B7%D0%BD%D1%83%D1%82%D1%80%D0%B8.%20%D0%9A%D0%B0%D0%BA%20%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C%20%D0%B8%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA%D0%B8%20%D1%80%D0%B0%D0%BD%D1%82%D0%B0%D0%B9%D0%BC%D0%B0%20Swift/"}]</script></div></div><script type="module" src="/ios_deep_tech/_astro/Base.astro_astro_type_script_index_0_lang.Cha2ZpVJ.js"></script></body></html>

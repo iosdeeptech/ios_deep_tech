@@ -1,32 +1,32 @@
 {
-  "generatedAt": "2026-09-28T17:20:29+03:00",
+  "generatedAt": "2026-10-06T11:34:15+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "9f8d116"
+    "commit": "7065ec9"
   },
-  "date": "2026-09-28",
+  "date": "2026-10-06",
   "highlighted": [
     {
-      "path": "Разработка с ИИ/Изучение/Junior/1. Как изучать iOS вместе с ассистентом и не терять понимание",
-      "label": "1. Как изучать iOS вместе с ассистентом и не терять понимание",
-      "title": "Как изучать iOS вместе с ассистентом и не терять понимание",
+      "path": "Разработка с ИИ/Изучение/Middle/1. Task Local изнутри. Как читать исходники рантайма Swift",
+      "label": "1. Task Local изнутри. Как читать исходники рантайма Swift",
+      "title": "Task Local изнутри. Как читать исходники рантайма Swift",
       "addedIn": {
-        "commit": "9f8d116",
-        "date": "2026-09-28T17:20:29+03:00"
+        "commit": "7065ec9",
+        "date": "2026-10-06T11:34:15+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 28,
-    "nodes": 55,
+    "articles": 29,
+    "nodes": 57,
     "sections": {
       "Swift": 23,
       "UI": 4,
-      "Разработка с ИИ": 1
+      "Разработка с ИИ": 2
     },
     "grades": {
       "Junior": 26,
-      "Middle": 2,
+      "Middle": 3,
       "Senior": 0
     }
   },
@@ -36,9 +36,9 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 2102.52,
+      "width": 2333.1,
       "height": 982.41,
-      "pngWidth": 4205,
+      "pngWidth": 4666,
       "pngHeight": 1965
     },
     "light": {
@@ -46,9 +46,9 @@
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 2102.52,
+      "width": 2333.1,
       "height": 982.41,
-      "pngWidth": 4205,
+      "pngWidth": 4666,
       "pngHeight": 1965
     },
     "telegram": {
