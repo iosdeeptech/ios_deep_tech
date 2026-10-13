@@ -1,31 +1,31 @@
 {
-  "generatedAt": "2026-10-06T11:34:15+03:00",
+  "generatedAt": "2026-10-13T16:49:43+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "7065ec9"
+    "commit": "a2553e2"
   },
-  "date": "2026-10-06",
+  "date": "2026-10-13",
   "highlighted": [
     {
-      "path": "Разработка с ИИ/Изучение/Middle/1. Task Local изнутри. Как читать исходники рантайма Swift",
-      "label": "1. Task Local изнутри. Как читать исходники рантайма Swift",
-      "title": "Task Local изнутри. Как читать исходники рантайма Swift",
+      "path": "Swift/Многопоточность/Structured Concurrency/Junior/Tasks/6. Task, Task.detached и атрибут concurrent в Swift 6.2",
+      "label": "6. Task, Task.detached и атрибут concurrent в Swift 6.2",
+      "title": "Task, Task.detached и атрибут concurrent в Swift 6.2",
       "addedIn": {
-        "commit": "7065ec9",
-        "date": "2026-10-06T11:34:15+03:00"
+        "commit": "a2553e2",
+        "date": "2026-10-13T16:49:43+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 29,
-    "nodes": 57,
+    "articles": 30,
+    "nodes": 58,
     "sections": {
-      "Swift": 23,
+      "Swift": 24,
       "UI": 4,
       "Разработка с ИИ": 2
     },
     "grades": {
-      "Junior": 26,
+      "Junior": 27,
       "Middle": 3,
       "Senior": 0
     }
@@ -36,30 +36,30 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 2333.1,
-      "height": 982.41,
-      "pngWidth": 4666,
-      "pngHeight": 1965
+      "width": 2300.48,
+      "height": 1013.41,
+      "pngWidth": 4601,
+      "pngHeight": 2027
     },
     "light": {
       "png": "roadmap-light.png",
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 2333.1,
-      "height": 982.41,
-      "pngWidth": 4666,
-      "pngHeight": 1965
+      "width": 2300.48,
+      "height": 1013.41,
+      "pngWidth": 4601,
+      "pngHeight": 2027
     },
     "telegram": {
       "png": "roadmap-4x5-dark.png",
       "theme": "brand",
       "layout": "stacked",
       "aspect": "4:5",
-      "width": 1217.13,
-      "height": 1521.41,
-      "pngWidth": 2434,
-      "pngHeight": 3043
+      "width": 1241.93,
+      "height": 1552.41,
+      "pngWidth": 2484,
+      "pngHeight": 3105
     }
   },
   "warnings": []
