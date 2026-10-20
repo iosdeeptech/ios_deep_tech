@@ -1,31 +1,31 @@
 {
-  "generatedAt": "2026-10-13T16:49:43+03:00",
+  "generatedAt": "2026-10-20T09:52:23+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "a2553e2"
+    "commit": "10b39e6"
   },
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "highlighted": [
     {
-      "path": "Swift/Многопоточность/Structured Concurrency/Junior/Tasks/6. Task, Task.detached и атрибут concurrent в Swift 6.2",
-      "label": "6. Task, Task.detached и атрибут concurrent в Swift 6.2",
-      "title": "Task, Task.detached и атрибут concurrent в Swift 6.2",
+      "path": "Swift/ARC/Junior/3. weak let в Swift 6.3",
+      "label": "3. weak let в Swift 6.3",
+      "title": "weak let в Swift 6.3",
       "addedIn": {
-        "commit": "a2553e2",
-        "date": "2026-10-13T16:49:43+03:00"
+        "commit": "10b39e6",
+        "date": "2026-10-20T09:52:23+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 30,
-    "nodes": 58,
+    "articles": 31,
+    "nodes": 59,
     "sections": {
-      "Swift": 24,
+      "Swift": 25,
       "UI": 4,
       "Разработка с ИИ": 2
     },
     "grades": {
-      "Junior": 27,
+      "Junior": 28,
       "Middle": 3,
       "Senior": 0
     }
@@ -36,30 +36,30 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 2300.48,
-      "height": 1013.41,
-      "pngWidth": 4601,
-      "pngHeight": 2027
+      "width": 2276.88,
+      "height": 1028.91,
+      "pngWidth": 4554,
+      "pngHeight": 2058
     },
     "light": {
       "png": "roadmap-light.png",
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 2300.48,
-      "height": 1013.41,
-      "pngWidth": 4601,
-      "pngHeight": 2027
+      "width": 2276.88,
+      "height": 1028.91,
+      "pngWidth": 4554,
+      "pngHeight": 2058
     },
     "telegram": {
       "png": "roadmap-4x5-dark.png",
       "theme": "brand",
       "layout": "stacked",
       "aspect": "4:5",
-      "width": 1241.93,
-      "height": 1552.41,
-      "pngWidth": 2484,
-      "pngHeight": 3105
+      "width": 1254.33,
+      "height": 1567.91,
+      "pngWidth": 2509,
+      "pngHeight": 3136
     }
   },
   "warnings": []

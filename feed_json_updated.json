@@ -9,6 +9,34 @@
   "language": "ru",
   "items": [
     {
+      "id": "https://iosdeeptech.github.io/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/",
+      "url": "https://iosdeeptech.github.io/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/",
+      "title": "Подробнее про ARC",
+      "summary": "Automatic Reference Counting (ARC) — это механизм управления памятью, встроенный в Swift и Objective-C, который автоматически управляет жизненным циклом объектов. Его задача — освободить…",
+      "content_text": "Automatic Reference Counting (ARC) — это механизм управления памятью, встроенный в Swift и Objective-C, который автоматически управляет жизненным циклом объектов. Его задача — освободить…",
+      "date_published": "2024-10-23T08:34:20.000Z",
+      "date_modified": "2026-10-20T06:52:20.000Z",
+      "tags": [
+        "Swift",
+        "ARC",
+        "Junior"
+      ]
+    },
+    {
+      "id": "https://iosdeeptech.github.io/ios_deep_tech/Swift/ARC/Junior/3.%20weak%20let%20%D0%B2%20Swift%206.3/",
+      "url": "https://iosdeeptech.github.io/ios_deep_tech/Swift/ARC/Junior/3.%20weak%20let%20%D0%B2%20Swift%206.3/",
+      "title": "weak let в Swift 6.3",
+      "summary": "Почему weak раньше нельзя было объявить через let, что изменилось в Swift 6.3, зачем weak let нужен Sendable-классу с делегатом и что SE-0481 меняет для [weak self].",
+      "content_text": "Почему weak раньше нельзя было объявить через let, что изменилось в Swift 6.3, зачем weak let нужен Sendable-классу с делегатом и что SE-0481 меняет для [weak self].",
+      "date_published": "2026-10-20T06:52:20.000Z",
+      "date_modified": "2026-10-20T06:52:20.000Z",
+      "tags": [
+        "Swift",
+        "ARC",
+        "Junior"
+      ]
+    },
+    {
       "id": "https://iosdeeptech.github.io/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/6.%20Task%2C%20Task.detached%20%D0%B8%20%D0%B0%D1%82%D1%80%D0%B8%D0%B1%D1%83%D1%82%20concurrent%20%D0%B2%20Swift%206.2/",
       "url": "https://iosdeeptech.github.io/ios_deep_tech/Swift/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Structured%20Concurrency/Junior/Tasks/6.%20Task%2C%20Task.detached%20%D0%B8%20%D0%B0%D1%82%D1%80%D0%B8%D0%B1%D1%83%D1%82%20concurrent%20%D0%B2%20Swift%206.2/",
       "title": "Task, Task.detached и атрибут concurrent в Swift 6.2",
@@ -288,20 +316,6 @@
         "Swift",
         "Коллекции",
         "Словари",
-        "Junior"
-      ]
-    },
-    {
-      "id": "https://iosdeeptech.github.io/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/",
-      "url": "https://iosdeeptech.github.io/ios_deep_tech/Swift/ARC/Junior/2.%20%D0%9F%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BF%D1%80%D0%BE%20ARC/",
-      "title": "Подробнее про ARC",
-      "summary": "Automatic Reference Counting (ARC) — это механизм управления памятью, встроенный в Swift и Objective-C, который автоматически управляет жизненным циклом объектов. Его задача — освободить…",
-      "content_text": "Automatic Reference Counting (ARC) — это механизм управления памятью, встроенный в Swift и Objective-C, который автоматически управляет жизненным циклом объектов. Его задача — освободить…",
-      "date_published": "2024-10-23T08:34:20.000Z",
-      "date_modified": "2024-10-23T08:34:20.000Z",
-      "tags": [
-        "Swift",
-        "ARC",
         "Junior"
       ]
     },
