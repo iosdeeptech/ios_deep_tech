@@ -1,31 +1,32 @@
 {
-  "generatedAt": "2026-10-27T12:36:24+03:00",
+  "generatedAt": "2026-11-03T11:10:23+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "a8cb03f"
+    "commit": "453df68"
   },
-  "date": "2026-10-27",
+  "date": "2026-11-03",
   "highlighted": [
     {
-      "path": "Swift/Многопоточность/Structured Concurrency/Middle/Actors (deep)/1. Ошибки изоляции Swift 6. Чем заменить unchecked Sendable и другие заглушки",
-      "label": "1. Ошибки изоляции Swift 6. Чем заменить unchecked Sendable и другие заглушки",
-      "title": "Ошибки изоляции Swift 6. Чем заменить unchecked Sendable и другие заглушки",
+      "path": "Тестирование/Swift Testing/Junior/1. Тест до кода. Swift Testing как постановка задачи",
+      "label": "1. Тест до кода. Swift Testing как постановка задачи",
+      "title": "Тест до кода. Swift Testing как постановка задачи",
       "addedIn": {
-        "commit": "a8cb03f",
-        "date": "2026-10-27T12:36:24+03:00"
+        "commit": "453df68",
+        "date": "2026-11-03T11:10:23+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 32,
-    "nodes": 61,
+    "articles": 33,
+    "nodes": 65,
     "sections": {
       "Swift": 26,
       "UI": 4,
-      "Разработка с ИИ": 2
+      "Разработка с ИИ": 2,
+      "Тестирование": 1
     },
     "grades": {
-      "Junior": 28,
+      "Junior": 29,
       "Middle": 4,
       "Senior": 0
     }
@@ -36,9 +37,9 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 2497.78,
+      "width": 2690.08,
       "height": 1028.91,
-      "pngWidth": 4996,
+      "pngWidth": 5380,
       "pngHeight": 2058
     },
     "light": {
@@ -46,9 +47,9 @@
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 2497.78,
+      "width": 2690.08,
       "height": 1028.91,
-      "pngWidth": 4996,
+      "pngWidth": 5380,
       "pngHeight": 2058
     },
     "telegram": {
