@@ -1,33 +1,33 @@
 {
-  "generatedAt": "2026-11-03T11:10:23+03:00",
+  "generatedAt": "2026-11-10T09:29:19+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "453df68"
+    "commit": "7728cc4"
   },
-  "date": "2026-11-03",
+  "date": "2026-11-10",
   "highlighted": [
     {
-      "path": "Тестирование/Swift Testing/Junior/1. Тест до кода. Swift Testing как постановка задачи",
-      "label": "1. Тест до кода. Swift Testing как постановка задачи",
-      "title": "Тест до кода. Swift Testing как постановка задачи",
+      "path": "Разработка с ИИ/Контекст проекта/Middle/1. Как описать проект для агента. AGENTS.md, скиллы и хуки",
+      "label": "1. Как описать проект для агента. AGENTS.md, скиллы и хуки",
+      "title": "Как описать проект для агента. AGENTS.md, скиллы и хуки",
       "addedIn": {
-        "commit": "453df68",
-        "date": "2026-11-03T11:10:23+03:00"
+        "commit": "7728cc4",
+        "date": "2026-11-10T09:29:19+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 33,
-    "nodes": 65,
+    "articles": 34,
+    "nodes": 68,
     "sections": {
       "Swift": 26,
       "UI": 4,
-      "Разработка с ИИ": 2,
+      "Разработка с ИИ": 3,
       "Тестирование": 1
     },
     "grades": {
       "Junior": 29,
-      "Middle": 4,
+      "Middle": 5,
       "Senior": 0
     }
   },
@@ -37,9 +37,9 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 2690.08,
+      "width": 2930.4,
       "height": 1028.91,
-      "pngWidth": 5380,
+      "pngWidth": 5861,
       "pngHeight": 2058
     },
     "light": {
@@ -47,9 +47,9 @@
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 2690.08,
+      "width": 2930.4,
       "height": 1028.91,
-      "pngWidth": 5380,
+      "pngWidth": 5861,
       "pngHeight": 2058
     },
     "telegram": {
