@@ -1,32 +1,32 @@
 {
-  "generatedAt": "2026-11-10T09:29:19+03:00",
+  "generatedAt": "2026-11-18T18:25:02+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "7728cc4"
+    "commit": "b5a73bf"
   },
-  "date": "2026-11-10",
+  "date": "2026-11-18",
   "highlighted": [
     {
-      "path": "Разработка с ИИ/Контекст проекта/Middle/1. Как описать проект для агента. AGENTS.md, скиллы и хуки",
-      "label": "1. Как описать проект для агента. AGENTS.md, скиллы и хуки",
-      "title": "Как описать проект для агента. AGENTS.md, скиллы и хуки",
+      "path": "UI/SwiftUI/Junior/5. Observation вместо ObservableObject",
+      "label": "5. Observation вместо ObservableObject",
+      "title": "Observation вместо ObservableObject",
       "addedIn": {
-        "commit": "7728cc4",
-        "date": "2026-11-10T09:29:19+03:00"
+        "commit": "b5a73bf",
+        "date": "2026-11-18T18:25:02+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 34,
-    "nodes": 68,
+    "articles": 35,
+    "nodes": 69,
     "sections": {
       "Swift": 26,
-      "UI": 4,
+      "UI": 5,
       "Разработка с ИИ": 3,
       "Тестирование": 1
     },
     "grades": {
-      "Junior": 29,
+      "Junior": 30,
       "Middle": 5,
       "Senior": 0
     }
@@ -37,9 +37,9 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 2930.4,
+      "width": 2856.83,
       "height": 1028.91,
-      "pngWidth": 5861,
+      "pngWidth": 5714,
       "pngHeight": 2058
     },
     "light": {
@@ -47,9 +47,9 @@
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 2930.4,
+      "width": 2856.83,
       "height": 1028.91,
-      "pngWidth": 5861,
+      "pngWidth": 5714,
       "pngHeight": 2058
     },
     "telegram": {
@@ -57,10 +57,10 @@
       "theme": "brand",
       "layout": "stacked",
       "aspect": "4:5",
-      "width": 1254.33,
-      "height": 1567.91,
-      "pngWidth": 2509,
-      "pngHeight": 3136
+      "width": 1300.73,
+      "height": 1625.91,
+      "pngWidth": 2601,
+      "pngHeight": 3252
     }
   },
   "warnings": []
