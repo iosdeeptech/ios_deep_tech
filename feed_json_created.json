@@ -9,6 +9,20 @@
   "language": "ru",
   "items": [
     {
+      "id": "https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%91%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Senior/1.%20%D0%91%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20iOS-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BF%D1%80%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B5%20%D1%81%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%BC/",
+      "url": "https://iosdeeptech.github.io/ios_deep_tech/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D1%81%20%D0%98%D0%98/%D0%91%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C/Senior/1.%20%D0%91%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20iOS-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%D0%BF%D1%80%D0%B8%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B5%20%D1%81%20%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%BE%D0%BC/",
+      "title": "Безопасность iOS-проекта при работе с агентом",
+      "summary": "Как внешние данные становятся действиями агента, что запускает сборка и какие ограничения дают песочницы Xcode, SwiftPM и компилятора Swift.",
+      "content_text": "Как внешние данные становятся действиями агента, что запускает сборка и какие ограничения дают песочницы Xcode, SwiftPM и компилятора Swift.",
+      "date_published": "2026-11-25T07:17:10.000Z",
+      "date_modified": "2026-11-25T07:17:10.000Z",
+      "tags": [
+        "Разработка с ИИ",
+        "Безопасность",
+        "Senior"
+      ]
+    },
+    {
       "id": "https://iosdeeptech.github.io/ios_deep_tech/UI/SwiftUI/Junior/5.%20Observation%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%BE%20ObservableObject/",
       "url": "https://iosdeeptech.github.io/ios_deep_tech/UI/SwiftUI/Junior/5.%20Observation%20%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%BE%20ObservableObject/",
       "title": "Observation вместо ObservableObject",

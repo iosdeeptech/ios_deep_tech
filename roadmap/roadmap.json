@@ -1,34 +1,34 @@
 {
-  "generatedAt": "2026-11-18T18:25:02+03:00",
+  "generatedAt": "2026-11-25T10:17:12+03:00",
   "source": {
     "ref": "HEAD",
-    "commit": "b5a73bf"
+    "commit": "833fcb6"
   },
-  "date": "2026-11-18",
+  "date": "2026-11-25",
   "highlighted": [
     {
-      "path": "UI/SwiftUI/Junior/5. Observation вместо ObservableObject",
-      "label": "5. Observation вместо ObservableObject",
-      "title": "Observation вместо ObservableObject",
+      "path": "Разработка с ИИ/Безопасность/Senior/1. Безопасность iOS-проекта при работе с агентом",
+      "label": "1. Безопасность iOS-проекта при работе с агентом",
+      "title": "Безопасность iOS-проекта при работе с агентом",
       "addedIn": {
-        "commit": "b5a73bf",
-        "date": "2026-11-18T18:25:02+03:00"
+        "commit": "833fcb6",
+        "date": "2026-11-25T10:17:12+03:00"
       }
     }
   ],
   "counts": {
-    "articles": 35,
-    "nodes": 69,
+    "articles": 36,
+    "nodes": 72,
     "sections": {
       "Swift": 26,
       "UI": 5,
-      "Разработка с ИИ": 3,
+      "Разработка с ИИ": 4,
       "Тестирование": 1
     },
     "grades": {
       "Junior": 30,
       "Middle": 5,
-      "Senior": 0
+      "Senior": 1
     }
   },
   "images": {
@@ -37,9 +37,9 @@
       "svg": "roadmap-dark.svg",
       "theme": "brand",
       "layout": "tree",
-      "width": 2856.83,
+      "width": 3095.65,
       "height": 1028.91,
-      "pngWidth": 5714,
+      "pngWidth": 6191,
       "pngHeight": 2058
     },
     "light": {
@@ -47,9 +47,9 @@
       "svg": "roadmap-light.svg",
       "theme": "brand-light",
       "layout": "tree",
-      "width": 2856.83,
+      "width": 3095.65,
       "height": 1028.91,
-      "pngWidth": 5714,
+      "pngWidth": 6191,
       "pngHeight": 2058
     },
     "telegram": {
